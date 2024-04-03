@@ -2,19 +2,20 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
 
     {% block meta %}
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% endblock %}
 
     {% block extra_meta %}
     {% endblock %}
 
     <link rel="icon" type="image/png" sizes="16x16"
-    href="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712000909/Royal%20Drive/Uploads/favicon-16_hxoznx.webp">
+        href="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712000909/Royal%20Drive/Uploads/favicon-16_hxoznx.webp">
     <link rel="icon" type="image/png" sizes="32x32"
         href="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712000910/Royal%20Drive/Uploads/favicon-32_kgnscu.webp">
     <link rel="icon" type="image/png" sizes="48x48"
@@ -23,38 +24,53 @@
         href="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712000913/Royal%20Drive/Uploads/favicone-512_ill0ec.webp">
 
     {% block corecss %}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link async rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha384-<YOUR_SHOULD_GET_THE_LATEST_INTEGRITY>" crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% endblock %}
 
     {% block extra_css %}
     {% endblock %}
 
     {% block corejs %}
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/f723d8f016.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
     {% endblock %}
 
     {% block extra_js %}
     {% endblock %}
 
     <title>Royal Drive {% block extra_title %}{% endblock %}</title>
-  </head>
-  <body>
+</head>
+
+<body class="bg-black">
     <header class="container-fluid">
-        <div class="row bg-dark">
-            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
+        <div class="row bg-dark py-3">
+            <div class="col-12 col-lg-4 my-auto py-3 py-lg-0 text-center text-lg-left">
                 <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                    <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1711994837/Royal%20Drive/Uploads/logo_rgz5ig.webp" alt="Royal Drive Logo" style="height:80px">
-                    <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712006709/Royal%20Drive/Uploads/logo-latter_u0yved.png" alt="Royal Drive name letter" style="height:30px">
+                    <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1711994837/Royal%20Drive/Uploads/logo_rgz5ig.webp"
+                        alt="Royal Drive Logo" style="height:60px">
+                    <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712006709/Royal%20Drive/Uploads/logo-latter_u0yved.png"
+                        alt="Royal Drive name letter" style="height:30px">
                 </a>
             </div>
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
                 <form method="GET" action="">
                     <div class="input-group w-100">
-                        <input class="form-control border border-black rounded-2" type="text" name="q" placeholder="Search cars">
+                        <input class="form-control border border-black rounded-2" type="text" name="q"
+                            placeholder="Search cars">
                         <div class="input-group-append bg-black">
                             <button class="form-control btn btn-black border border-black rounded-0" type="submit">
                                 <span class="icon text-white">
@@ -68,7 +84,8 @@
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
                 <ul class="list-inline list-unstyled text-center text-lg-right my-0">
                     <li class="list-inline-item dropdown">
-                        <a class="text-white nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="text-white nav-link" href="#" id="user-options" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
                             <div class="text-center">
                                 <div><i class="fas fa-user fa-lg"></i></div>
                                 <p class="my-0">My Account</p>
@@ -76,26 +93,27 @@
                         </a>
                         <div class="dropdown-menu border-0" aria-labelledby="user-options">
                             {% if request.user.is_authenticated %}
-                                {% if request.user.is_superuser %}
-                                    <a href="" class="dropdown-item">Product Management</a>
-                                {% endif %}
-                                <a href="" class="dropdown-item">My Profile</a>
-                                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                            {% if request.user.is_superuser %}
+                            <a href="" class="dropdown-item">Product Management</a>
+                            {% endif %}
+                            <a href="" class="dropdown-item">My Profile</a>
+                            <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
                             {% else %}
-                                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                            <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                            <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
                             {% endif %}
                         </div>
                     </li>
                     <li class="list-inline-item">
-                        <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-white{% endif %} nav-link" href="">
+                        <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-white{% endif %} nav-link"
+                            href="">
                             <div class="text-center">
                                 <div><i class="fas fa-shopping-bag fa-lg"></i></div>
                                 <p class="my-0">
                                     {% if grand_total %}
-                                        € {{ grand_total|floatformat:2 }}
+                                    € {{ grand_total|floatformat:2 }}
                                     {% else %}
-                                        € 0.00
+                                    € 0.00
                                     {% endif %}
                                 </p>
                             </div>
@@ -107,7 +125,7 @@
     </header>
 
     {% if messages %}
-        <div class="message-container"></div>
+    <div class="message-container"></div>
     {% endif %}
 
     {% block page_header %}
@@ -116,9 +134,21 @@
     {% block content %}
     {% endblock %}
 
+    <footer class="container-fluid w-100">
+        <div class="row clearfix">
+            <div class="col-12 bg-dark" style="height: 200px;">
+                &copy; Royal Drive <span id="year"></span>
+            </div>
+        </div>
+    </footer>
+
     {% block postloadjs %}
     {% endblock %}
 
-    
-  </body>
+    <script>
+        // Dynamically update the year in the copyright notice
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+
 </html>
