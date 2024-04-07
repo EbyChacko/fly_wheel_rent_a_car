@@ -57,7 +57,7 @@
 
 <body class="bg-black">
     <header class="container-fluid">
-        <div class="row bg-dark py-3">
+        <div class="row dark-blue py-3">
             <div class="col-12 col-lg-4 my-auto py-3 py-lg-0 text-center text-lg-left">
                 <a href="{% url 'home' %}" class="nav-link main-logo-link">
                     <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1711994837/Royal%20Drive/Uploads/logo_rgz5ig.webp"
@@ -68,7 +68,7 @@
             </div>
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
                 <form method="GET" action="">
-                    <div class="input-group w-100">
+                    <div class="input-group">
                         <input class="form-control border border-black rounded-2" type="text" name="q"
                             placeholder="Search cars">
                         <div class="input-group-append bg-black">
@@ -87,11 +87,10 @@
                         <a class="text-white nav-link" href="#" id="user-options" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <div class="text-center">
-                                <div><i class="fas fa-user fa-lg"></i></div>
                                 <p class="my-0">My Account</p>
                             </div>
                         </a>
-                        <div class="dropdown-menu border-0" aria-labelledby="user-options">
+                        <div class="dropdown-menu border-0 shadow" aria-labelledby="user-options" data-bs-theme="dark">
                             {% if request.user.is_authenticated %}
                             {% if request.user.is_superuser %}
                             <a href="" class="dropdown-item">Product Management</a>
@@ -104,25 +103,11 @@
                             {% endif %}
                         </div>
                     </li>
-                    <li class="list-inline-item">
-                        <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-white{% endif %} nav-link"
-                            href="">
-                            <div class="text-center">
-                                <div><i class="fas fa-shopping-bag fa-lg"></i></div>
-                                <p class="my-0">
-                                    {% if grand_total %}
-                                    € {{ grand_total|floatformat:2 }}
-                                    {% else %}
-                                    € 0.00
-                                    {% endif %}
-                                </p>
-                            </div>
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>
     </header>
+
 
     {% if messages %}
     <div class="message-container"></div>
@@ -134,10 +119,106 @@
     {% block content %}
     {% endblock %}
 
-    <footer class="container-fluid w-100">
-        <div class="row clearfix">
-            <div class="col-12 bg-dark" style="height: 200px;">
-                &copy; Royal Drive <span id="year"></span>
+    <footer class="container-fluid w-100 p-5 dark-blue">
+        <div class="row ">
+            <div class="col-12 col-xl-4 d-none d-xl-block">
+                <div class="col-12 col-xl-10  p-3">
+                    <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712262378/Royal%20Drive/Uploads/logo-footer_baxgyt.png"
+                        alt="Royal Drive logo" style="width:200px;">
+                </div>
+
+                <div class="col-12 col-xl-10 p-3">
+                    <small>
+                        Royal Drive is an ultimate destination for top-tier <strong>luxury car rentals</strong>. At Royal
+                        Drive, we take immense pride in delivering unparalleled service, ensuring each journey with us is truly
+                        extraordinary. From streamlined booking processes to bespoke customer care, we are committed to
+                        surpassing expectations at every opportunity. At Royal Drive, you're not just
+                        renting a car - you're embarking on a voyage
+                        defined by sophistication, comfort, and unparalleled prestige. We offer a <strong>budget car rental</strong>
+                        service in the whole Ireland.
+                    </small>
+                </div>
+            </div>
+            <div class="col-12 col-xl-8">
+                <div class="row p-3">
+                    <div class="col-12 p-3">
+                        <div class="row p-3">
+                            <div class="col-12 col-lg-6 p-3">
+                                <h5 class="text-info">Explore Us</h5>
+                                <small><a href="#"><span><i class="fa-solid fa-circle-arrow-right"></i></span>
+                                        Home</a></small><br>
+
+                                <small><a href="#"><span><i class="fa-solid fa-circle-arrow-right"></i></span> About
+                                        Us</a></small><br>
+                                <small><a href="#"><span><i class="fa-solid fa-circle-arrow-right"></i></span>
+                                        Contact</a></small><br>
+                                <small><a href="#"><span><i class="fa-solid fa-circle-arrow-right"></i></span> Rent a
+                                        car</a></small><br>
+                            </div>
+                            <div class="col-12  col-lg-6 p-3">
+                                <h5 class="text-info">Meet Us</h5>
+                                <a class="text-reset text-decoration-none" href="tel:+353892336291">
+                                    <address>
+                                        <small>Main Street</small><br>
+                                        <small>Ballinasloe</small><br>
+                                        <small>Co-Galway</small><br>
+                                    </address>
+                                </a>
+                            </div>
+                            <div class="col-12  col-lg-6 p-3">
+                                <h5 class="text-info">Reach Us</h5>
+                                <small>
+                                    <a href="tel:+353892336291">
+                                        <span><i class="fa fa-phone-volume"> </i></span> +353 89 233 6291
+                                    </a>
+                                </small>
+                                <br>
+                                <small>
+                                    <a href="mailto:royaldrive.carhire@gmail.com">
+                                        <span><i class="fa-regular fa-envelope"> </i></span>
+                                        royaldrive.carhire@gmail.com
+                                    </a>
+                                </small>
+                            </div>
+                            <div class="col-12 col-lg-6 p-3">
+                                <h5 class="text-info">Subscribe</h5>
+                                <div class="row p-5 d-flex justify-content-center ">
+                                    <div class="col-12">
+                                        <div class="">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 social-links">
+                                <h5 class="text-info">Connect With Us</h5>
+                                <h3><a href="https://www.facebook.com/" target="_blank" aria-label="Facebook">
+                                        <i class="fab fa-facebook-f social"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
+                                        <i class="fab fa-instagram social"></i>
+                                    </a>
+                                    <a href="https://www.youtube.com/" target="_blank" aria-label="Youtube">
+                                        <i class="fab fa-youtube social"></i>
+                                    </a>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="row p-3">
+
+                        </div>
+                        <div class="row p-3">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <small>Copyright &copy; Royal Drive <span id="year"></span></small>
             </div>
         </div>
     </footer>

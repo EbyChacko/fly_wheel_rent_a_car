@@ -11,9 +11,9 @@ body {
     font-weight: 300;
 }
 
-/* set the header position and shadow */
-header{
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+/* set the shadow class */
+.shadow{
+  box-shadow: inset 0 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* from Bulma */
@@ -35,6 +35,29 @@ header{
 
 .border-black {
     border: 1px solid black !important;
+}
+
+.dark-blue {
+  background-color: #07171e; 
+}
+
+
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover{
+  color:#00DDEB;
+  cursor: pointer;
+}
+
+span{
+  margin-right: 10px;
+}
+
+.social-links a{
+  margin:0 15px;
 }
 
 /* make animation when page loads */
@@ -153,12 +176,6 @@ border-color: gray;
 .logos-slide img {
   height: 50px;
   margin: 0 40px;
-}
-
-.clearfix::after {
-  content: "";
-  display: table;
-  clear: both;
 }
 
 /* -------------------------------- Media Queries */
