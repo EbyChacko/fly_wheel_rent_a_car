@@ -5,17 +5,32 @@
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Sign Out" %}</h1>
-
-<p>{% trans 'Are you sure you want to sign out?' %}</p>
-
-<form method="post" action="{% url 'account_logout' %}">
-  {% csrf_token %}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-  {% endif %}
-  <button type="submit">{% trans 'Sign Out' %}</button>
-</form>
-
+<div class="container">
+  <div class="row my-5 d-flex justify-content-center align-items-center">
+    <div class="row my-5">
+      <div class="col-12 col-xl-6 ">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="rounded-5 p-4" style="max-width: 450px;">
+            <h3>{% trans "Sign Out" %}</h3>
+            <hr>
+            <p>{% trans 'Are you sure you want to sign out?' %}</p>
+            <form method="post" action="{% url 'account_logout' %}">
+              {% csrf_token %}
+              {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+              {% endif %}
+              <button class="button-2" type="submit">{% trans 'Sign Out' %}</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-xl-6">
+        <img
+          src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712757143/Royal%20Drive/Uploads/signup_image_ukt0ez.webp"
+          alt="Signup car image" style="width:100%;">
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

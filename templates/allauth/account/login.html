@@ -1,4 +1,5 @@
 {% extends "account/base.html" %}
+{% load widget_tweaks %}
 
 {% load i18n %}
 {% load account socialaccount %}
@@ -7,40 +8,57 @@
 
 {% block content %}
 
-<h1>{% trans "Sign In" %}</h1>
+<div class="container">
+  <div class="row my-5 d-flex justify-content-center align-items-center">
+    <div class="row my-3">
+      <div class="col-12 col-xl-6 ">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="rounded-5 border border-dark p-4" style="max-width: 450px; min-height:400px;">
+            <h3 class=" text-center">{% trans "Sign In" %}</h3>
+            <hr>
+            {% if form.errors %}
+            <p class="error">
+              {% for field in form %}
+              {% for error in field.errors %}
+              {{ error|escape }}
+              {% endfor %}
+              {% endfor %}
+            </p>
+            {% endif %}
 
-{% get_providers as socialaccount_providers %}
-
-{% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
-
-<div class="socialaccount_ballot">
-
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
-
-  <div class="login-or">{% trans 'or' %}</div>
-
+            <form class="login" method="POST" action="{% url 'account_login' %}">
+              {% csrf_token %}
+              <div class="row d-flex justify-content-center">
+                <div class="form-group p-3">
+                  <label for="{{ form.username.id_for_label }}">Username</label>
+                  {% render_field form.login class="form-control" %}
+                </div>
+                <div class="form-group p-3">
+                  <label for="{{ form.password.id_for_label }}">Password</label>
+                  {% render_field form.password class="form-control" %}
+                </div>
+                <div class=" p-3 mx-auto">
+                  <button class="button-2" type="submit">Log in</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <p class="text-center pt-4">
+            <small>
+              <a class="button secondaryAction" href="{% url 'account_reset_password' %}">
+                {% trans "Forgot Password" %}</a> | <a class="button-3" href="{{ signup_url }}">Sign Up</a>
+            </small>
+          </p>
+        </div>
+      </div>
+      <div class="col-12 col-xl-6">
+        <img
+          src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712757143/Royal%20Drive/Uploads/signup_image_ukt0ez.webp"
+          alt="Signup car image" style="width:100%;">
+      </div>
+    </div>
+  </div>
 </div>
 
-{% include "socialaccount/snippets/login_extra.html" %}
-
-{% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-{% endif %}
-
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
-</form>
 
 {% endblock %}
