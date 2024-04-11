@@ -62,56 +62,62 @@
 </head>
 
 <body class="bg-black">
-    <header class="container-fluid">
-        <div class="row dark-blue py-3">
-            <div class="col-12 col-lg-4 my-auto py-3 py-lg-0 text-center text-lg-left">
+    <header>
+        <nav class="navbar navbar-expand-xl dark-blue py-3">
+            <div class="container">
                 <a href="{% url 'home' %}" class="nav-link main-logo-link">
                     <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712694080/Royal%20Drive/Uploads/Fly_wheel_logo_heading_wz2noi.png"
                         alt="Fly wheel Logo" style="height:50px">
                 </a>
-            </div>
-            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-                <form method="GET" action="">
-                    <div class="input-group">
-                        <input class="form-control border border-black rounded-2" type="text" name="q"
-                            placeholder="Search cars">
-                        <div class="input-group-append bg-black">
-                            <button class="form-control btn btn-black border border-black rounded-0" type="submit">
-                                <span class="icon text-white">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-                <ul class="list-inline list-unstyled text-center text-lg-right my-0">
-                    <li class="list-inline-item dropdown">
-                        <a class="text-white nav-link" href="#" id="user-options" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <div class="text-center">
-                                <p class="my-0">My Account</p>
-                            </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars text-white"></i>
+                </button>
+
+                <div class="collapse navbar-collapse text-start ps-5" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                        <li class="nav-item {% if request.path == 'home' %}text-purple{% endif %}">
+                            <a class="nav-link text-white" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item {% if request.path == 'about' %}text-purple{% endif %}">
+                            <a class="nav-link text-white" href="{% url 'about' %}">About Us</a>
+                        </li>
+                        <li class="nav-item {% if request.path == 'contact' %}text-purple{% endif %}">
+                            <a class="nav-link text-white" href="{% url 'contact' %}">Contact</a>
+                        </li>
+                    </ul>
+                    {% if user.is_authenticated %}
+                    <div class="dropdown">
+                        <a href="#" class="text-uppercase me-4 mb-3 dropdown-toggle" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user"></i> {{ user }}
                         </a>
-                        <div class="dropdown-menu border-0 shadow" aria-labelledby="user-options" data-bs-theme="dark">
+                        <div class="dropdown-menu border-0 shadow" aria-labelledby="dropdownMenuButton1"
+                            data-bs-theme="dark">
                             {% if request.user.is_authenticated %}
                             {% if request.user.is_superuser %}
                             <a href="" class="dropdown-item">Product Management</a>
                             {% endif %}
                             <a href="" class="dropdown-item">My Profile</a>
-                            <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-                            {% else %}
-                            <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                            <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
                             {% endif %}
                         </div>
-                    </li>
-                </ul>
+                    </div>
+                    <p class=" me-4 mb-3 nav-item nav-link d-none d-xl-block">|</p>
+                    <a class=" me-4 mb-3 nav-item nav-link text-warning" href="{% url 'account_logout' %}" role="button">
+                        Log out</a>
+                    {% else %}
+                    <a class=" me-4 mb-3 nav-item nav-link" href="{% url 'account_signup' %}" role="button"
+                        id="sign_up">
+                        Register</a>
+                        <p class=" me-4 mb-3 nav-item nav-link d-none d-xl-block">|</p>
+                    <a class=" mb-3 nav-item nav-link text-warning" href="{% url 'account_login' %}" role="button"
+                        id="login">Login</a>
+                    {% endif %}
+                </div>
             </div>
-        </div>
+        </nav>
     </header>
-
 
     {% if messages %}
     <div class="message-container"></div>
@@ -168,13 +174,11 @@
                                 </div>
                                 <div class="col-12  col-lg-6 p-3">
                                     <h5 class="text-info">Meet Us</h5>
-                                    <a class="text-reset text-decoration-none" href="tel:+353892336291">
                                         <address>
                                             <small>Main Street</small><br>
                                             <small>Ballinasloe</small><br>
                                             <small>Co-Galway</small><br>
                                         </address>
-                                    </a>
                                 </div>
                                 <div class="col-12  col-lg-6 p-3">
                                     <h5 class="text-info">Reach Us</h5>

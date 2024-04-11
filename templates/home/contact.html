@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row animation">
+        <div class="row d-flex align-item-center">
+            <div class="col-12 col-xl-6">
+                <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712757143/Royal%20Drive/Uploads/signup_image_ukt0ez.webp"
+                    alt="Fly Wheel - car image" style="width:100%;">
+            </div>
+            <div class="col-12 col-xl-6 py-3 my-3 d-flex justify-content-center mx-auto">
+                <div class="col-12 col-sm-8">
+                    <div class="row ">
+                        <div class="col-12 pb-3">
+                            <h3 class="text-white">Contact Fly Wheel</h3>
+                            <small class="">If you have any questions or you'd like to contact us please send us a message below and we'll contact you within 24 hours.</small>
+                        </div>
+                        <div class="col-12">
+                            <div>
+                                <form method="post" action="{% url 'contact' %}">
+                                    {% csrf_token %}
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                                        <input type="text" aria-label="name" name="{{ form.name.name }}"
+                                            class="form-control text-start" id="name">
+                                    </div>
+                                    <p id="nameError" style="color: red; visibility: hidden;" class="text-start">
+                                    </p>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text"><i class="fa-solid fa-phone-volume"></i></span>
+                                        <input type="tel" aria-label="mobile" name="{{ form.mobile.name }}"
+                                            class="form-control text-start" id="mobile">
+                                    </div>
+                                    <p id="mobileError" style="color: red; visibility: hidden;" class="text-start">
+                                    </p>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                        <input type="text" aria-label="email" name="{{ form.email.name }}"
+                                            class="form-control text-start" id="email">
+                                    </div>
+                                    <p id="emailError" style="color: red; visibility: hidden;" class="text-start">
+                                    </p>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text align-self-start" style="height:100px;"><i
+                                                class="fa-solid fa-message"></i></span>
+                                        <textarea name="{{ form.message.name }}" aria-label="message" rows="15"
+                                            cols="36" class="form-control text-start" id="message"
+                                            style="height:100px"></textarea>
+                                    </div>
+                                    <p id="messageError" style="color: red; visibility: hidden;" class="text-start">
+                                    </p>
+                                    <input type="submit" aria-label="send" class="btn text-white" value="Send"
+                                        onclick="return validateForm()">
+                                    <input type="reset" aria-label="reset" value="Reset" class="btn text-white">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-5">
+                            <h5 class="text-info text-start">Reach Us</h5>
+                            <small class="text-start">
+                                <a href="tel:+353892336291">
+                                    <span><i class="fa fa-phone-volume"> </i></span> +353 89 233 6291
+                                </a>
+                            </small>
+                            <br>
+                            <small class="text-start">
+                                <a href="mailto:flywheel.carhire@gmail.com">
+                                    <span><i class="fa-regular fa-envelope"> </i></span>
+                                    flywheel.carhire@gmail.com
+                                </a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-warning">
+            <div class=" container text-black p-3">
+                <div class="row">
+                    <div class="col-12 col-lg-8 py-3">
+                        <h3>You are a few steps from driving away to discover Ireland.</h3>
+                        Fly wheel rent a car: We care for you.
+                    </div>
+                    <div class="col-12 col-lg-4 py-3">
+                        <a href="" class=" btn button-1 rounded-5 py-3">Rent a car</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    // fade in animation when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        var animation = document.querySelector('.animation');
+        var animation1 = document.querySelector('.animation1');
+        animation.classList.add('fade-in');
+        animation1.classList.add('fade-in');
+    });
+    // brand logo carousel- duplicate logos
+    var copy = document.querySelector(".logos-slide").cloneNode(true);
+    document.querySelector(".logos").appendChild(copy);
+
+</script>
+{% endblock %}

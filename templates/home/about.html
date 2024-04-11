@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container h-100">
+    <div class="row animation py-3">
+        <h3 class="py-3 text-center text-uppercase">About us</h3>
+        <hr>
+        <p class="py-3">
+            <small>
+                For over 25 years, Flywheel Rent-a-Car has been the leading choice for discerning travelers
+                seeking a <strong>luxurious and hassle-free car rental</strong> experience in Galway, Ireland.
+                As a
+                local, family-owned business, we understand the unique charm and diverse landscapes of Galway's
+                west
+                coast. Whether you're dreaming of a breathtaking coastal drive along the Wild Atlantic Way, a
+                sophisticated city exploration, or a journey through quaint villages and hidden coves, our
+                extensive
+                fleet caters to every desire
+            </small>
+        </p>
+        <div class="row mx-auto">
+            <div class="col-12 col-lg-4 p-4 bg-dark rounded-5">
+                <h4 class="text-warning">Unparalleled Selection and Personalized Service:</h4>
+                <p>
+                    <small>
+                        Unparalleled Selection and Personalized Service: At Flywheel, we go beyond just offering a wide
+                        range of vehicles. From fuel-efficient compact cars perfect for navigating charming towns to
+                        spacious SUVs ideal for family adventures and luxurious high-performance vehicles designed to
+                        turn
+                        heads on the open road, we have the perfect car to match your travel style and budget. Looking
+                        to
+                        indulge in ultimate luxury? Explore our exquisite collection of premium cars, including
+                        prestigious
+                        brands and the latest high-performance models. Our knowledgeable and friendly staff are
+                        passionate
+                        about Galway and committed to exceeding your expectations.
+                    </small>
+                </p>
+                <div class="my-3 rounded-5">
+                    <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712800968/Royal%20Drive/Uploads/aboit_page_image_3_cponpv.webp"
+                        alt="Fly Wheel about page image" style=" max-width:100%;" class="rounded-5">
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 p-4 bg-secondary rounded-5">
+                <h4 class="text-warning">Unforgettable Journeys Begin at Flywheel:</h4>
+
+                <p>
+                    <small>
+                        Unforgettable Journeys Begin at Flywheel: Flywheel Rent-a-Car is more than just a car rental
+                        company; we're your gateway to exploring Galway at your own pace. We ensure a seamless and
+                        stress-free rental process, allowing you to focus on creating lasting memories. Search for
+                        Galway
+                        car rentals on our user-friendly website, compare options, and book your dream vehicle in just a
+                        few
+                        clicks. Galway luxury car rentals, Galway SUV rentals, Galway family car rentals – whatever your
+                        need, Flywheel has the perfect solution.
+                    </small>
+                </p>
+                <div class="my-3 rounded-5">
+                    <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712799391/Royal%20Drive/Uploads/about_page_image_2_mrwagp.webp"
+                        alt="Fly Wheel logo" style=" max-width:100%;" class="rounded-5">
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 p-4 bg-dark rounded-5">
+                <h4 class="text-warning">Unlock a World of Possibilities with Flywheel:</h4>
+                <p>
+                    <small>
+                        So buckle up for an exceptional journey in Galway! With Flywheel Rent-a-Car, you're not just
+                        renting a car, you're unlocking a world of possibilities. Visit us today and let our local
+                        expertise guide you towards crafting the ultimate Galway experience. We look forward to
+                        welcoming you and helping you turn your travel dreams into reality.Whether you're dreaming of a
+                        breathtaking coastal drive along the Wild Atlantic Way, a sophisticated city exploration, or a
+                        journey through quaint villages and hidden coves, our extensive fleet caters to every desire.
+                    </small>
+                </p>
+                <div class="my-3 rounded-5">
+                    <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712799389/Royal%20Drive/Uploads/about_page_image_1_fdalbw.webp"
+                        alt="Fly Wheel logo" style=" max-width:100%;" class="rounded-5">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-warning">
+    <div class=" container text-black p-3">
+        <div class="row">
+            <div class="col-12 col-lg-8 py-3">
+                <h3>You are a few steps from driving away to discover Ireland.</h3>
+                Fly wheel rent a car: We care for you.
+            </div>
+            <div class="col-12 col-lg-4 py-3">
+                <a href="" class=" btn button-1 rounded-5 py-3">Rent a car</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    // fade in animation when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        var animation = document.querySelector('.animation');
+        animation.classList.add('fade-in');
+    });
+    // brand logo carousel- duplicate logos
+    var copy = document.querySelector(".logos-slide").cloneNode(true);
+    document.querySelector(".logos").appendChild(copy);
+
+</script>
+{% endblock %}
