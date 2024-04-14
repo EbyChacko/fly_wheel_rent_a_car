@@ -4,11 +4,11 @@ from .forms import CustomerMessageForm
 # Create your views here.
 
 def index(request):
-    """To return home page"""
+    """To load home page"""
     return render(request, 'home/index.html')
 
 def contact(request):
-    """To perform the messaging by the user to the hopital"""
+    """To perform the messaging by the user to the fly wheel"""
 
     form = CustomerMessageForm()
     if request.method == 'POST':
@@ -22,5 +22,5 @@ def contact(request):
 
 
 def about(request):
-    """To return contact page"""
+    """To load about page"""
     return render(request, 'home/about.html')

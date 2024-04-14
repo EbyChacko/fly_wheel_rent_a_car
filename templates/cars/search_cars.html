@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row animation">
+        <div class="row d-flex align-item-center">
+            <div class="col-12 col-xl-6">
+                <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712853252/Royal%20Drive/Uploads/search_page_image_nb157w.webp"
+                    alt="Fly Wheel - car image" style="width:100%;">
+            </div>
+            <div class="col-12 col-xl-6 py-3 my-3 d-flex justify-content-center mx-auto">
+                <div class="col-12 col-sm-8">
+                    <div class="row ">
+                        <div class="col-12 pb-3">
+                            <h3 class="text-white">Car Rental Online Reservation</h3>
+                            <small class="">Start Your Reservation!</small>
+                        </div>
+                        <div class="col-12">
+                            <div>
+                                <form method="post" action="{% url 'search_result' %}">
+                                    {% csrf_token %}
+                                    <div class="form-group pb-3">
+                                        <label for="id_pick_up_location">Pick-up Location</label>
+                                        {% render_field form.pick_up_location class="form-control" %}
+                                    </div>
+                                    <div class="form-group pb-3">
+                                        <label for="id_drop_off_location">Drop-off Location</label>
+                                        {% render_field form.drop_off_location class="form-control" %}
+                                    </div>
+                                    <div class="form-group pb-3">
+                                        <label for="id_pick_up_date">Pick-up Date</label>
+                                        {% render_field form.pick_up_date class="form-control" %}
+                                    </div>
+                                    <div class="form-group pb-3">
+                                        <label for="id_pick_up_time">Pick-up Time</label>
+                                        {% render_field form.pick_up_time class="form-control" %}
+                                    </div>
+                                    <div class="form-group pb-3">
+                                        <label for="id_drop_off_date">Drop-off Date</label>
+                                        {% render_field form.drop_off_date class="form-control" %}
+                                    </div>
+                                    <div class="form-group pb-3">
+                                        <label for="id_drop_off_time">Drop-off Time</label>
+                                        {% render_field form.drop_off_time class="form-control" %}
+                                    </div>
+                                    <button type="submit" class="btn button-2">Search Cars</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-warning">
+            <div class=" container text-black p-3">
+                <div class="row">
+                    <div class="col-12 col-lg-8 py-3">
+                        <h3>You are a few steps from driving away to discover Ireland.</h3>
+                        Fly wheel rent a car: We care for you.
+                    </div>
+                    <div class="col-12 col-lg-4 py-3">
+                        <a href="" class=" btn button-1 rounded-5 py-3">Rent a car</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    // fade in animation when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        var animation = document.querySelector('.animation');
+        var animation1 = document.querySelector('.animation1');
+        animation.classList.add('fade-in');
+        animation1.classList.add('fade-in');
+    });
+    // brand logo carousel- duplicate logos
+    var copy = document.querySelector(".logos-slide").cloneNode(true);
+    document.querySelector(".logos").appendChild(copy);
+
+</script>
+{% endblock %}
