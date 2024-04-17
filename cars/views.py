@@ -33,5 +33,5 @@ def search_result(request):
             form = CarRentalForm(request.POST)
             return render(request, 'cars/search_cars.html', {'form': form})
     else:
-        form = CarRentalForm()
+        form = CarRentalForm(request.POST)
         return render(request, 'cars/search_cars.html', {'form': form})

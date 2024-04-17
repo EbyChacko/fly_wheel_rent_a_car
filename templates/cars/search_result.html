@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-12 col-sm-7 col-md-7 col-lg-8 col-xl-9 py-3 my-2">
                             <small>{{ car.category }}</small>
-                            <h5>{{ car.make }} {{ car.model }}</h5>
+                            <h5 class="text-warning">{{ car.make }} {{ car.model }}</h5>
                             <small>Year: {{ car.year }}</small>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                         <div class="col-12 col-md-7 py-3 my-2">
                             <div class="row">
                                 <div class="col-12">
-                                    <h5>Car Features</h5>
+                                    <h5 class="text-info">Car Features</h5>
                                 </div>
                                 <div class="col-6 col-xl-4">
                                     <small>{{ car.seats }} Seats</small>
@@ -105,7 +105,7 @@
                         <div class="col-12 col-md-5 py-3 my-2">
                             <div class="row">
                                 <div class="col-12">
-                                    <h5>Included In Price</h5>
+                                    <h5 class="text-info">Included In Price</h5>
                                 </div>
                                 <div class="col-12">
                                     <small><i class="text-warning fa-regular fa-circle-check"></i> Instant booking
@@ -130,8 +130,8 @@
                     <hr>
                     <div class="row">
                         <div class="col-6">
-                            <h4 class="text-info">{{ car.rent }}<small>,00 € / day</small></h4>
-                            <p></p>
+                            <h4 class="text-info">{{ car.rent }}<small>,00 €</small></h4>
+                            <small>Per day</small>
                         </div>
                         <div class="col-6 text-right d-flex justify-content-end">
                             <a href="#" class="button-4">
@@ -141,11 +141,11 @@
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
-</div>
+
 
 {% endblock %}
 

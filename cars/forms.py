@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from .models import Cities
+from django.utils import timezone
 
 
 class CarRentalForm(forms.Form):
@@ -17,9 +18,17 @@ class CarRentalForm(forms.Form):
         pick_up_time = cleaned_data.get("pick_up_time")
         drop_off_date = cleaned_data.get("drop_off_date")
         drop_off_time = cleaned_data.get("drop_off_time")
+        now = timezone.now().date()
+
+        if pick_up_date and pick_up_date < now:
+            raise ValidationError("Pick-up date cannot be before today")
+
+        if drop_off_date and drop_off_date < now:
+            raise ValidationError("Drop-off date cannot be before today")
 
         if pick_up_date and drop_off_date and pick_up_date > drop_off_date:
             raise ValidationError("Pick-up date cannot be after drop-off date")
 
         if pick_up_date == drop_off_date and pick_up_time >= drop_off_time:
             raise ValidationError("Pick-up time must be before drop-off time if on the same day")
+
