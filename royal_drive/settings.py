@@ -27,9 +27,13 @@ SECRET_KEY = 'django-insecure-avzc&366rp$w-+g-d#2^uuj55#uy^40(3+q)*p-4!k(2i)ucen
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '8000-ebychacko-flywheelrenta-qz7v3qtx061.ws-eu110.gitpod.io',
+]
 
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-ebychacko-flywheelrenta-qz7v3qtx061.ws-eu110.gitpod.io',
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,10 +47,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'crispy_forms',
     'widget_tweaks',
-    'cities',
-    
+
     'home',
     'cars',
 ]
@@ -112,6 +114,7 @@ WSGI_APPLICATION = 'royal_drive.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
+        # 'ENGINE': 'django.contrib.gis.db.backends.mysql'
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }

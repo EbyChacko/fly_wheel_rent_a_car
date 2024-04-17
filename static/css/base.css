@@ -3,7 +3,7 @@
 
 
 body {
-    margin:0;
+    margin:0 !important;
     background-color:black;
     background-size: cover;
     color: #ffffff;

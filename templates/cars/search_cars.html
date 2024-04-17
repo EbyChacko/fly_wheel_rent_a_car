@@ -18,6 +18,7 @@
                             <h3 class="text-white">Car Rental Online Reservation</h3>
                             <small class="">Start Your Reservation!</small>
                         </div>
+                        <hr>
                         <div class="col-12">
                             <div>
                                 <form method="post" action="{% url 'search_result' %}">
@@ -46,23 +47,19 @@
                                         <label for="id_drop_off_time">Drop-off Time</label>
                                         {% render_field form.drop_off_time class="form-control" %}
                                     </div>
+                                    {% if form.errors %}
+                                        <ul>
+                                            {% for field in form %}
+                                                {% for error in field.errors %}
+                                                    <li>{{ error }}</li>
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
                                     <button type="submit" class="btn button-2">Search Cars</button>
                                 </form>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid bg-warning">
-            <div class=" container text-black p-3">
-                <div class="row">
-                    <div class="col-12 col-lg-8 py-3">
-                        <h3>You are a few steps from driving away to discover Ireland.</h3>
-                        Fly wheel rent a car: We care for you.
-                    </div>
-                    <div class="col-12 col-lg-4 py-3">
-                        <a href="" class=" btn button-1 rounded-5 py-3">Rent a car</a>
                     </div>
                 </div>
             </div>

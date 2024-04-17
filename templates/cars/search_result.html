@@ -1,4 +1,159 @@
+{% extends "base.html" %}
+{% load static %}
 
-{% for car in cars %}
-{{ car.make }} - {{ car.model }} - {{ car.year }}
-{% endfor %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container-fluid bg-dark">
+    <div class="row animation p-3">
+        <div class="col-12 col-md-3 py-3 px-2 my-3">
+            <form method="post" action="{% url 'search_result' %}">
+                {% csrf_token %}
+                <div class="form-group pb-3">
+                    <label for="id_pick_up_location"><small>Pick-up Location</small></label>
+                    {% render_field form.pick_up_location class="form-control" %}
+                </div>
+                <div class="form-group pb-3">
+                    <label for="id_drop_off_location"><small>Drop-off Location</small></label>
+                    {% render_field form.drop_off_location class="form-control" %}
+                </div>
+                <div class="form-group pb-3">
+                    <label for="id_pick_up_date"><small>Pick-up Date</small></label>
+                    {% render_field form.pick_up_date class="form-control" %}
+                </div>
+                <div class="form-group pb-3">
+                    <label for="id_pick_up_time"><small>Pick-up Time</small></label>
+                    {% render_field form.pick_up_time class="form-control" %}
+                </div>
+                <div class="form-group pb-3">
+                    <label for="id_drop_off_date"><small>Drop-off Date</small></label>
+                    {% render_field form.drop_off_date class="form-control" %}
+                </div>
+                <div class="form-group pb-3">
+                    <label for="id_drop_off_time"><small>Drop-off Time</small></label>
+                    {% render_field form.drop_off_time class="form-control" %}
+                </div>
+                {% if form.errors %}
+                <ul>
+                    {% for field in form %}
+                    {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <button type="submit" class="btn button-2">Filter</button>
+            </form>
+        </div>
+        <div class="col-12 col-md-9 p-2 mx-auto">
+            {% for car in cars %}
+            <div class="p-3">
+                <div class="row p-3 rounded-4 border border-secondary">
+                    <div class="col-12 col-sm-5 col-md-5 col-lg-4 col-xl-3 my-2 d-flex justify-content-center">
+                        <img src="{{ car.image.url }}" alt="Car Image" style="width:100%; max-width:250px;" class="rounded-4">
+                    </div>
+                    <div class="col-12 col-sm-7 col-md-7 col-lg-8 col-xl-9 py-3 my-2">
+                        <small>{{ car.category }}</small>
+                        <h5>{{ car.make }} {{ car.model }}</h5>
+                        <small>Year: {{ car.year }}</small>
+                    </div>
+                    <hr>
+                    <div class="col-12 col-md-7 py-3 my-2">
+                        <div class="row">
+                            <div class="col-12">
+                                <h5>Car Features</h5>
+                            </div>
+                            <div class="col-6 col-xl-4">
+                                <small>{{ car.seats }} Seats</small>
+                            </div>
+                            <div class="col-6 col-xl-4">
+                                <small>{{ car.fuel }}</small>
+                            </div>
+                            <div class="col-6 col-xl-4">
+                                <small>{{ car.doors }} Doors</small>
+                            </div>
+                            <div class="col-6 col-xl-4">
+                                <small>{{ car.gear_box }}</small>
+                            </div>
+                            <div class="col-6 col-xl-4">
+                                <small>Large Bags : {{ car.large_bags }}</small>
+                            </div>
+                            <div class="col-6 col-xl-4">
+                                <small>Small Bags : {{ car.small_bags }}</small>
+                            </div>
+                            <div class="col-6 col-xl-4">
+                                {% if car.air_condition %}
+                                <small>A/C : Yes </small>
+                                {% else %}
+                                <small>A/C : No </small>
+                                {% endif %}
+                            </div>
+                            <div class="col-6 col-xl-4">
+                                {% if car.abs %}
+                                <small>ABS : Yes </small>
+                                {% else %}
+                                <small>ABS : No </small>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-5 py-3 my-2">
+                        <div class="row">
+                            <div class="col-12">
+                                <h5>Included In Price</h5>
+                            </div>
+                            <div class="col-12">
+                                <small><i class="text-warning fa-regular fa-circle-check"></i> Instant booking confirmation</small><br>
+                                <small><i class="text-warning fa-regular fa-circle-check"></i> Second Driver</small><br>
+                                <small><i class="text-warning fa-regular fa-circle-check"></i> Third party</small><br>
+                                <small><i class="text-warning fa-regular fa-circle-check"></i> Theft and fire protection</small><br>
+                                <small><i class="text-warning fa-regular fa-circle-check"></i> Personal Accident protection</small><br>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <a href="">
+                            <small>Terms & Conditions</small>
+                        </a>
+                    </div>
+                    <div class="col-4 text-right d-flex justify-content-right ">
+                        <h4 class="text-warning p-2">{{ car.rent }}<small>,00 €</small></h4>
+                        <a href="" class="button-4 ">
+                            View Deal
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    // fade in animation when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        var animation = document.querySelector('.animation');
+        var animation1 = document.querySelector('.animation1');
+        animation.classList.add('fade-in');
+        animation1.classList.add('fade-in');
+    });
+    // brand logo carousel- duplicate logos
+    var copy = document.querySelector(".logos-slide").cloneNode(true);
+    document.querySelector(".logos").appendChild(copy);
+
+    // to toggle sidebar on button click
+    document.getElementById("sidebar-toggle").addEventListener("click", function () {
+        var sidebar = document.getElementById("sidebar");
+        if (sidebar.style.width === "250px") {
+            sidebar.style.width = "0";
+        } else {
+            sidebar.style.width = "250px";
+        }
+    });
+
+</script>
+{% endblock %}
