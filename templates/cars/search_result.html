@@ -8,7 +8,7 @@
     <div class="row animation p-3">
         <div class="col-12 col-md-3 py-3 px-2 my-3">
             <h3>Filter</h3>
-            <form method="post" action="{% url 'search_result' %}">
+            <form method="post" action="{% url 'search_result_update' %}">
                 {% csrf_token %}
                 <div class="form-group pb-3">
                     <label for="id_pick_up_location"><small>Pick-up Location</small></label>
@@ -34,17 +34,21 @@
                     <label for="id_drop_off_time"><small>Drop-off Time</small></label>
                     {% render_field form.drop_off_time class="form-control" %}
                 </div>
-                {% if form.errors %}
-                <ul>
-                    {% for field in form %}
-                    {% for error in field.errors %}
-                    <li>{{ error }}</li>
-                    {% endfor %}
-                    {% endfor %}
-                </ul>
-                {% endif %}
+                <div class="form-group pb-3">
+                    <label for="id_category"><small>Category</small></label>
+                    {% render_field form.category class="form-control" %}
+                </div>
+                <div class="form-group pb-3">
+                    <label for="id_fuel"><small>Fuel Type</small></label>
+                    {% render_field form.fuel class="form-control" %}
+                </div>
+                <div class="form-group pb-3">
+                    <label for="id_gear_box"><small>Gear-Box Type</small></label>
+                    {% render_field form.gear_box class="form-control" %}
+                </div>
+                <small class="text-danger">{{ form.non_field_errors }}</small>
                 <button type="submit" class="btn button-2">Filter</button>
-            </form>
+            </form>            
         </div>
         <div class="col-12 col-md-9 p-2 mx-auto">
             {% for car in cars %}
@@ -122,7 +126,7 @@
                             </div>
                         </div>
                         <div class="col-12 pb-3">
-                            <a href="">
+                            <a href="#">
                                 <small>Terms & Conditions</small>
                             </a>
                         </div>
@@ -134,7 +138,7 @@
                             <small>Per day</small>
                         </div>
                         <div class="col-6 text-right d-flex justify-content-end">
-                            <a href="#" class="button-4">
+                            <a href="#" class="button-2">
                                 View Deal
                             </a>
                         </div>
@@ -161,16 +165,6 @@
     // brand logo carousel- duplicate logos
     var copy = document.querySelector(".logos-slide").cloneNode(true);
     document.querySelector(".logos").appendChild(copy);
-
-    // to toggle sidebar on button click
-    document.getElementById("sidebar-toggle").addEventListener("click", function () {
-        var sidebar = document.getElementById("sidebar");
-        if (sidebar.style.width === "250px") {
-            sidebar.style.width = "0";
-        } else {
-            sidebar.style.width = "250px";
-        }
-    });
 
 </script>
 {% endblock %}
