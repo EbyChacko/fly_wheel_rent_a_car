@@ -45,6 +45,17 @@ class GearBox(models.Model):
         return f"{self.gear_box}"
 
 
+class Seats(models.Model):
+    seats = models.IntegerField()
+
+    class Meta:
+        verbose_name_plural = "Seats"
+        ordering = ['seats']
+    
+    def __str__(self):
+        return f"{self.seats}"
+
+
 class Title(models.Model):
     title = models.CharField(max_length=10)
 
@@ -93,7 +104,9 @@ class PersonalDetails(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Personal Details"
-
+    class Meta:
+        verbose_name_plural = "Personal Details"
+        ordering = ['name']
 
 class Booking(models.Model):
     customer = models.ForeignKey(PersonalDetails, on_delete=models.CASCADE)

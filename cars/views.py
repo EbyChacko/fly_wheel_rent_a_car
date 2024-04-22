@@ -59,6 +59,7 @@ def search_result_update(request):
             category = form.cleaned_data['category']
             fuel = form.cleaned_data['fuel']
             gear_box = form.cleaned_data['gear_box']
+            seats = form.cleaned_data['seats']
             
             available_cars = Car.objects.filter(city=pick_up_location)
             if category:
@@ -67,7 +68,8 @@ def search_result_update(request):
                 available_cars = available_cars.filter(fuel=fuel)
             if gear_box:
                 available_cars = available_cars.filter(gear_box=gear_box)
-
+            if seats:
+                available_cars = available_cars.filter(seats=seats)
             booked_cars = Booking.objects.filter(
                 pick_up_date__lte=drop_off_date,
                 drop_off_date__gte=pick_up_date
