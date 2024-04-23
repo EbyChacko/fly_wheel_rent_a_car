@@ -23,21 +23,21 @@
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
                                         <input type="text" aria-label="name" name="{{ form.name.name }}"
-                                            class="form-control text-start" id="name">
+                                            class="form-control text-start" id="name" placeholder="Your Name">
                                     </div>
                                     <p id="nameError" style="color: red; visibility: hidden;" class="text-start">
                                     </p>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><i class="fa-solid fa-phone-volume"></i></span>
                                         <input type="tel" aria-label="mobile" name="{{ form.mobile.name }}"
-                                            class="form-control text-start" id="mobile">
+                                            class="form-control text-start" id="mobile" placeholder="Your Mobile Number">
                                     </div>
                                     <p id="mobileError" style="color: red; visibility: hidden;" class="text-start">
                                     </p>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
                                         <input type="text" aria-label="email" name="{{ form.email.name }}"
-                                            class="form-control text-start" id="email">
+                                            class="form-control text-start" id="email" placeholder="Your e-mail address">
                                     </div>
                                     <p id="emailError" style="color: red; visibility: hidden;" class="text-start">
                                     </p>
@@ -46,17 +46,20 @@
                                                 class="fa-solid fa-message"></i></span>
                                         <textarea name="{{ form.message.name }}" aria-label="message" rows="15"
                                             cols="36" class="form-control text-start" id="message"
-                                            style="height:100px"></textarea>
+                                            style="height:100px" placeholder="Your Message"></textarea>
                                     </div>
                                     <p id="messageError" style="color: red; visibility: hidden;" class="text-start">
                                     </p>
-                                    <input type="submit" aria-label="send" class="btn button-4 text-white" value="Send"
+                                    <div  class=" col-12 d-flex justify-content-end">
+                                        <input type="reset" aria-label="reset" value="Reset" class="btn text-white">
+                                        <input type="submit" aria-label="send" class="btn button-4 text-white" value="Send"
                                         onclick="return validateForm()">
-                                    <input type="reset" aria-label="reset" value="Reset" class="btn text-white">
+                                    </div>
+                                    
                                 </form>
                             </div>
                         </div>
-                        <div class="col-12 mt-5">
+                        <div class="col-12 mt-5 bg-dark p-5 rounded-5">
                             <h5 class="text-info text-start">Reach Us</h5>
                             <small class="text-start">
                                 <a href="tel:+353892336291">
