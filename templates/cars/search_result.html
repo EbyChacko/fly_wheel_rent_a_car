@@ -4,67 +4,16 @@
 
 {% block content %}
 <div class="container-fluid bg-dark">
-    <div class="row p-3">
-        <div class="col-12 col-lg-3 py-3 px-2 my-3 sidebar animation d-none d-lg-block">
-            <h3>Filter</h3>
-            <form method="post" action="{% url 'search_result_update' %}">
-                {% csrf_token %}
-                <div class="form-group pb-3">
-                    <label for="id_pick_up_location"><small>Pick-up Location</small></label>
-                    {% render_field form.pick_up_location class="form-control" %}
-                </div>
-                <div class="form-group pb-3">
-                    <label for="id_drop_off_location"><small>Drop-off Location</small></label>
-                    {% render_field form.drop_off_location class="form-control" %}
-                </div>
-                <div class="form-group pb-3">
-                    <label for="id_pick_up_date"><small>Pick-up Date</small></label>
-                    {% render_field form.pick_up_date class="form-control" %}
-                </div>
-                <div class="form-group pb-3">
-                    <label for="id_pick_up_time"><small>Pick-up Time</small></label>
-                    {% render_field form.pick_up_time class="form-control" %}
-                </div>
-                <div class="form-group pb-3">
-                    <label for="id_drop_off_date"><small>Drop-off Date</small></label>
-                    {% render_field form.drop_off_date class="form-control" %}
-                </div>
-                <div class="form-group pb-3">
-                    <label for="id_drop_off_time"><small>Drop-off Time</small></label>
-                    {% render_field form.drop_off_time class="form-control" %}
-                </div>
-                <div class="form-group pb-3">
-                    <label for="id_category"><small>Category</small></label>
-                    {% render_field form.category class="form-control" %}
-                </div>
-                <div class="form-group pb-3">
-                    <label for="id_fuel"><small>Fuel Type</small></label>
-                    {% render_field form.fuel class="form-control" %}
-                </div>
-                <div class="form-group pb-3">
-                    <label for="id_gear_box"><small>Number of seats</small></label>
-                    {% render_field form.seats class="form-control" placeholder="Select Number of seats" %}
-                </div>
-                <div class="form-group pb-3">
-                    <label for="id_gear_box"><small>Gear-Box Type</small></label>
-                    {% render_field form.gear_box class="form-control" %}
-                </div>
-                <small class="text-danger">{{ form.non_field_errors }}</small>
-                <div class=" col-12 d-flex justify-content-end">
-                    <button type="submit" class="btn button-2">Filter</button>
-                </div>
-            </form>
-        </div>
-        <div class=" col-12 col-lg-3 d-block d-lg-none py-3 px-2 my-3">
+    <div class="row p-3 container mx-auto">
+        <div class="col-12 py-3 px-2 my-2 animation">
             <div class="bg-black p-3 text-center filter-trigger">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleDiv"
                     aria-controls="toggleDiv" aria-expanded="false" aria-label="Toggle navigation">
                     Filter <i class="fa-solid fa-list-check"></i>
                 </button>
             </div>
-
             <div class="collapse navbar-collapse" id="toggleDiv">
-                <form method="post" action="{% url 'search_result_update' %}">
+                <form method="post" action="{% url 'search_result_update' %}" id="filterForm">
                     {% csrf_token %}
                     <div class="row py-3">
                         <div class="col-12 col-sm-6 form-group pb-3">
@@ -109,14 +58,111 @@
                         </div>
                     </div>
                     <small class="text-danger">{{ form.non_field_errors }}</small>
+                    <input type="hidden" name="submitAction" id="submitAction">
                     <div class=" col-12 d-flex justify-content-end">
                         <button type="submit" class="btn button-2">Filter</button>
                     </div>
-
                 </form>
             </div>
         </div>
-        {% include "include/update_search.html" %}
+        <div class="col-12 p-2 mx-auto animation1">
+            {% for car in cars %}
+            <div class="p-3">
+                <div class="row p-3 rounded-4 border border-secondary">
+                    <div class="row">
+                        <div class="col-12 col-sm-5 col-md-5 col-lg-4 col-xl-3 my-2 d-flex justify-content-center">
+                            <img src="{{ car.image.url }}" alt="Car Image" style="width:100%; object-fit: contain;"
+                                class="rounded-4">
+                        </div>
+                        <div class="col-12 col-sm-7 col-md-7 col-lg-8 col-xl-9 py-3 my-2">
+                            <small>{{ car.category }}</small>
+                            <h5 class="text-warning">{{ car.make }} {{ car.model }}</h5>
+                            <small>Year: {{ car.year }}</small>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-12 col-md-7 py-3 my-2">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="text-info">Car Features</h5>
+                                </div>
+                                <div class="col-6 col-xl-4">
+                                    <small>{{ car.seats }} Seats</small>
+                                </div>
+                                <div class="col-6 col-xl-4">
+                                    <small>{{ car.fuel }}</small>
+                                </div>
+                                <div class="col-6 col-xl-4">
+                                    <small>{{ car.doors }} Doors</small>
+                                </div>
+                                <div class="col-6 col-xl-4">
+                                    <small>{{ car.gear_box }}</small>
+                                </div>
+                                <div class="col-6 col-xl-4">
+                                    <small>Large Bags : {{ car.large_bags }}</small>
+                                </div>
+                                <div class="col-6 col-xl-4">
+                                    <small>Small Bags : {{ car.small_bags }}</small>
+                                </div>
+                                <div class="col-6 col-xl-4">
+                                    {% if car.air_condition %}
+                                    <small>A/C : Yes </small>
+                                    {% else %}
+                                    <small>A/C : No </small>
+                                    {% endif %}
+                                </div>
+                                <div class="col-6 col-xl-4">
+                                    {% if car.abs %}
+                                    <small>ABS : Yes </small>
+                                    {% else %}
+                                    <small>ABS : No </small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-5 py-3 my-2">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="text-info">Included In Price</h5>
+                                </div>
+                                <div class="col-12">
+                                    <small><i class="text-warning fa-regular fa-circle-check"></i> Instant booking
+                                        confirmation</small><br>
+                                    <small><i class="text-warning fa-regular fa-circle-check"></i> Second
+                                        Driver</small><br>
+                                    <small><i class="text-warning fa-regular fa-circle-check"></i> Third
+                                        party</small><br>
+                                    <small><i class="text-warning fa-regular fa-circle-check"></i> Theft and fire
+                                        protection</small><br>
+                                    <small><i class="text-warning fa-regular fa-circle-check"></i> Personal Accident
+                                        protection</small><br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 pb-3">
+                            <a href="#">
+                                <small>Terms & Conditions</small>
+                            </a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-6">
+                            <h4 class="text-info">{{ car.rent }}<small>,00 €</small></h4>
+                            <small>Per day</small>
+                        </div>
+                        <div class="col-6 text-right d-flex justify-content-end">
+                            <a href="{% url 'car_details' id=car.id %}?{% if form.pick_up_date.value %}pick_up_date={{ form.pick_up_date.value }}&{% endif %}{% if form.pick_up_time.value %}pick_up_time={{ form.pick_up_time.value }}&{% endif %}{% if form.drop_off_date.value %}drop_off_date={{ form.drop_off_date.value }}&{% endif %}{% if form.drop_off_time.value %}drop_off_time={{ form.drop_off_time.value }}&{% endif %}"class="button-2">
+                                View Deal
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}
@@ -130,10 +176,6 @@
         animation.classList.add('fade-in');
         animation1.classList.add('fade-in');
     });
-
-    // brand logo carousel- duplicate logos
-    var copy = document.querySelector(".logos-slide").cloneNode(true);
-    document.querySelector(".logos").appendChild(copy);
 
 </script>
 {% endblock %}

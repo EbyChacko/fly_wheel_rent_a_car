@@ -74,7 +74,7 @@ class Car(models.Model):
     year = models.IntegerField()
     rent = models.IntegerField()
     fuel = models.ForeignKey(Fuel, on_delete=models.CASCADE)
-    seats = models.IntegerField()
+    seats = models.ForeignKey(Seats, on_delete=models.CASCADE)
     doors = models.IntegerField()
     gear_box = models.ForeignKey(GearBox, on_delete=models.CASCADE)
     large_bags = models.IntegerField()

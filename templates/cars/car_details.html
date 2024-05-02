@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container-fluid bg-dark">
+    <div class="row p-3">
+        <div class="col-12 col-lg-3 py-3 px-2 my-3 sidebar animation">
+            <div class="col-12 my-2 text-center">
+                <h4>{{ total_rent }} €</h4>
+                <small>Rental Cost for {{ days }} day{% if days > 1 %}s{% endif %}{% if hours %} & {{ hours }} hours{% endif %}</small>
+            </div>
+            <div class="col-12 my-2 d-flex justify-content-center">
+                <img src="{{ car.image.url }}" alt="Car Image" style="width:100%; object-fit: contain;"
+                    class="rounded-4">
+            </div>
+            <div class="col-12 py-3 my-2">
+                <small>{{ car.category }}</small>
+                <h5 class="text-warning">{{ car.make }} {{ car.model }}</h5>
+                <small>Year: {{ car.year }}</small>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6 py-3 px-2 my-3 animation1">
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    // fade in animation when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        var animation = document.querySelector('.animation');
+        var animation1 = document.querySelector('.animation1');
+        animation.classList.add('fade-in');
+        animation1.classList.add('fade-in');
+    });
+
+    document.getElementById('deal_button').addEventListener('click', function() {
+        var form = document.getElementById('filterForm');
+        var formData = new FormData(form);
+        var queryParams = [];
+
+        for (var pair of formData.entries()) {
+            queryParams.push(encodeURIComponent(pair[0]) + '=' + encodeURIComponent(pair[1]));
+        }
+
+        var queryString = queryParams.join('&');
+        var url = "{% url 'car_details' id=car.id %}?" + queryString;
+
+        window.location.href = url;
+    });
+
+</script>
+{% endblock %}

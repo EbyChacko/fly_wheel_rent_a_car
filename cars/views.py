@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from .forms import CarRentalForm, CarFilterForm
 from .models import Car, Booking
+from datetime import datetime, timedelta
+from django.utils.dateparse import parse_datetime
+from django.shortcuts import render, get_object_or_404
+from django.http import QueryDict
 
 def search_cars(request):
     """To load search page"""
@@ -84,3 +88,64 @@ def search_result_update(request):
     else:
         form = CarFilterForm(request.POST)
         return render(request, 'cars/search_result.html', {'form': form})
+
+
+def car_details(request, id):
+    car = get_object_or_404(Car, pk=id)
+
+    if request.method == 'GET':
+        query_params = request.GET.copy()
+        print("Query Params:", query_params)
+
+        form_data = {
+            'pick_up_date': query_params.get('pick_up_date'),
+            'pick_up_time': query_params.get('pick_up_time'),
+            'drop_off_date': query_params.get('drop_off_date'),
+            'drop_off_time': query_params.get('drop_off_time'),
+        }
+        print("Form Data:", form_data)
+
+        form = CarFilterForm(initial=form_data)
+
+    else:
+        form = CarFilterForm()
+
+    try:
+        if form_data['pick_up_date'] and form_data['pick_up_time']:
+            pick_up_datetime = datetime.strptime(f"{form_data['pick_up_date']} {form_data['pick_up_time']}", '%B %d, %Y %I:%M %p')
+        else:
+            pick_up_datetime = None
+
+        if form_data['drop_off_date'] and form_data['drop_off_time']:
+            drop_off_datetime = datetime.strptime(f"{form_data['drop_off_date']} {form_data['drop_off_time']}", '%B %d, %Y %I:%M %p')
+        else:
+            drop_off_datetime = None
+    except ValueError:
+        pick_up_datetime = None
+        drop_off_datetime = None
+
+    if pick_up_datetime and drop_off_datetime:
+        total_hours = (drop_off_datetime - pick_up_datetime).total_seconds() / 3600
+        days = int(total_hours // 24)
+        hours = total_hours % 24
+
+        if  hours > 5:
+            days += 1
+
+        total_rent = days * car.rent
+
+    else:
+        days = 1
+        total_rent = car.rent
+        hours = None
+
+    context = {
+        'car': car,
+        'pick_up_datetime': pick_up_datetime,
+        'drop_off_datetime': drop_off_datetime,
+        'days': days,
+        'total_rent': total_rent,
+        'form': form,
+    }
+
+    return render(request, 'cars/car_details.html', context)
