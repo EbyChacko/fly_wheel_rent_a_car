@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import CarRentalForm, CarFilterForm
 from .models import Car, Booking
 from datetime import datetime, timedelta
@@ -92,52 +92,47 @@ def search_result_update(request):
 
 def car_details(request, id):
     car = get_object_or_404(Car, pk=id)
-
-    if request.method == 'GET':
-        query_params = request.GET.copy()
-        print("Query Params:", query_params)
-
-        form_data = {
-            'pick_up_date': query_params.get('pick_up_date'),
-            'pick_up_time': query_params.get('pick_up_time'),
-            'drop_off_date': query_params.get('drop_off_date'),
-            'drop_off_time': query_params.get('drop_off_time'),
-        }
-        print("Form Data:", form_data)
-
-        form = CarFilterForm(initial=form_data)
-
-    else:
-        form = CarFilterForm()
+    form = CarFilterForm(request.POST)
+    if form.is_valid():
+            pick_up_location = form.cleaned_data['pick_up_location']
+            drop_off_location = form.cleaned_data['drop_off_location']
+            pick_up_date = form.cleaned_data['pick_up_date']
+            pick_up_time = form.cleaned_data['pick_up_time']
+            drop_off_date = form.cleaned_data['drop_off_date']
+            drop_off_time = form.cleaned_data['drop_off_time']
 
     try:
-        if form_data['pick_up_date'] and form_data['pick_up_time']:
-            pick_up_datetime = datetime.strptime(f"{form_data['pick_up_date']} {form_data['pick_up_time']}", '%B %d, %Y %I:%M %p')
+        if pick_up_date and pick_up_time:
+            pick_up_datetime = datetime.strptime(f"{pick_up_date} {pick_up_time}", '%Y-%m-%d %H:%M:%S')
+            pick_up_time_formatted = pick_up_datetime.strftime('%I:%M %p')
         else:
             pick_up_datetime = None
 
-        if form_data['drop_off_date'] and form_data['drop_off_time']:
-            drop_off_datetime = datetime.strptime(f"{form_data['drop_off_date']} {form_data['drop_off_time']}", '%B %d, %Y %I:%M %p')
+        if drop_off_date and drop_off_time:
+            drop_off_datetime = datetime.strptime(f"{drop_off_date} {drop_off_time}", '%Y-%m-%d %H:%M:%S')
+            drop_off_time_formatted = drop_off_datetime.strftime('%I:%M %p')
         else:
             drop_off_datetime = None
     except ValueError:
         pick_up_datetime = None
         drop_off_datetime = None
-
+    total_rent = request.session.get('total_rent', 0)
+    total_rent = 0
     if pick_up_datetime and drop_off_datetime:
         total_hours = (drop_off_datetime - pick_up_datetime).total_seconds() / 3600
         days = int(total_hours // 24)
-        hours = total_hours % 24
-
-        if  hours > 5:
-            days += 1
-
-        total_rent = days * car.rent
+        hours = int(total_hours % 24)
+        if hours > 5:
+            total_rent = (days + 1) * car.rent
+        else:
+            total_rent = days * car.rent
 
     else:
         days = 1
         total_rent = car.rent
         hours = None
+    
+    request.session['total_rent'] = total_rent
 
     context = {
         'car': car,
@@ -146,6 +141,14 @@ def car_details(request, id):
         'days': days,
         'total_rent': total_rent,
         'form': form,
+        'hours':hours,
+        'pick_up_city': pick_up_location.city,
+        'drop_off_city': drop_off_location.city,
+        'pick_up_county': pick_up_location.county,
+        'drop_off_county': drop_off_location.county,
+        'pick_up_time_formatted':pick_up_time_formatted,
+        'drop_off_time_formatted':drop_off_time_formatted,
     }
 
     return render(request, 'cars/car_details.html', context)
+

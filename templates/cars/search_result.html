@@ -153,10 +153,55 @@
                             <small>Per day</small>
                         </div>
                         <div class="col-6 text-right d-flex justify-content-end">
-                            <a href="{% url 'car_details' id=car.id %}?{% if form.pick_up_date.value %}pick_up_date={{ form.pick_up_date.value }}&{% endif %}{% if form.pick_up_time.value %}pick_up_time={{ form.pick_up_time.value }}&{% endif %}{% if form.drop_off_date.value %}drop_off_date={{ form.drop_off_date.value }}&{% endif %}{% if form.drop_off_time.value %}drop_off_time={{ form.drop_off_time.value }}&{% endif %}"class="button-2">
-                                View Deal
-                            </a>
-                            
+                            <form method="post" action="{% url 'car_details' id=car.id %}">
+                                {% csrf_token %}
+                                <div class=" col-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn button-2">View Deal</button>
+                                </div>
+                                <div class="row py-3">
+                                    <div class="col-12 col-sm-6 form-group pb-3 d-none">
+                                        <label for="id_pick_up_location"><small>Pick-up Location</small></label>
+                                        {% render_field form.pick_up_location class="form-control" %}
+                                    </div>
+                                    <div class="col-12 col-sm-6 form-group pb-3 d-none">
+                                        <label for="id_drop_off_location"><small>Drop-off Location</small></label>
+                                        {% render_field form.drop_off_location class="form-control" %}
+                                    </div>
+                                    <div class="col-6 col-md-3 form-group pb-3 d-none">
+                                        <label for="id_pick_up_date"><small>Pick-up Date</small></label>
+                                        {% render_field form.pick_up_date class="form-control" %}
+                                    </div>
+                                    <div class="col-6 col-md-3 form-group pb-3 d-none">
+                                        <label for="id_pick_up_time"><small>Pick-up Time</small></label>
+                                        {% render_field form.pick_up_time class="form-control" %}
+                                    </div>
+                                    <div class="col-6 col-md-3 form-group pb-3 d-none">
+                                        <label for="id_drop_off_date"><small>Drop-off Date</small></label>
+                                        {% render_field form.drop_off_date class="form-control" %}
+                                    </div>
+                                    <div class="col-6 col-md-3 form-group pb-3 d-none">
+                                        <label for="id_drop_off_time"><small>Drop-off Time</small></label>
+                                        {% render_field form.drop_off_time class="form-control" %}
+                                    </div>
+                                    <div class="col-6 col-md-3  form-group pb-3 d-none">
+                                        <label for="id_category"><small>Category</small></label>
+                                        {% render_field form.category class="form-control" %}
+                                    </div>
+                                    <div class="col-6 col-md-3  form-group pb-3 d-none">
+                                        <label for="id_fuel"><small>Fuel Type</small></label>
+                                        {% render_field form.fuel class="form-control" %}
+                                    </div>
+                                    <div class="col-6 col-md-3  form-group pb-3 d-none">
+                                        <label for="id_gear_box"><small>Number of seats</small></label>
+                                        {% render_field form.seats class="form-control" %}
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-3  form-group pb-3 d-none">
+                                        <label for="id_gear_box"><small>Gear-Box Type</small></label>
+                                        {% render_field form.gear_box class="form-control" %}
+                                    </div>
+                                </div>
+                                <input class="d-none" type="hidden" name="submitAction" id="submitAction">
+                            </form>
                         </div>
                     </div>
                 </div>

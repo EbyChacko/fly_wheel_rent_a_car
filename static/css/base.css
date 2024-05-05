@@ -85,10 +85,21 @@ span{
   .animation1 {
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 4s ease, transform 4s ease;
+    transition: opacity 3s ease, transform 3s ease;
   }
 
 .animation1.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animation2 {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 4s ease, transform 4s ease;
+  }
+
+.animation2.fade-in {
     opacity: 1;
     transform: translateY(0);
   }

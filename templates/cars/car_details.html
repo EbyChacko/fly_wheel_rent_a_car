@@ -4,26 +4,282 @@
 
 {% block content %}
 <div class="container-fluid bg-dark">
-    <div class="row p-3">
-        <div class="col-12 col-lg-3 py-3 px-2 my-3 sidebar animation">
-            <div class="col-12 my-2 text-center">
-                <h4>{{ total_rent }} €</h4>
-                <small>Rental Cost for {{ days }} day{% if days > 1 %}s{% endif %}{% if hours %} & {{ hours }} hours{% endif %}</small>
-            </div>
-            <div class="col-12 my-2 d-flex justify-content-center">
-                <img src="{{ car.image.url }}" alt="Car Image" style="width:100%; object-fit: contain;"
-                    class="rounded-4">
-            </div>
-            <div class="col-12 py-3 my-2">
-                <small>{{ car.category }}</small>
-                <h5 class="text-warning">{{ car.make }} {{ car.model }}</h5>
-                <small>Year: {{ car.year }}</small>
+    <div class="row">
+        <div class="col-12 col-lg-3 p-3 animation">
+            <div class="rounded-1" style="border: solid 1px #ffc107">
+                <div class="col-12 p-3 text-center rounded-1 bg-black">
+                    <h4 class="text-warning">{{ total_rent }} €</h4>
+                    <small>
+                        Rental Cost for {{ days }} day{% if days > 1 %}s{% endif %}{% if hours %} & {{ hours }} hours{% endif %}
+                    </small>
+                </div>
+                <div class="col-8 col-md-6 col-lg-12 d-flex justify-content-center mx-auto p-3">
+                    <img src="{{ car.image.url }}" alt="Car Image" style="width:100%; object-fit: contain;"
+                        class="rounded-4">
+                </div>
+                <div class="col-12 p-3">
+                    <small>{{ car.category }}</small>
+                    <h5 class="text-warning">{{ car.make }} {{ car.model }}</h5>
+                    <small>Year: {{ car.year }}</small>
+                </div>
+                <hr>
+                <div class="col-12 p-3">
+                    <h5> <i class="fa-solid fa-plane-departure"></i> Pick-Up</h5>
+                    <h6 class="disabled">{{ pick_up_city }}, {{ pick_up_county }}</h6>
+                    <small>Date : {{ form.pick_up_date.value }}</small><br>
+                    <small>Time : {{ pick_up_time_formatted }}</small>
+                </div>
+                <div class="col-12 p-3">
+                    <h5><i class="fa-solid fa-plane-arrival"></i> Drop Off</h5>
+                    <h6 class="disabled">{{ drop_off_city }}, {{ drop_off_county }}</h6>
+                    <small>Date : {{ form.drop_off_date.value }}</small><br>
+                    <small>Time : {{ drop_off_time_formatted }}</small>
+                </div>
             </div>
         </div>
-        <div class="col-12 col-lg-6 py-3 px-2 my-3 animation1">
+        <div class="col-12 col-lg-6 p-4 my-3 animation1">
+            <div>
+                <form method="post" action="{% url 'search_result_update' %}">
+                    {% csrf_token %}
+                    <div class="row py-3 d-none">
+                        <div class="col-12 col-sm-6 form-group pb-3">
+                            <label for="id_pick_up_location"><small>Pick-up Location</small></label>
+                            {% render_field form.pick_up_location class="form-control" %}
+                        </div>
+                        <div class="col-12 col-sm-6 form-group pb-3">
+                            <label for="id_drop_off_location"><small>Drop-off Location</small></label>
+                            {% render_field form.drop_off_location class="form-control" %}
+                        </div>
+                        <div class="col-6 col-md-3 form-group pb-3">
+                            <label for="id_pick_up_date"><small>Pick-up Date</small></label>
+                            {% render_field form.pick_up_date class+="form-control" %}
+                        </div>
+                        <div class="col-6 col-md-3 form-group pb-3">
+                            <label for="id_pick_up_time"><small>Pick-up Time</small></label>
+                            {% render_field form.pick_up_time class+="form-control" %}
+                        </div>
+                        <div class="col-6 col-md-3 form-group pb-3">
+                            <label for="id_drop_off_date"><small>Drop-off Date</small></label>
+                            {% render_field form.drop_off_date class+="form-control" %}
+                        </div>
+                        <div class="col-6 col-md-3 form-group pb-3">
+                            <label for="id_drop_off_time"><small>Drop-off Time</small></label>
+                            {% render_field form.drop_off_time class+="form-control" %}
+                        </div>
+                        <div class="col-6 col-md-3  form-group pb-3">
+                            <label for="id_category"><small>Category</small></label>
+                            {% render_field form.category class+="form-control" %}
+                        </div>
+                        <div class="col-6 col-md-3  form-group pb-3">
+                            <label for="id_fuel"><small>Fuel Type</small></label>
+                            {% render_field form.fuel class+="form-control" %}
+                        </div>
+                        <div class="col-6 col-md-3  form-group pb-3">
+                            <label for="id_gear_box"><small>Number of seats</small></label>
+                            {% render_field form.seats class+="form-control" %}
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-3  form-group pb-3">
+                            <label for="id_gear_box"><small>Gear-Box Type</small></label>
+                            {% render_field form.gear_box class+="form-control" %}
+                        </div>
+                    </div>
+                    <input type="hidden" name="submitAction" id="submitAction">
+                    <div class=" col-12 d-flex justify-content-start">
+                        <button type="submit" class="btn button-2">Back to car search</button>
+                    </div>
+                </form>
+            </div>
+            <div class="row py-5 ">
+                <h3 class=""><strong>Your Deal</strong></h3>
+                <hr>
+                <div class="col-12 ">
+                    <div class="alert alert-warning" role="alert">
+                        <i class="fa-regular fa-clock"></i> Free cancellation up to 48 hours before pick-up
+                    </div>
+                </div>
 
+                <div class="col-12 py-3 my-2">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-info">Car Features</h5>
+                        </div>
+                        <div class="col-6 col-xl-4">
+                            <small>{{ car.seats }} Seats</small>
+                        </div>
+                        <div class="col-6 col-xl-4">
+                            <small>{{ car.fuel }}</small>
+                        </div>
+                        <div class="col-6 col-xl-4">
+                            <small>{{ car.doors }} Doors</small>
+                        </div>
+                        <div class="col-6 col-xl-4">
+                            <small>{{ car.gear_box }}</small>
+                        </div>
+                        <div class="col-6 col-xl-4">
+                            <small>Large Bags : {{ car.large_bags }}</small>
+                        </div>
+                        <div class="col-6 col-xl-4">
+                            <small>Small Bags : {{ car.small_bags }}</small>
+                        </div>
+                        <div class="col-6 col-xl-4">
+                            {% if car.air_condition %}
+                            <small>A/C : Yes </small>
+                            {% else %}
+                            <small>A/C : No </small>
+                            {% endif %}
+                        </div>
+                        <div class="col-6 col-xl-4">
+                            {% if car.abs %}
+                            <small>ABS : Yes </small>
+                            {% else %}
+                            <small>ABS : No </small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-12 py-3 my-2">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-info">Included In Price</h5>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Instant booking confirmation
+                            </small><br>
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Second Driver
+                            </small><br>
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Third party
+                            </small><br>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Theft and fire protection
+                            </small><br>
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Personal Accident protection
+                            </small><br>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-12 py-3 my-2">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-info">Great choice!</h5>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Customer Rating : {{ car.rating }} / 5.0
+                            </small><br>
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Most popular fuel policy
+                            </small><br>
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Short queues
+                            </small><br>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Easy to find counter
+                            </small><br>
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Helpful counter staff
+                            </small><br>
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Free Cancellation
+                            </small><br>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-12 py-3 my-2">
+                    <div class="row">
+                        <h5 class="text-info">Your pick-up checklist</h5>
+                        <br>
+                        <div class="p-3 rounded-2 border border-secondary my-2">
+                            <p class="text-warning"><strong><i class="fa-regular fa-clock"></i> Arrive On Time</strong></p>
+                            <p><small>Rental companies only allow you to get your keys at your allocated pick-up time, 
+                                they'll usually hold your car for a limited time after you're due to pick it up - then 
+                                it's likely to be passed to another customer.</small></p>
+                            <p class="text-info"><small>Your pick-up time is {{ pick_up_time_formatted }}</small></p>
+                        </div>
+                        
+                        <div class="p-3 rounded-2 border border-secondary my-2">
+                            <p class="text-warning"><strong><i class="fa-solid fa-id-card"></i> Bring with you</strong></p>
+                            <p><small>When you pick the car up, you'll need:</small></p>
+                            <p><small><i class="text-warning fa-regular fa-circle-check"></i> A passport or national ID card</small></p>
+                            <p><small><i class="text-warning fa-regular fa-circle-check"></i> All drivers to provide their driver's licence(s)</small></p>
+                            <p><small><i class="text-warning fa-regular fa-circle-check"></i> A credit card in the main driver's name, to hold the security deposit</small></p>
+                        </div>
+                        <div class="p-3 rounded-2 border border-secondary my-2">
+                            <p class="text-warning"><strong><i class="fa-regular fa-credit-card"></i> refundable Deposit</strong></p>
+                            <p><small>At pick-up, the main driver will need €1,500 available on their credit card for a refundable security deposit.
+                                Cash and debit cards aren't accepted.</small></p>
+                            <p class="text-info"><small><strong>Accepted cards:</strong> Mastercard, Visa, American Express</small></p>
+                        </div>
+                        <small>Click here for <a href="#">Terms and Conditions</a></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-3 p-3 animation2">
+            <div class="rounded-1 bg-warning" style="border: solid 1px #ffc107">
+                <div class="col-12 rounded-1 bg-black p-3">
+                    <h4>Payment Summary</h4>
+                </div>
+                <div class="col-12 p-3 my-2 text-black">
+                    <div class="row">
+                        <div class="col-8">
+                            <p>
+                                <strong> Car Rent</strong><br>
+                                <small>For 1 day </small>
+                            </p>
+                        </div>
+                        <div class="col-4 text-end">
+                            <storng>
+                                {{ car.rent }} €
+                            </strong>
+                        </div>
+                        <div class="col-8">
+                            <p>
+                                <strong>Total Rent</strong><br>
+                                <small>{{ days }} day{% if days > 1 %}s{% endif %}{% if hours %} & {{ hours }} hours{% endif %}</small>
+                            </p>
+                        </div>
+                        <div class="col-4 text-end">
+                            <storng>
+                                {{ total_rent }} €
+                            </strong>
+                        </div>
+                        <hr>
+                        <div class="col-8">
+                            <h5>
+                                <strong>Grand Total</strong><br>
+                            </h5>
+                        </div>
+                        <div class="col-4 text-end">
+                            <storng>
+                                {{ total_rent }} €
+                            </strong>
+                        </div>
+                        <hr>
+                        <div class="col-12 text-end">
+                            <small>
+                                Price includes all taxes & fees
+                            </small>
+                        </div>
+                        <div class="pt-2 d-flex justify-content-end">
+                            <button class="button-2">Make Payment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 </div>
 {% endblock %}
 
@@ -33,23 +289,10 @@
     document.addEventListener("DOMContentLoaded", function () {
         var animation = document.querySelector('.animation');
         var animation1 = document.querySelector('.animation1');
+        var animation2 = document.querySelector('.animation2');
         animation.classList.add('fade-in');
         animation1.classList.add('fade-in');
-    });
-
-    document.getElementById('deal_button').addEventListener('click', function() {
-        var form = document.getElementById('filterForm');
-        var formData = new FormData(form);
-        var queryParams = [];
-
-        for (var pair of formData.entries()) {
-            queryParams.push(encodeURIComponent(pair[0]) + '=' + encodeURIComponent(pair[1]));
-        }
-
-        var queryString = queryParams.join('&');
-        var url = "{% url 'car_details' id=car.id %}?" + queryString;
-
-        window.location.href = url;
+        animation2.classList.add('fade-in');
     });
 
 </script>
