@@ -133,22 +133,24 @@ def car_details(request, id):
         hours = None
     
     request.session['total_rent'] = total_rent
+    request.session['days'] = days
+    request.session['hours'] = hours
+    request.session['pick_up_city'] = pick_up_location.city
+    request.session['drop_off_city'] = drop_off_location.city
+    request.session['pick_up_county'] = pick_up_location.county
+    request.session['drop_off_county'] = drop_off_location.county
+    request.session['pick_up_time_formatted'] = pick_up_time_formatted
+    request.session['drop_off_time_formatted'] = drop_off_time_formatted
 
     context = {
         'car': car,
         'pick_up_datetime': pick_up_datetime,
         'drop_off_datetime': drop_off_datetime,
-        'days': days,
-        'total_rent': total_rent,
         'form': form,
-        'hours':hours,
-        'pick_up_city': pick_up_location.city,
-        'drop_off_city': drop_off_location.city,
-        'pick_up_county': pick_up_location.county,
-        'drop_off_county': drop_off_location.county,
-        'pick_up_time_formatted':pick_up_time_formatted,
-        'drop_off_time_formatted':drop_off_time_formatted,
     }
 
     return render(request, 'cars/car_details.html', context)
 
+
+def terms(request):
+    return render(request, 'cars/terms.html')

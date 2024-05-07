@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 p-4 my-3 animation">
+            <div class="row ">
+                <h3 class=""><strong>Terms & Conditions</strong></h3>
+                <hr>
+                <div class="col-12 py-3">
+                    <div class="row">
+                        <h5 class="text-info text-decoration-underline">Important Informations</h5>
+                        <br>
+                        <div class="p-3">
+                            <p class="text-warning"><strong><i class="fa-regular fa-clock"></i> Arrive On Time</strong></p>
+                            <p><small>Rental companies only allow you to get your keys at your allocated pick-up time, 
+                                they'll usually hold your car for a limited time after you're due to pick it up - then 
+                                it's likely to be passed to another customer.</small></p>
+                        </div>
+                        <div class="p-3">
+                            <p class="text-warning"><strong><i class="fa-solid fa-id-card"></i> Bring with you</strong></p>
+                            <p><small>When you pick the car up, you'll need:</small></p>
+                            <p><small><i class="text-warning fa-regular fa-circle-check"></i> A passport or national ID card</small></p>
+                            <p><small><i class="text-warning fa-regular fa-circle-check"></i> All drivers to provide their driver's licence(s)</small></p>
+                            <p><small><i class="text-warning fa-regular fa-circle-check"></i> A credit card in the main driver's name, to hold the security deposit</small></p>
+                        </div>
+                        <div class="p-3">
+                            <p class="text-warning"><strong><i class="fa-solid fa-gas-pump"></i> Fuel Policy</strong></p>
+                            <p><small>When you pick your car up, the fuel tank will be full or partly full. You will leave a deposit to cover the cost of the fuel: 
+                                the counter staff will block this money on your credit card. Just before you return your car, please replace the fuel you've used.</small></p>
+                        </div>
+                        <div class="p-3">
+                            <p class="text-warning"><strong><i class="fa-solid fa-location-dot"></i> Mileage</strong></p>
+                            <p><small>Your rental includes unlimited free miles.</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    // fade in animation when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        var animation = document.querySelector('.animation');
+        animation.classList.add('fade-in');
+    });
+
+</script>
+{% endblock %}

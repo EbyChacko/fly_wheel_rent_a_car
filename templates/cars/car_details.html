@@ -10,7 +10,7 @@
                 <div class="col-12 p-3 text-center rounded-1 bg-black">
                     <h4 class="text-warning">{{ total_rent }} €</h4>
                     <small>
-                        Rental Cost for {{ days }} day{% if days > 1 %}s{% endif %}{% if hours %} & {{ hours }} hours{% endif %}
+                        Rental Cost for {{ request.session.days }} day{% if days > 1 %}s{% endif %}{% if request.session.hours %} & {{ request.session.hours }} hours{% endif %}
                     </small>
                 </div>
                 <div class="col-8 col-md-6 col-lg-12 d-flex justify-content-center mx-auto p-3">
@@ -25,15 +25,15 @@
                 <hr>
                 <div class="col-12 p-3">
                     <h5> <i class="fa-solid fa-plane-departure"></i> Pick-Up</h5>
-                    <h6 class="disabled">{{ pick_up_city }}, {{ pick_up_county }}</h6>
+                    <h6>{{ request.session.pick_up_city }}, {{ request.session.pick_up_county }}</h6>
                     <small>Date : {{ form.pick_up_date.value }}</small><br>
-                    <small>Time : {{ pick_up_time_formatted }}</small>
+                    <small>Time : {{ request.session.pick_up_time_formatted }}</small>
                 </div>
                 <div class="col-12 p-3">
                     <h5><i class="fa-solid fa-plane-arrival"></i> Drop Off</h5>
                     <h6 class="disabled">{{ drop_off_city }}, {{ drop_off_county }}</h6>
                     <small>Date : {{ form.drop_off_date.value }}</small><br>
-                    <small>Time : {{ drop_off_time_formatted }}</small>
+                    <small>Time : {{ request.session.drop_off_time_formatted }}</small>
                 </div>
             </div>
         </div>
@@ -220,7 +220,7 @@
                                 Cash and debit cards aren't accepted.</small></p>
                             <p class="text-info"><small><strong>Accepted cards:</strong> Mastercard, Visa, American Express</small></p>
                         </div>
-                        <small>Click here for <a href="#">Terms and Conditions</a></small>
+                        <small>Click here for <a href="{% url 'terms' %}"  target="_blank">Terms and Conditions</a></small>
                     </div>
                 </div>
             </div>
@@ -246,12 +246,12 @@
                         <div class="col-8">
                             <p>
                                 <strong>Total Rent</strong><br>
-                                <small>{{ days }} day{% if days > 1 %}s{% endif %}{% if hours %} & {{ hours }} hours{% endif %}</small>
+                                <small>{{ request.session.days }} day{% if request.session.days > 1 %}s{% endif %}{% if request.session.hours %} & {{ request.session.hours }} hours{% endif %}</small>
                             </p>
                         </div>
                         <div class="col-4 text-end">
                             <storng>
-                                {{ total_rent }} €
+                                {{ request.session.total_rent }} €
                             </strong>
                         </div>
                         <hr>
@@ -262,7 +262,7 @@
                         </div>
                         <div class="col-4 text-end">
                             <storng>
-                                {{ total_rent }} €
+                                {{ request.session.total_rent }} €
                             </strong>
                         </div>
                         <hr>
