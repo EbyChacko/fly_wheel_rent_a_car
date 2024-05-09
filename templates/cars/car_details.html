@@ -5,12 +5,13 @@
 {% block content %}
 <div class="container-fluid bg-dark">
     <div class="row">
-        <div class="col-12 col-lg-3 p-3 animation">
+        <div class="col-12 col-lg-4 col-xl-3 p-3 animation">
             <div class="rounded-1" style="border: solid 1px #ffc107">
                 <div class="col-12 p-3 text-center rounded-1 bg-black">
-                    <h4 class="text-warning">{{ total_rent }} €</h4>
+                    <h4 class="text-warning">{{ request.session.total_rent }} €</h4>
                     <small>
-                        Rental Cost for {{ request.session.days }} day{% if days > 1 %}s{% endif %}{% if request.session.hours %} & {{ request.session.hours }} hours{% endif %}
+                        Rental Cost for {{ request.session.days }} day{% if request.session.days > 1 %}s{% endif %}
+                        {% if request.session.hours %} & {{ request.session.hours }} hour{% if request.session.hours > 1 %}s {% endif %}{% endif %}
                     </small>
                 </div>
                 <div class="col-8 col-md-6 col-lg-12 d-flex justify-content-center mx-auto p-3">
@@ -31,61 +32,22 @@
                 </div>
                 <div class="col-12 p-3">
                     <h5><i class="fa-solid fa-plane-arrival"></i> Drop Off</h5>
-                    <h6 class="disabled">{{ drop_off_city }}, {{ drop_off_county }}</h6>
+                    <h6 class="disabled">{{ request.session.drop_off_city }}, {{ request.session.drop_off_county }}</h6>
                     <small>Date : {{ form.drop_off_date.value }}</small><br>
                     <small>Time : {{ request.session.drop_off_time_formatted }}</small>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-6 p-4 my-3 animation1">
+        <div class="col-12 col-lg-8 col-xl-6 p-4 mt-2 animation1">
             <div>
                 <form method="post" action="{% url 'search_result_update' %}">
                     {% csrf_token %}
                     <div class="row py-3 d-none">
-                        <div class="col-12 col-sm-6 form-group pb-3">
-                            <label for="id_pick_up_location"><small>Pick-up Location</small></label>
-                            {% render_field form.pick_up_location class="form-control" %}
-                        </div>
-                        <div class="col-12 col-sm-6 form-group pb-3">
-                            <label for="id_drop_off_location"><small>Drop-off Location</small></label>
-                            {% render_field form.drop_off_location class="form-control" %}
-                        </div>
-                        <div class="col-6 col-md-3 form-group pb-3">
-                            <label for="id_pick_up_date"><small>Pick-up Date</small></label>
-                            {% render_field form.pick_up_date class+="form-control" %}
-                        </div>
-                        <div class="col-6 col-md-3 form-group pb-3">
-                            <label for="id_pick_up_time"><small>Pick-up Time</small></label>
-                            {% render_field form.pick_up_time class+="form-control" %}
-                        </div>
-                        <div class="col-6 col-md-3 form-group pb-3">
-                            <label for="id_drop_off_date"><small>Drop-off Date</small></label>
-                            {% render_field form.drop_off_date class+="form-control" %}
-                        </div>
-                        <div class="col-6 col-md-3 form-group pb-3">
-                            <label for="id_drop_off_time"><small>Drop-off Time</small></label>
-                            {% render_field form.drop_off_time class+="form-control" %}
-                        </div>
-                        <div class="col-6 col-md-3  form-group pb-3">
-                            <label for="id_category"><small>Category</small></label>
-                            {% render_field form.category class+="form-control" %}
-                        </div>
-                        <div class="col-6 col-md-3  form-group pb-3">
-                            <label for="id_fuel"><small>Fuel Type</small></label>
-                            {% render_field form.fuel class+="form-control" %}
-                        </div>
-                        <div class="col-6 col-md-3  form-group pb-3">
-                            <label for="id_gear_box"><small>Number of seats</small></label>
-                            {% render_field form.seats class+="form-control" %}
-                        </div>
-                        <div class="col-6 col-sm-6 col-md-3  form-group pb-3">
-                            <label for="id_gear_box"><small>Gear-Box Type</small></label>
-                            {% render_field form.gear_box class+="form-control" %}
-                        </div>
+                        {{ form.as_p }}
                     </div>
                     <input type="hidden" name="submitAction" id="submitAction">
                     <div class=" col-12 d-flex justify-content-start">
-                        <button type="submit" class="btn button-2">Back to car search</button>
+                        <button type="submit" class="btn button-2">Change Car</button>
                     </div>
                 </form>
             </div>
@@ -197,35 +159,116 @@
                 <hr>
                 <div class="col-12 py-3 my-2">
                     <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-info">Extras</h5>
+                        </div>
+                        <div class="col-12 my-2">
+                            <div class="row rounded-2 border border-1 border-secondary p-3">
+                                <div class="col-3">
+                                    <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1714679891/Royal%20Drive/Uploads/booster_seat_plvdyj.png"
+                                        alt="Car Image" style="width:100%; max-height:100% ;" class="rounded-4">
+                                </div>
+                                <div class="col-9">
+                                    <h5>BOOSTER SEAT (5 - 10 YEARS)</h5>
+                                    <small>Booster seats are recommended if your child is between 15-36 kg.</small>
+                                    <h5 class="text-warning pt-2">5,00 €/day</h5>
+                                    <form class="form" action="{% url 'add_extras' id=1 %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="row py-3 d-none">
+                                            {{ form.as_p }}
+                                        </div>
+                                        <button type="submit" class="btn button-2">Add</button>
+                                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 my-2">
+                            <div class="row rounded-2 border border-1 border-secondary p-3">
+                                <div class="col-3">
+                                    <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1714682522/Royal%20Drive/Uploads/child_seat_ztjq6m.webp"
+                                        alt="Car Image" style="width:100%; max-height:100% ;" class="rounded-4">
+                                </div>
+                                <div class="col-9">
+                                    <h5>CHILD SEAT (1 - 5 YEARS)</h5>
+                                    <small>Child seats are normally used for children between (2-19 kg).</small>
+                                    <h5 class="text-warning pt-2">5,00 €/day</h5>
+                                    <form class="form" action="{% url 'add_extras' id=2 %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="row py-3 d-none">
+                                            {{ form.as_p }}
+                                        </div>
+                                        <button type="submit" class="btn button-2">Add</button>
+                                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 my-2">
+                            <div class="row rounded-2 border border-1 border-secondary p-3">
+                                <div class="col-3">
+                                    <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1714681132/Royal%20Drive/Uploads/infant_car_capsule_bhe6mr.webp"
+                                        alt="Car Image" style="width:100%; max-height:100% ;" class="rounded-4">
+                                </div>
+                                <div class="col-9">
+                                    <h5>INFANT CAR CAPSULE (0 - 1 YEARS)</h5>
+                                    <small>Infant Car Capsule (0 - 1 years)</small>
+                                    <h5 class="text-warning pt-2">5,00 €/day</h5>
+                                    <form class="form" action="{% url 'add_extras' id=3 %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="row py-3 d-none">
+                                            {{ form.as_p }}
+                                        </div>
+                                        <button type="submit" class="btn button-2">Add</button>
+                                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-12 py-3 my-2">
+                    <div class="row">
                         <h5 class="text-info">Your pick-up checklist</h5>
                         <br>
                         <div class="p-3 rounded-2 border border-secondary my-2">
-                            <p class="text-warning"><strong><i class="fa-regular fa-clock"></i> Arrive On Time</strong></p>
-                            <p><small>Rental companies only allow you to get your keys at your allocated pick-up time, 
-                                they'll usually hold your car for a limited time after you're due to pick it up - then 
-                                it's likely to be passed to another customer.</small></p>
-                            <p class="text-info"><small>Your pick-up time is {{ pick_up_time_formatted }}</small></p>
+                            <p class="text-warning"><strong><i class="fa-regular fa-clock"></i> Arrive On Time</strong>
+                            </p>
+                            <p><small>Rental companies only allow you to get your keys at your allocated pick-up time,
+                                    they'll usually hold your car for a limited time after you're due to pick it up -
+                                    then
+                                    it's likely to be passed to another customer.</small></p>
+                            <p class="text-info"><small>Your pick-up time is {{ request.session.pick_up_time_formatted }}</small></p>
                         </div>
-                        
+
                         <div class="p-3 rounded-2 border border-secondary my-2">
-                            <p class="text-warning"><strong><i class="fa-solid fa-id-card"></i> Bring with you</strong></p>
+                            <p class="text-warning"><strong><i class="fa-solid fa-id-card"></i> Bring with you</strong>
+                            </p>
                             <p><small>When you pick the car up, you'll need:</small></p>
-                            <p><small><i class="text-warning fa-regular fa-circle-check"></i> A passport or national ID card</small></p>
-                            <p><small><i class="text-warning fa-regular fa-circle-check"></i> All drivers to provide their driver's licence(s)</small></p>
-                            <p><small><i class="text-warning fa-regular fa-circle-check"></i> A credit card in the main driver's name, to hold the security deposit</small></p>
+                            <p><small><i class="text-warning fa-regular fa-circle-check"></i> A passport or national ID
+                                    card</small></p>
+                            <p><small><i class="text-warning fa-regular fa-circle-check"></i> All drivers to provide
+                                    their driver's licence(s)</small></p>
+                            <p><small><i class="text-warning fa-regular fa-circle-check"></i> A credit card in the main
+                                    driver's name, to hold the security deposit</small></p>
                         </div>
                         <div class="p-3 rounded-2 border border-secondary my-2">
-                            <p class="text-warning"><strong><i class="fa-regular fa-credit-card"></i> refundable Deposit</strong></p>
-                            <p><small>At pick-up, the main driver will need €1,500 available on their credit card for a refundable security deposit.
-                                Cash and debit cards aren't accepted.</small></p>
-                            <p class="text-info"><small><strong>Accepted cards:</strong> Mastercard, Visa, American Express</small></p>
+                            <p class="text-warning"><strong><i class="fa-regular fa-credit-card"></i> refundable
+                                    Deposit</strong></p>
+                            <p><small>At pick-up, the main driver will need €1,500 available on their credit card for a
+                                    refundable security deposit.
+                                    Cash and debit cards aren't accepted.</small></p>
+                            <p class="text-info"><small><strong class="text-uppercase">Accepted cards:</strong>
+                                    Mastercard, Visa, American Express</small></p>
                         </div>
-                        <small>Click here for <a href="{% url 'terms' %}"  target="_blank">Terms and Conditions</a></small>
+                        <small>Click here for <a href="{% url 'terms' %}" target="_blank">Terms and
+                                Conditions</a></small>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-3 p-3 animation2">
+        <div class="col-12 col-xl-3 p-3 animation2">
             <div class="rounded-1 bg-warning" style="border: solid 1px #ffc107">
                 <div class="col-12 rounded-1 bg-black p-3">
                     <h4>Payment Summary</h4>
@@ -241,29 +284,108 @@
                         <div class="col-4 text-end">
                             <storng>
                                 {{ car.rent }} €
-                            </strong>
+                                </strong>
                         </div>
                         <div class="col-8">
                             <p>
                                 <strong>Total Rent</strong><br>
-                                <small>{{ request.session.days }} day{% if request.session.days > 1 %}s{% endif %}{% if request.session.hours %} & {{ request.session.hours }} hours{% endif %}</small>
+                                <small>{{ request.session.days }} day{% if request.session.days > 1 %}s{% endif %}
+                                    {% if request.session.hours %} & {{ request.session.hours }} hours{% endif %}</small>
                             </p>
                         </div>
                         <div class="col-4 text-end">
                             <storng>
                                 {{ request.session.total_rent }} €
-                            </strong>
+                                </strong>
                         </div>
                         <hr>
+                        {% if request.session.booster_quantity or request.session.childseat_quantity or request.session.infant_quantity %}
+                        <h5>Extras</h5>
+                        {% endif %}
+                        {% if request.session.booster_quantity %}
+                        <div class="col-8">
+                            <p>
+                                <strong> Booster Seat</strong><br>
+                                <small>Quantity {{ request.session.booster_quantity }} </small>
+                            </p>
+                        </div>
+                        <div class="col-4 text-end">
+                            <storng>
+                                {{ request.session.booster_total }} €
+                                </strong>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end">
+                            <form class="form" action="{% url 'remove_extras' id=1 %}" method="POST">
+                                {% csrf_token %}
+                                <div class="row py-3 d-none">
+                                    {{ form.as_p }}
+                                </div>
+                                <button type="submit" class="remove-button">Remove</button>
+                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            </form>
+                        </div>
+                        <hr>
+                        {% endif %}
+
+                        {% if request.session.childseat_quantity %}
+                        <div class="col-8">
+                            <p>
+                                <strong> Child Seat</strong><br>
+                                <small>Quantity {{ request.session.childseat_quantity }} </small>
+                            </p>
+                        </div>
+                        <div class="col-4 text-end">
+                            <storng>
+                                {{ request.session.childseat_total }} €
+                                </strong>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end">
+                            <form class="form" action="{% url 'remove_extras' id=2 %}" method="POST">
+                                {% csrf_token %}
+                                <div class="row py-3 d-none">
+                                    {{ form.as_p }}
+                                </div>
+                                <button type="submit" class="remove-button">Remove</button>
+                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            </form>
+                        </div>
+                        <hr>
+                        {% endif %}
+                        {% if request.session.infant_quantity %}
+                        <div class="col-8">
+                            <p>
+                                <strong> Infant Car Capsule</strong><br>
+                                <small>Quantity {{ request.session.infant_quantity }} </small>
+                            </p>
+                        </div>
+                        <div class="col-4 text-end">
+                            <storng>
+                                {{ request.session.infant_total }} €
+                                </strong>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end">
+                            <form class="form" action="{% url 'remove_extras' id=3 %}" method="POST">
+                                {% csrf_token %}
+                                <div class="row py-3 d-none">
+                                    {{ form.as_p }}
+                                </div>
+                                <button type="submit" class="remove-button">Remove</button>
+                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            </form>
+                        </div>
+                        <hr>
+                        {% endif %}
                         <div class="col-8">
                             <h5>
                                 <strong>Grand Total</strong><br>
                             </h5>
                         </div>
                         <div class="col-4 text-end">
-                            <storng>
-                                {{ request.session.total_rent }} €
-                            </strong>
+                            <h5>
+                                <storng>
+                                    {{ request.session.grand_total }} €
+                                    </strong>
+                            </h5>
                         </div>
                         <hr>
                         <div class="col-12 text-end">

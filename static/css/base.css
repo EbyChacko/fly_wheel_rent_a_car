@@ -251,6 +251,20 @@ border-color: gray;
   margin: 0 40px;
 }
 
+/* to remove the button style od remove button */
+.remove-button {
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  color: #c40860;
+}
+
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */
