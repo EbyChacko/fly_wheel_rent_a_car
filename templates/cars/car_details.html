@@ -394,7 +394,14 @@
                             </small>
                         </div>
                         <div class="pt-2 d-flex justify-content-end">
-                            <button class="button-2">Make Payment</button>
+                            <form class="form" action="{% url 'payment' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="row py-3 d-none">
+                                    {{ form.as_p }}
+                                </div>
+                                <button type="submit" class="button-2">Make Payment</button>
+                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            </form>
                         </div>
                     </div>
                 </div>

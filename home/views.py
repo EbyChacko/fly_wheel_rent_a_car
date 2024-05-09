@@ -15,7 +15,7 @@ def contact(request):
         form = CustomerMessageForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('contact')
     return render(request, 'home/contact.html', {
         'form': form,
     })

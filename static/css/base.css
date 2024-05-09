@@ -52,7 +52,7 @@ a{
 }
 
 a:hover{
-  color:#00DDEB !important;
+  color:#ffe600 !important;
   cursor: pointer;
 }
 
@@ -190,7 +190,7 @@ border-color: gray;
 }
 
 .button-1:hover {
-  color:#ffdd00;
+  color:#ffffff;
 }
 @media (min-width: 768px) {
   .button-1 {

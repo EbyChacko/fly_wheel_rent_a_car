@@ -104,13 +104,14 @@
                         </div>
                     </div>
                     <p class=" me-4 mb-3 nav-item nav-link d-none d-xl-block">|</p>
-                    <a class=" me-4 mb-3 nav-item nav-link text-warning" href="{% url 'account_logout' %}" role="button">
+                    <a class=" me-4 mb-3 nav-item nav-link text-warning" href="{% url 'account_logout' %}"
+                        role="button">
                         Log out</a>
                     {% else %}
                     <a class=" me-4 mb-3 nav-item nav-link" href="{% url 'account_signup' %}" role="button"
                         id="sign_up">
                         Register</a>
-                        <p class=" me-4 mb-3 nav-item nav-link d-none d-xl-block">|</p>
+                    <p class=" me-4 mb-3 nav-item nav-link d-none d-xl-block">|</p>
                     <a class=" mb-3 nav-item nav-link text-warning" href="{% url 'account_login' %}" role="button"
                         id="login">Login</a>
                     {% endif %}
@@ -161,24 +162,41 @@
                             <div class="row">
                                 <div class="col-12 col-lg-6 p-3">
                                     <h5 class="text-info">Explore Us</h5>
-                                    <small><a href="#"><span><i class="fa-solid fa-circle-arrow-right"></i></span>
-                                            Home</a></small><br>
-
-                                    <small><a href="#"><span><i class="fa-solid fa-circle-arrow-right"></i></span> About
-                                            Us</a></small><br>
-                                    <small><a href="#"><span><i class="fa-solid fa-circle-arrow-right"></i></span>
-                                            Contact</a></small><br>
-                                    <small><a href="#"><span><i class="fa-solid fa-circle-arrow-right"></i></span> Rent
-                                            a
-                                            car</a></small><br>
+                                    <small>
+                                        <a href="{% url 'home' %}">
+                                            <span><i class="fa-solid fa-circle-arrow-right"></i></span>
+                                            Home
+                                        </a>
+                                    </small>
+                                    <br>
+                                    <small>
+                                        <a href="{% url 'about' %}">
+                                            <span><i class="fa-solid fa-circle-arrow-right"></i></span>
+                                            About Us
+                                        </a>
+                                    </small><br>
+                                    <small>
+                                        <a href="{% url 'contact' %}"><span>
+                                                <i class="fa-solid fa-circle-arrow-right"></i></span>
+                                            Contact
+                                        </a>
+                                    </small>
+                                    <br>
+                                    <small>
+                                        <a href="{% url 'search_cars' %}">
+                                            <span><i class="fa-solid fa-circle-arrow-right"></i></span>
+                                            Rent a car
+                                        </a>
+                                    </small>
+                                    <br>
                                 </div>
                                 <div class="col-12  col-lg-6 p-3">
                                     <h5 class="text-info">Meet Us</h5>
-                                        <address>
-                                            <small>Main Street</small><br>
-                                            <small>Ballinasloe</small><br>
-                                            <small>Co-Galway</small><br>
-                                        </address>
+                                    <address>
+                                        <small>Main Street</small><br>
+                                        <small>Ballinasloe</small><br>
+                                        <small>Co-Galway</small><br>
+                                    </address>
                                 </div>
                                 <div class="col-12  col-lg-6 p-3">
                                     <h5 class="text-info">Reach Us</h5>

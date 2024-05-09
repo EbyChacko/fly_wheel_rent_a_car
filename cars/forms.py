@@ -46,7 +46,7 @@ class CarRentalForm(forms.Form):
             raise ValidationError("Pick-up date cannot be after drop-off date")
 
         if pick_up_date == drop_off_date and pick_up_time >= drop_off_time:
-            raise ValidationError("Pick-up time must be before drop-off time if on the same day")
+            raise ValidationError("Pick-up time must be before drop-off time")
 
 
 

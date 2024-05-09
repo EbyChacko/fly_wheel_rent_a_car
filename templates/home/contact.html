@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% load widget_tweaks %}
+
 {% block content %}
 <div class="container-fluid">
     <div class="row animation">
@@ -22,40 +24,35 @@
                                     {% csrf_token %}
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                                        <input type="text" aria-label="name" name="{{ form.name.name }}"
-                                            class="form-control text-start" id="name" placeholder="Your Name">
+                                        {% render_field form.name class="form-control text-start" placeholder="Your Name" %}
                                     </div>
-                                    <p id="nameError" style="color: red; visibility: hidden;" class="text-start">
-                                    </p>
+                                    {% if form.name.errors %}
+                                        <p class="text-start text-danger">{{ form.name.errors }}</p>
+                                    {% endif %}
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><i class="fa-solid fa-phone-volume"></i></span>
-                                        <input type="tel" aria-label="mobile" name="{{ form.mobile.name }}"
-                                            class="form-control text-start" id="mobile" placeholder="Your Mobile Number">
+                                        {% render_field form.mobile class="form-control text-start" placeholder="Your Mobile Number" %}
                                     </div>
-                                    <p id="mobileError" style="color: red; visibility: hidden;" class="text-start">
-                                    </p>
+                                    {% if form.mobile.errors %}
+                                        <p class="text-start text-danger">{{ form.mobile.errors }}</p>
+                                    {% endif %}
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-                                        <input type="text" aria-label="email" name="{{ form.email.name }}"
-                                            class="form-control text-start" id="email" placeholder="Your e-mail address">
+                                        {% render_field form.email class="form-control text-start" placeholder="Your e-mail address" %}
                                     </div>
-                                    <p id="emailError" style="color: red; visibility: hidden;" class="text-start">
-                                    </p>
+                                    {% if form.email.errors %}
+                                        <p class="text-start text-danger">{{ form.email.errors }}</p>
+                                    {% endif %}
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text align-self-start" style="height:100px;"><i
-                                                class="fa-solid fa-message"></i></span>
-                                        <textarea name="{{ form.message.name }}" aria-label="message" rows="15"
-                                            cols="36" class="form-control text-start" id="message"
-                                            style="height:100px" placeholder="Your Message"></textarea>
+                                        <span class="input-group-text align-self-start" style="height:100px;"><i class="fa-solid fa-message"></i></span>
+                                        {% render_field form.message class="form-control text-start" placeholder="Your Message" rows="15" cols="36" style="height:100px" %}
                                     </div>
-                                    <p id="messageError" style="color: red; visibility: hidden;" class="text-start">
-                                    </p>
-                                    <div  class=" col-12 d-flex justify-content-end">
-                                        <input type="reset" aria-label="reset" value="Reset" class="btn text-white">
-                                        <input type="submit" aria-label="send" class="btn button-4 text-white" value="Send"
-                                        onclick="return validateForm()">
+                                    {% if form.message.errors %}
+                                        <p class="text-start text-danger">{{ form.message.errors }}</p>
+                                    {% endif %}
+                                    <div class=" col-12 d-flex justify-content-end">
+                                        <input type="submit" aria-label="send" class="btn button-4 text-white" value="Send" onclick="return validateForm()">
                                     </div>
-                                    
                                 </form>
                             </div>
                         </div>
@@ -86,7 +83,7 @@
                         Fly wheel rent a car: We care for you.
                     </div>
                     <div class="col-12 col-lg-4 py-3">
-                        <a href="" class=" btn button-1 rounded-5 py-3">Rent a car</a>
+                        <a href="{% url 'search_cars' %}" class="button-1 rounded-5 py-3">Rent a car</a>
                     </div>
                 </div>
             </div>

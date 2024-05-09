@@ -284,3 +284,7 @@ def remove_extras(request,id):
 
 def terms(request):
     return render(request, 'cars/terms.html')
+
+
+def payment(request):
+    return render(request, 'cars/payment.html')
