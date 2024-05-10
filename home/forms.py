@@ -1,8 +1,7 @@
 from django import forms
 from .models import CustomerMessage
-import re
 from django.forms import widgets
-
+import re
 
 
 # form fo the customer message in the contact.html

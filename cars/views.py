@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from .forms import CarRentalForm, CarFilterForm
-from .models import Car, Booking
+from .forms import CarRentalForm, CarFilterForm, BookingForm
+from .models import Car, Booking, PersonalDetails
 from datetime import datetime, timedelta
 from django.utils.dateparse import parse_datetime
 from django.shortcuts import render, get_object_or_404
 from django.http import QueryDict
+from django.contrib import messages
 
 def search_cars(request):
     """To load search page"""
@@ -65,6 +66,13 @@ def search_result_update(request):
             gear_box = form.cleaned_data['gear_box']
             seats = form.cleaned_data['seats']
             
+            request.session['pick_up_location'] = pick_up_location
+            request.session['drop_off_location'] = drop_off_location
+            request.session['pick_up_date'] = pick_up_date
+            request.session['pick_up_time'] = pick_up_time
+            request.session['drop_off_date'] = drop_off_date
+            request.session['drop_off_time'] = drop_off_time
+
             available_cars = Car.objects.filter(city=pick_up_location)
             if category:
                 available_cars = available_cars.filter(category=category)
@@ -287,4 +295,48 @@ def terms(request):
 
 
 def payment(request):
-    return render(request, 'cars/payment.html')
+    # if request.method == 'POST':
+    #     form = BookingForm(request.POST)
+    #     if form.is_valid():
+    #         booking = form.save(commit=False)
+
+    #         if request.user.is_authenticated:
+    #             customer_details = PersonalDetails.objects.get(user=request.user)
+    #             booking.customer = customer_details
+
+    #             booking.car_id = request.session.get('car_id')
+    #             booking.pick_up_location = request.session.get('pick_up_location')
+    #             print(booking.pick_up_location)
+    #             booking.drop_off_location = request.session.get('drop_off_location')
+    #             booking.pick_up_date = request.session.get('pick_up_date')
+    #             booking.drop_off_date = request.session.get('drop_off_date')
+    #             booking.pick_up_time = request.session.get('pick_up_time')
+    #             booking.drop_off_time = request.session.get('drop_off_time')
+    #             booking.booster_seat = request.session.get('booster_quantity', 0)
+    #             booking.child_seat = request.session.get('childseat_quantity', 0)
+    #             booking.infant_car_capsule = request.session.get('infant_quantity', 0)
+
+    #         booking.save()
+    #         return redirect('/')
+    #     else:
+    #         messages.error(request, 'There were errors in your form submission.')
+    # else:
+    form = BookingForm()
+    if request.user.is_authenticated:
+        customer_details = PersonalDetails.objects.get(user=request.user)
+        form.initial = {
+            'title': customer_details.title,
+            'name': customer_details.name,
+            'email': customer_details.user.email,
+            'mobile': customer_details.mobile,
+            'date_of_birth': customer_details.date_of_birth,
+            'address_1': customer_details.address_1,
+            'address_2': customer_details.address_2,
+            'town': customer_details.town,
+            'county': customer_details.county,
+            'eir_code': customer_details.eir_code,
+            'country': customer_details.country,
+        }
+        print(customer_details)
+
+    return render(request, 'cars/payment.html', {'form': form})

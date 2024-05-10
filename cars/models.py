@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
+import uuid
 
 class Cities(models.Model):
     city = models.CharField(max_length=250)
@@ -12,6 +13,16 @@ class Cities(models.Model):
     
     def __str__(self):
         return f"{self.city}, {self.county}"
+
+
+class County(models.Model):
+    county = models.CharField(max_length=250)
+
+    class Meta:
+        verbose_name_plural = "counties"
+    
+    def __str__(self):
+        return f"{self.county}"
 
 
 class Categories(models.Model):
@@ -98,7 +109,7 @@ class PersonalDetails(models.Model):
     address_1 = models.CharField(max_length=250)
     address_2 = models.CharField(max_length=250, blank=True, null=True)
     town = models.CharField(max_length=100)
-    county = models.CharField(max_length=100)
+    county = models.ForeignKey(County, on_delete=models.CASCADE, blank=True, null=True)
     eir_code = models.CharField(max_length=10)
     country = CountryField()
 
@@ -109,6 +120,7 @@ class PersonalDetails(models.Model):
         ordering = ['name']
 
 class Booking(models.Model):
+    booking_number = models.CharField(max_length=32, null=False, editable=False)
     customer = models.ForeignKey(PersonalDetails, on_delete=models.CASCADE)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     pick_up_location = models.CharField(max_length=250)
@@ -126,18 +138,25 @@ class Booking(models.Model):
     address_1 = models.CharField(max_length=250)
     address_2 = models.CharField(max_length=250, blank=True, null=True)
     town = models.CharField(max_length=100)
-    county = CountryField()
+    county = models.ForeignKey(County, on_delete=models.CASCADE, blank=True, null=True)
     eir_code = models.CharField(max_length=10)
-    country = models.CharField(max_length=100)
+    country = CountryField()
     licence_number = models.CharField(max_length=20)
     licence_expiry = models.DateField()
     personal_id = models.CharField(max_length=20)
     id_number = models.CharField(max_length=20)
     id_expiry = models.DateField()
-    full_cover = models.BooleanField(default=False)
-    booster_seat = models.BooleanField(default=False)
-    child_seat = models.BooleanField(default=False)
-    infant_car_capsule = models.BooleanField(default=False)
+    booster_seat = models.IntegerField(default=False)
+    child_seat = models.IntegerField(default=False)
+    infant_car_capsule = models.IntegerField(default=False)
+
+    def _Generate_booking_number(self):
+        return uuid.uuid4().hex.upper()
+
+    def save(self, *arg, **kwargs):
+        if not self.booking_number:
+            self.booking_number = self._Generate_booking_number()
+            super().save(*arg, **kwargs)
 
     def __str__(self):
         return f"Booking for {self.customer.user.username} - {self.car}"
