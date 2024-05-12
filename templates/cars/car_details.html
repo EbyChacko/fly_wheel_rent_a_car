@@ -394,7 +394,7 @@
                             </small>
                         </div>
                         <div class="pt-2 d-flex justify-content-end">
-                            <form class="form" action="{% url 'payment' %}" method="POST">
+                            <form class="form" action="{% url 'checkout' %}" method="POST">
                                 {% csrf_token %}
                                 <div class="row py-3 d-none">
                                     {{ form.as_p }}

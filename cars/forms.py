@@ -4,7 +4,8 @@ from .models import Cities, Categories, Fuel, GearBox, Seats, Booking
 from django.utils import timezone
 from django.forms import TypedChoiceField
 from django.forms import widgets
-from datetime import date
+from datetime import date, datetime
+import time
 import re
 
 SEATS_CHOICES = [(i, str(i)) for i in range(2, 11)]
@@ -116,7 +117,7 @@ class CarFilterForm(forms.Form):
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['title', 'name', 'email', 'mobile', 'date_of_birth', 'address_1', 'address_2', 'town', 'county', 'eir_code', 'country', 'licence_number', 'licence_expiry', 'personal_id', 'id_number', 'id_expiry', ]
+        fields = ['title', 'name', 'email', 'mobile', 'date_of_birth', 'address_1', 'address_2', 'town', 'county', 'eir_code', 'country', 'licence_number', 'licence_expiry', 'personal_id', 'country_issued', 'id_number', 'id_expiry', ]
         widgets = {
             'title': widgets.Select(attrs={'class': 'form-control'}),
             'name': widgets.TextInput(attrs={'class': 'form-control'}),
@@ -131,10 +132,15 @@ class BookingForm(forms.ModelForm):
             'country': widgets.Select(attrs={'class': 'form-control'}),
             'licence_number': widgets.TextInput(attrs={'class': 'form-control'}),
             'licence_expiry': widgets.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            'personal_id': widgets.TextInput(attrs={'class': 'form-control'}),
+            'personal_id': widgets.Select(attrs={'class': 'form-control'}),
             'id_number': widgets.TextInput(attrs={'class': 'form-control'}),
+            'country_issued':widgets.Select(attrs={'class': 'form-control'}),
             'id_expiry': widgets.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)  # Get request object from kwargs
+        super(BookingForm, self).__init__(*args, **kwargs)
 
     def clean_mobile(self):
         mobile = self.cleaned_data.get('mobile')
@@ -158,3 +164,29 @@ class BookingForm(forms.ModelForm):
             if age < 18:
                 raise forms.ValidationError("The driver must be at least 18 years old.")
         return date_of_birth
+
+    def clean_licence_expiry(self):
+        licence_expiry = self.cleaned_data.get('licence_expiry')
+        drop_off_date_str = self.request.session.get('drop_off_date')
+        drop_off_date = datetime.strptime(drop_off_date_str, '%Y-%m-%d').date()
+
+        if not licence_expiry:
+            raise forms.ValidationError("Please enter your licence expiry date.")
+
+        if licence_expiry <= drop_off_date:
+            raise forms.ValidationError("Licence expiry must be after the drop-off date.")
+
+        return licence_expiry
+
+    def clean_id_expiry(self):
+        id_expiry = self.cleaned_data.get('id_expiry')
+        drop_off_date_str = self.request.session.get('drop_off_date')
+        drop_off_date = datetime.strptime(drop_off_date_str, '%Y-%m-%d').date()
+
+        if not id_expiry:
+            raise forms.ValidationError("Please enter your ID expiry date.")
+
+        if id_expiry <= drop_off_date:
+            raise forms.ValidationError("ID expiry must be after the drop-off date.")
+
+        return id_expiry

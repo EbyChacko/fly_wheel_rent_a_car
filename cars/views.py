@@ -65,13 +65,6 @@ def search_result_update(request):
             fuel = form.cleaned_data['fuel']
             gear_box = form.cleaned_data['gear_box']
             seats = form.cleaned_data['seats']
-            
-            request.session['pick_up_location'] = pick_up_location
-            request.session['drop_off_location'] = drop_off_location
-            request.session['pick_up_date'] = pick_up_date
-            request.session['pick_up_time'] = pick_up_time
-            request.session['drop_off_date'] = drop_off_date
-            request.session['drop_off_time'] = drop_off_time
 
             available_cars = Car.objects.filter(city=pick_up_location)
             if category:
@@ -125,6 +118,14 @@ def car_details(request, id):
         gear_box = form.cleaned_data['gear_box']
         seats = form.cleaned_data['seats']
 
+        pick_up_date_str = pick_up_date.strftime('%Y-%m-%d')
+        drop_off_date_str = drop_off_date.strftime('%Y-%m-%d')
+        pick_up_time_str = pick_up_time.strftime('%H:%M:%S')
+        drop_off_time_str = drop_off_time.strftime('%H:%M:%S')
+        request.session['pick_up_time'] = pick_up_time_str
+        request.session['drop_off_time'] = drop_off_time_str
+        request.session['pick_up_date'] = pick_up_date_str
+        request.session['drop_off_date'] = drop_off_date_str
     pick_up_datetime = None
     drop_off_datetime = None
     pick_up_time_formatted = None
@@ -294,34 +295,10 @@ def terms(request):
     return render(request, 'cars/terms.html')
 
 
-def payment(request):
-    # if request.method == 'POST':
-    #     form = BookingForm(request.POST)
-    #     if form.is_valid():
-    #         booking = form.save(commit=False)
-
-    #         if request.user.is_authenticated:
-    #             customer_details = PersonalDetails.objects.get(user=request.user)
-    #             booking.customer = customer_details
-
-    #             booking.car_id = request.session.get('car_id')
-    #             booking.pick_up_location = request.session.get('pick_up_location')
-    #             print(booking.pick_up_location)
-    #             booking.drop_off_location = request.session.get('drop_off_location')
-    #             booking.pick_up_date = request.session.get('pick_up_date')
-    #             booking.drop_off_date = request.session.get('drop_off_date')
-    #             booking.pick_up_time = request.session.get('pick_up_time')
-    #             booking.drop_off_time = request.session.get('drop_off_time')
-    #             booking.booster_seat = request.session.get('booster_quantity', 0)
-    #             booking.child_seat = request.session.get('childseat_quantity', 0)
-    #             booking.infant_car_capsule = request.session.get('infant_quantity', 0)
-
-    #         booking.save()
-    #         return redirect('/')
-    #     else:
-    #         messages.error(request, 'There were errors in your form submission.')
-    # else:
+def checkout(request):
     form = BookingForm()
+    car_id = request.session.get('car_id')
+    car = get_object_or_404(Car, pk=car_id)
     if request.user.is_authenticated:
         customer_details = PersonalDetails.objects.get(user=request.user)
         form.initial = {
@@ -337,6 +314,51 @@ def payment(request):
             'eir_code': customer_details.eir_code,
             'country': customer_details.country,
         }
-        print(customer_details)
+    context = {
+        'car': car,
+        'form': form,
+    }
+    return render(request, 'cars/payment.html', context)
 
-    return render(request, 'cars/payment.html', {'form': form})
+
+def payment(request):
+    # if request.method == 'POST':
+    form = BookingForm(request.POST, request=request)
+    car_id = request.session.get('car_id')
+    car = get_object_or_404(Car, pk=car_id)
+    if form.is_valid():
+        booking = form.save(commit=False)
+
+        if request.user.is_authenticated:
+            customer_details = PersonalDetails.objects.get(user=request.user)
+            booking.customer = customer_details
+
+            booking.car_id = car_id
+            booking.pick_up_city = request.session.get('pick_up_city')
+            booking.pick_up_county = request.session.get('pick_up_county')
+            booking.drop_off_city = request.session.get('drop_off_city')
+            booking.drop_off_county = request.session.get('drop_off_county')
+            booking.pick_up_date = request.session.get('pick_up_date')
+            booking.drop_off_date = request.session.get('drop_off_date')
+            booking.pick_up_time = request.session.get('pick_up_time')
+            booking.drop_off_time = request.session.get('drop_off_time')
+            booking.booster_seat = request.session.get('booster_quantity', 0)
+            booking.child_seat = request.session.get('childseat_quantity', 0)
+            booking.infant_car_capsule = request.session.get('infant_quantity', 0)
+
+            booking.booster_total = request.session.get('booster_total', 0)
+            booking.childseat_total = request.session.get('childseat_total', 0)
+            booking.infant_total = request.session.get('infant_total', 0)
+            booking.total_rent = request.session.get('total_rent', 0)
+            booking.grand_total = request.session.get('grand_total', 0)
+            booking.days = request.session.get('days', 0)
+            booking.hours = request.session.get('hours', 0)
+            booking.save()
+            return redirect('/')
+    else:
+        messages.error(request, 'There were errors in your form submission.')
+    context = {
+        'car': car,
+        'form': form,
+    }
+    return render(request, 'cars/payment.html', context)

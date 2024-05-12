@@ -1,5 +1,297 @@
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Pay</button>
-</form>
+{% extends "base.html" %}
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container-flex bg-dark">
+    <div class="row animation d-flex align-item-center p-3">
+        <form method="post" action="{% url 'payment' %}" >
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-12 col-lg-4 col-xl-3 p-4 animation1">
+                    <div class="rounded-1 bg-warning" style="border: solid 1px #ffc107">
+                        <div class="col-12 rounded-1 bg-black p-3">
+                            <h5>Payment Summary</h5>
+                        </div>
+                        <div class="col-12 p-3 my-2 text-black">
+                            <div class="row">
+                                <div class="col-8">
+                                    <p>
+                                        <strong> Car Rent</strong><br>
+                                        <small>For 1 day </small>
+                                    </p>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <storng>
+                                        {{ car.rent }} €
+                                        </strong>
+                                </div>
+                                <div class="col-8">
+                                    <p>
+                                        <strong>Total Rent</strong><br>
+                                        <small>{{ request.session.days }} day{% if request.session.days > 1 %}s{% endif %}
+                                            {% if request.session.hours %} & {{ request.session.hours }} hours{% endif %}</small>
+                                    </p>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <storng>
+                                        {{ request.session.total_rent }} €
+                                        </strong>
+                                </div>
+                                <hr>
+                                {% if request.session.booster_quantity or request.session.childseat_quantity or request.session.infant_quantity %}
+                                <h5>Extras</h5>
+                                {% endif %}
+                                {% if request.session.booster_quantity %}
+                                <div class="col-8">
+                                    <p>
+                                        <strong> Booster Seat</strong><br>
+                                        <small>Quantity {{ request.session.booster_quantity }} </small>
+                                    </p>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <storng>
+                                        {{ request.session.booster_total }} €
+                                        </strong>
+                                </div>
+                                <hr>
+                                {% endif %}
+
+                                {% if request.session.childseat_quantity %}
+                                <div class="col-8">
+                                    <p>
+                                        <strong> Child Seat</strong><br>
+                                        <small>Quantity {{ request.session.childseat_quantity }} </small>
+                                    </p>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <storng>
+                                        {{ request.session.childseat_total }} €
+                                        </strong>
+                                </div>
+                                <hr>
+                                {% endif %}
+                                {% if request.session.infant_quantity %}
+                                <div class="col-8">
+                                    <p>
+                                        <strong> Infant Car Capsule</strong><br>
+                                        <small>Quantity {{ request.session.infant_quantity }} </small>
+                                    </p>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <storng>
+                                        {{ request.session.infant_total }} €
+                                        </strong>
+                                </div>
+                                <hr>
+                                {% endif %}
+                                <div class="col-8">
+                                    <h5>
+                                        <strong>Grand Total</strong><br>
+                                    </h5>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <h5>
+                                        <storng>
+                                            {{ request.session.grand_total }} €
+                                            </strong>
+                                    </h5>
+                                </div>
+                                <hr>
+                                <div class="col-12 text-end">
+                                    <small>
+                                        Price includes all taxes & fees
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-9 p-4">
+                    <h3 class=""><strong>Checkout</strong></h3>
+                    <hr>
+                    <div class="row py-2">
+                        <h5 class="text-info pb-3">Billing Details</h5>
+                        <div class="col-3 col-md-2 col-lg-3 col-xl-2 form-group pb-3 ">
+                            <label for="id_title">Title</label>
+                            {% render_field form.title class="form-control" %}
+                            {% if form.title.errors %}
+                                {% for error in form.title.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                                            </div>
+                        <div class="col-9 col-md-6 col-lg-9 col-xl-6 col-sm-9 form-group pb-3 ">
+                            <label for="id_name">Name</label>
+                            {% render_field form.name class="form-control" %}
+                            {% if form.name.errors %}
+                                {% for error in form.name.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-xl-4 form-group pb-3 ">
+                            <label for="id_email">Email</label>
+                            {% render_field form.email class="form-control" %}
+                            {% if form.email.errors %}
+                                {% for error in form.email.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4 form-group pb-3 ">
+                            <label for="id_mobile">Mobile</label>
+                            {% render_field form.mobile class="form-control" %}
+                            {% if form.mobile.errors %}
+                                {% for error in form.mobile.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4 form-group pb-3 ">
+                            <label for="id_date_of_birth">Date of Birth</label>
+                            {% render_field form.date_of_birth class="form-control" %}
+                            {% if form.date_of_birth.errors %}
+                                {% for error in form.date_of_birth.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4 form-group pb-3 ">
+                            <label for="id_address_1">Address 1</label>
+                            {% render_field form.address_1 class="form-control" %}
+                            {% if form.address_1.errors %}
+                                {% for error in form.address_1.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4 form-group pb-3 ">
+                            <label for="id_address_2">Address 2</label>
+                            {% render_field form.address_2 class="form-control" %}
+                            {% if form.address_2.errors %}
+                                {% for error in form.address_2.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4 form-group pb-3 ">
+                            <label for="id_town">Town</label>
+                            {% render_field form.town class="form-control" %}
+                            {% if form.town.errors %}
+                                {% for error in form.town.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4 form-group pb-3 ">
+                            <label for="id_county">County</label>
+                            {% render_field form.county class="form-control" %}
+                            {% if form.county.errors %}
+                                {% for error in form.county.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4 form-group pb-3 ">
+                            <label for="id_eir_code">EIR Code</label>
+                            {% render_field form.eir_code class="form-control" %}
+                            {% if form.eir_code.errors %}
+                                {% for error in form.eir_code.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4 form-group pb-3 ">
+                            <label for="id_country">Country</label>
+                            {% render_field form.country class="form-control" %}
+                            {% if form.country.errors %}
+                                {% for error in form.country.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row py-2">
+                        <h5 class="text-info">Licence & ID details</h5>
+                        <small class="pb-3">Fill out the licence and personal ID details of main driver.</small>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4 form-group pb-3 ">
+                            <label for="id_licence_number">Licence Number</label>
+                            {% render_field form.licence_number class="form-control" %}
+                            {% if form.licence_number.errors %}
+                                {% for error in form.licence_number.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4 form-group pb-3 ">
+                            <label for="id_licence_expiry">Licence Expiry</label>
+                            {% render_field form.licence_expiry class="form-control" %}
+                            {% if form.licence_expiry.errors %}
+                                {% for error in form.licence_expiry.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4 form-group pb-3 ">
+                            <label for="id_personal_id">Personal ID</label>
+                            {% render_field form.personal_id class="form-control" %}
+                            {% if form.personal_id.errors %}
+                                {% for error in form.personal_id.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4 form-group pb-3 ">
+                            <label for="id_country_issued">Country Issued</label>
+                            {% render_field form.country_issued class="form-control" %}
+                            {% if form.country_issued.errors %}
+                                {% for error in form.country_issued.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4 form-group pb-3 ">
+                            <label for="id_id_number">ID Number</label>
+                            {% render_field form.id_number class="form-control" %}
+                            {% if form.id_number.errors %}
+                                {% for error in form.id_number.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4 form-group pb-3 ">
+                            <label for="id_id_expiry">ID Expiry</label>
+                            {% render_field form.id_expiry class="form-control" %}
+                            {% if form.id_expiry.errors %}
+                                {% for error in form.id_expiry.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <small class="text-danger">{{ form.non_field_errors }}</small>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn button-2"> Book & Pay </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    // fade in animation when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        var animation = document.querySelector('.animation');
+        var animation1 = document.querySelector('.animation1');
+        animation.classList.add('fade-in');
+        animation1.classList.add('fade-in');
+    });
+</script>
+{% endblock %}

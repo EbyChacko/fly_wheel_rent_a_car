@@ -20,7 +20,7 @@ class County(models.Model):
 
     class Meta:
         verbose_name_plural = "counties"
-    
+        ordering = ['county']
     def __str__(self):
         return f"{self.county}"
 
@@ -77,6 +77,16 @@ class Title(models.Model):
         return f"{self.title}"
 
 
+class PersonalId(models.Model):
+    personal_id = models.CharField(max_length=250)
+
+    class Meta:
+        verbose_name_plural = "Personal IDs"
+        ordering = ['personal_id']
+    
+    def __str__(self):
+        return f" {self.personal_id}"
+
 class Car(models.Model):
     image = models.ImageField(upload_to='images/')
     make = models.CharField(max_length=100)
@@ -119,12 +129,15 @@ class PersonalDetails(models.Model):
         verbose_name_plural = "Personal Details"
         ordering = ['name']
 
+
 class Booking(models.Model):
     booking_number = models.CharField(max_length=32, null=False, editable=False)
     customer = models.ForeignKey(PersonalDetails, on_delete=models.CASCADE)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
-    pick_up_location = models.CharField(max_length=250)
-    drop_off_location = models.CharField(max_length=250)
+    pick_up_city = models.CharField(max_length=250)
+    pick_up_county = models.CharField(max_length=250)
+    drop_off_city = models.CharField(max_length=250)
+    drop_off_county = models.CharField(max_length=250)
     pick_up_date = models.DateField()
     drop_off_date = models.DateField()
     pick_up_time = models.TimeField()
@@ -143,12 +156,20 @@ class Booking(models.Model):
     country = CountryField()
     licence_number = models.CharField(max_length=20)
     licence_expiry = models.DateField()
-    personal_id = models.CharField(max_length=20)
+    personal_id = models.ForeignKey(PersonalId, on_delete=models.CASCADE, blank=True, null=True)
     id_number = models.CharField(max_length=20)
+    country_issued = CountryField()
     id_expiry = models.DateField()
     booster_seat = models.IntegerField(default=False)
+    booster_total = models.IntegerField(default=False)
     child_seat = models.IntegerField(default=False)
+    childseat_total = models.IntegerField(default=False)
     infant_car_capsule = models.IntegerField(default=False)
+    infant_total = models.IntegerField(default=False)
+    total_rent = models.IntegerField()
+    grand_total = models.IntegerField()
+    days = models.IntegerField()
+    hours = models.IntegerField()
 
     def _Generate_booking_number(self):
         return uuid.uuid4().hex.upper()
