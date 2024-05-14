@@ -3,6 +3,7 @@ from django.db import models
 from cars.models import PersonalDetails, Car, Title, County, Cities
 from cars.models import PersonalId
 from django_countries.fields import CountryField
+import uuid
 
 class Booking(models.Model):
     booking_number = models.CharField(max_length=32, null=False, editable=False)

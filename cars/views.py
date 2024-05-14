@@ -296,3 +296,5 @@ def remove_extras(request,id):
 
 def terms(request):
     return render(request, 'cars/terms.html')
+
+

@@ -37,6 +37,25 @@ class BookingForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        {
+            'title': 'Title',
+            'name': 'Name',
+            'email': 'E-mail',
+            'mobile': 'Mobile number',
+            'date_of_birth': 'Date of birth',
+            'address_1': 'House number or House name',
+            'address_2': 'Place',
+            'town': 'Town or City',
+            'county': 'County',
+            'eir_code': 'Eir code Or Postal code',
+            'country': 'Country',
+            'licence_number': 'Licence number',
+            'licence_expiry': 'Expiry date of your Licence',
+            'personal_id': 'Choose Personal ID',
+            'id_number': 'ID NUmber',
+            'country_issued':'Country that issue your ID',
+            'id_expiry': 'Expiry date of your ID',
+        }
         self.request = kwargs.pop('request', None)
         super(BookingForm, self).__init__(*args, **kwargs)
 

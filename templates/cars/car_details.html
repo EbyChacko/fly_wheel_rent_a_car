@@ -394,14 +394,15 @@
                             </small>
                         </div>
                         <div class="pt-2 d-flex justify-content-end">
-                            <form class="form" action="{% url 'checkout' %}" method="POST">
+                            <!-- <form class="form" action="{% url 'checkout' %}" method="POST">
                                 {% csrf_token %}
                                 <div class="row py-3 d-none">
                                     {{ form.as_p }}
                                 </div>
                                 <button type="submit" class="button-2">Check Out</button>
                                 <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                            </form>
+                            </form> -->
+                            <a href="{% url 'checkout' %}" class="button-2">Check Out</a>
                         </div>
                     </div>
                 </div>

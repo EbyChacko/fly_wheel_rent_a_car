@@ -9,6 +9,15 @@ import stripe
 # Create your views here.
 
 def checkout(request):
+    stripe_public_key = settings.STRIPE_PUBLIC_KEY
+    stripe_secret_key = settings.STRIPE_SECRET_KEY
+    grand_total=request.session.get('grand_total',0)
+    stripe_amount = round(grand_total * 100)
+    stripe.api_key = stripe_secret_key
+    intent = stripe.PaymentIntent.create(
+        amount=stripe_amount,
+        currency=settings.STRIPE_CURRENCY,
+    )
     form = BookingForm()
     car_id = request.session.get('car_id')
     car = get_object_or_404(Car, pk=car_id)
@@ -27,24 +36,6 @@ def checkout(request):
             'eir_code': customer_details.eir_code,
             'country': customer_details.country,
         }
-    context = {
-        'car': car,
-        'form': form,
-    }
-    return render(request, 'checkout/payment.html', context)
-
-
-
-def payment(request):
-    stripe_public_key = settings.STRIPE_PUBLIC_KEY
-    stripe_secret_key = settings.STRIPE_SECRET_KEY
-    print(stripe_public_key)
-    stripe.api_key = stripe_secret_key
-    intent = stripe.PaymentIntent.create(
-        amount=request.session.get('grand_total',0),
-        currency=settings.STRIPE_CURRENCY,
-    )
-    print(intent)
     if request.method == 'POST':
         form = BookingForm(request.POST, request=request)
         car_id = request.session.get('car_id')
@@ -84,7 +75,6 @@ def payment(request):
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
-    
     context = {
         'car': car,
         'form': form,
