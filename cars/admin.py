@@ -1,13 +1,12 @@
 
 from django.contrib import admin
-from .models import Car, Cities, PersonalDetails, Booking
+from .models import Car, Cities, PersonalDetails
 from .models import Categories, Fuel, GearBox, Title, Seats
 from .models import County, PersonalId
 
 admin.site.register(Car)
 admin.site.register(Cities)
 admin.site.register(PersonalDetails)
-admin.site.register(Booking)
 admin.site.register(Categories)
 admin.site.register(Fuel)
 admin.site.register(GearBox)
