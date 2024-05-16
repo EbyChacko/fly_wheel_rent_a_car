@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container-flex bg-dark">
+    <div class="container">
+        <div class=" animation p-3 d-flex justify-content-center">
+            <div class="row">
+                <div class="col-12  text-center py-4">
+                    <h1><i class="fa-solid fa-circle-check"></i></h1>
+                    <h2>Thank you</h2>
+                    <h4>Your booking is confirmed.</h4>
+                    <p><small>The Booking number is <strog class="fw-bold">{{ booking.booking_number }}</strog>.</small>
+                    </p>
+                    <p><small>A confirmation Mail Has been send to your email <strog class="fw-bold">{{ booking.email }}
+                            </strog>.</small></p>
+                </div>
+                <div class="col-12">
+                    <p><small>Your Order As follows.</small>
+                    </p>
+                </div>
+                <div class="w-50" style="border: solid 1px #404040">
+                    <div class="col-6 d-flex justify-content-start p-3">
+                        <img src="{{ car.image.url }}" alt="Car Image" style="width:100%; object-fit: contain;"
+                            class="rounded-4">
+                    </div>
+                    <div class="col-6">
+                        <small>{{ car.category }}</small>
+                        <h5 class="text-warning">{{ car.make }} {{ car.model }}</h5>
+                        <small>Year: {{ car.year }}</small>
+                    </div>
+                    <hr>
+                    <div class="col-12 p-3">
+                        <h5> <i class="fa-solid fa-plane-departure"></i> Pick-Up</h5>
+                        <h6>{{ request.session.pick_up_city }}, {{ request.session.pick_up_county }}</h6>
+                        <small>Date : {{ form.pick_up_date.value }}</small><br>
+                        <small>Time : {{ request.session.pick_up_time_formatted }}</small>
+                    </div>
+                    <div class="col-12 p-3">
+                        <h5><i class="fa-solid fa-plane-arrival"></i> Drop Off</h5>
+                        <h6 class="disabled">{{ request.session.drop_off_city }}, {{ request.session.drop_off_county }}
+                        </h6>
+                        <small>Date : {{ form.drop_off_date.value }}</small><br>
+                        <small>Time : {{ request.session.drop_off_time_formatted }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    // fade in animation when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        var animation = document.querySelector('.animation');
+        var animation1 = document.querySelector('.animation1');
+        animation.classList.add('fade-in');
+        animation1.classList.add('fade-in');
+    });
+</script>
+{% endblock %}

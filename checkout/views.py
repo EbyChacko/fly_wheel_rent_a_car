@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
 from .forms import BookingForm
 from cars.models import Car, PersonalDetails
+from.models import Booking
 from django.http import QueryDict
 from django.contrib import messages
 import stripe
@@ -68,7 +69,7 @@ def checkout(request):
                 booking.days = request.session.get('days', 0)
                 booking.hours = request.session.get('hours', 0)
                 booking.save()
-                return redirect('/')
+                return redirect('checkout_success', booking_number=booking.booking_number)
         else:
             messages.error(request, 'There were errors in your form submission.')
     
@@ -82,3 +83,17 @@ def checkout(request):
         'client_secret': intent.client_secret,
     }
     return render(request, 'checkout/payment.html', context)
+
+
+def checkout_success(request, booking_number):
+    booking = get_object_or_404(
+                                Booking, booking_number=booking_number,
+                                customer__user=request.user)
+    car_id = request.session.get('car_id')
+    car = get_object_or_404(Car, pk=car_id)
+    messages.success(request,f'Booking Successfully Completed!')
+    context ={
+        'car':car,
+        'booking' : booking,
+    }
+    return render(request, 'checkout/checkout_success.html', context)
