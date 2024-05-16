@@ -91,9 +91,11 @@ def checkout_success(request, booking_number):
                                 customer__user=request.user)
     car_id = request.session.get('car_id')
     car = get_object_or_404(Car, pk=car_id)
+    total_extra = booking.childseat_total + booking.infant_total + booking.booster_total
     messages.success(request,f'Booking Successfully Completed!')
     context ={
         'car':car,
         'booking' : booking,
+        'total_extra' : total_extra,
     }
     return render(request, 'checkout/checkout_success.html', context)

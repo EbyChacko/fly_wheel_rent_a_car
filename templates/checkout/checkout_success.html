@@ -5,45 +5,195 @@
 
 {% block content %}
 <div class="container-flex bg-dark">
-    <div class="container">
-        <div class=" animation p-3 d-flex justify-content-center">
+    <div class="container w-100 p-3">
+        <div class=" animation d-flex justify-content-center">
             <div class="row">
-                <div class="col-12  text-center py-4">
-                    <h1><i class="fa-solid fa-circle-check"></i></h1>
-                    <h2>Thank you</h2>
-                    <h4>Your booking is confirmed.</h4>
-                    <p><small>The Booking number is <strog class="fw-bold">{{ booking.booking_number }}</strog>.</small>
-                    </p>
-                    <p><small>A confirmation Mail Has been send to your email <strog class="fw-bold">{{ booking.email }}
-                            </strog>.</small></p>
-                </div>
-                <div class="col-12">
-                    <p><small>Your Order As follows.</small>
-                    </p>
-                </div>
-                <div class="w-50" style="border: solid 1px #404040">
-                    <div class="col-6 d-flex justify-content-start p-3">
-                        <img src="{{ car.image.url }}" alt="Car Image" style="width:100%; object-fit: contain;"
-                            class="rounded-4">
+                <div class="col-12 col-md-8 col-lg-6  text-start mx-auto py-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1><i class="fa-solid fa-circle-check"></i></h1>
+                            <h2>Thank you</h2>
+                            <h5>Your booking is confirmed.</h5>
+                            <small>The Booking number is <strog class="fw-bold text-info">{{ booking.booking_number }}</strog></small><br>
+                            <small>A confirmation mail has been send to <strog class="fw-bold text-info">{{ booking.email }}
+                                    </strog></small>
+                        </div>
+                        <div class="col-12 pt-4">
+                            <div class="col-8 col-sm-6 d-flex justify-content-start p-3">
+                                <img src="{{ car.image.url }}" alt="Car Image" style="width:100%; object-fit: contain;"
+                                    class="rounded-4">
+                            </div>
+                            <div class="col-6">
+                                <small>{{ car.category }}</small>
+                                <h5 class="text-warning">{{ car.make }} {{ car.model }}</h5>
+                                <small>Year: {{ car.year }}</small>
+                            </div>
+                            <div class="col-12 py-4">
+                                <a class="button-2" href="{% url 'home' %}">Return to home</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <small>{{ car.category }}</small>
-                        <h5 class="text-warning">{{ car.make }} {{ car.model }}</h5>
-                        <small>Year: {{ car.year }}</small>
+                    <div class="col-12 mx-auto pt-4">
+                        <p><small>Your order details as follows.</small>
+                        </p>
                     </div>
-                    <hr>
-                    <div class="col-12 p-3">
-                        <h5> <i class="fa-solid fa-plane-departure"></i> Pick-Up</h5>
-                        <h6>{{ request.session.pick_up_city }}, {{ request.session.pick_up_county }}</h6>
-                        <small>Date : {{ form.pick_up_date.value }}</small><br>
-                        <small>Time : {{ request.session.pick_up_time_formatted }}</small>
-                    </div>
-                    <div class="col-12 p-3">
-                        <h5><i class="fa-solid fa-plane-arrival"></i> Drop Off</h5>
-                        <h6 class="disabled">{{ request.session.drop_off_city }}, {{ request.session.drop_off_county }}
-                        </h6>
-                        <small>Date : {{ form.drop_off_date.value }}</small><br>
-                        <small>Time : {{ request.session.drop_off_time_formatted }}</small>
+                    <div style="border: solid 1px #404040">
+                        <div class="col-12 p-3">
+                            <h5><strong>Pick up and Drop Off Details</strong></h5>
+                            <div class="row">
+                                <div class="col-6">
+                                    <small>Pick-Up Location</small>
+                                </div>
+                                <div class="col-6">
+                                    <small>: {{ request.session.pick_up_city }}, {{ request.session.pick_up_county }}</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <small>Date</small>
+                                </div>
+                                <div class="col-6">
+                                    <small>: {{ booking.pick_up_date }}</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <small>Time</small>
+                                </div>
+                                <div class="col-6">
+                                    <small>: {{ request.session.pick_up_time_formatted }}</small>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-6">
+                                    <small>Drop Off Location</small>
+                                </div>
+                                <div class="col-6">
+                                    <small>: {{ request.session.drop_off_city }}, {{ request.session.drop_off_county }}</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <small>Date</small>
+                                </div>
+                                <div class="col-6">
+                                    <small>: {{ booking.drop_off_date }}}</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <small>Time</small>
+                                </div>
+                                <div class="col-6">
+                                    <small>: {{ request.session.drop_off_time_formatted }}</small>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-6">
+                                    <small>Duration of rent</small>
+                                </div>
+                                <div class="col-6">
+                                    <small>{% if request.session.days %}: {{ request.session.days }} day{% if request.session.days > 1 %}s{% endif %}
+                                        {% if request.session.hours %}{% endif %} & {{ request.session.hours }} 
+                                        hour{% if request.session.hours > 1 %}s {% endif %}{% endif %}</small>
+                                </div>
+                            </div>
+                            <hr>
+                            <h5><strong>Car Rent Details</strong></h5>
+                            <div class="row">
+                                <div class="col-6">
+                                    <small>Car Rent (1 day)</small>
+                                </div>
+                                <div class="col-6">
+                                    <small>: {{ car.rent }} €</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Total Rent</strong>
+                                </div>
+                                <div class="col-6">
+                                    : <strong>{{ booking.total_rent }} €</strong>
+                                </div>
+                            </div>
+                            {% if booking.child_seat or booking.infant_car_capsule or booking.booster_seat %}
+                            <hr>
+                            <h5><strong>Extras</strong></h5>
+                            {% if booking.booster_seat %}
+                            <div class="row">
+                                <div class="col-6">
+                                    <small>Booster Seats</small>
+                                </div>
+                                <div class="col-6">
+                                    <small>: {{ booking.booster_seat }} Seat{% if booking.booster_seat > 1 %}s{% endif %}</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <small>Booster seat rent</small>
+                                </div>
+                                <div class="col-6">
+                                    <small>: {{ booking.booster_total }} €</small>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if booking.child_seat %}
+                            <div class="row">
+                                <div class="col-6">
+                                    <small>Child Seats</small>
+                                </div>
+                                <div class="col-6">
+                                    <small>: {{ booking.child_seat }} Seat{% if booking.child_seat > 1 %}s{% endif %}</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <small>Child seat rent</small>
+                                </div>
+                                <div class="col-6">
+                                    <small>: {{ booking.childseat_total }} €</small>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if booking.infant_car_capsule %}
+                            <div class="row">
+                                <div class="col-6">
+                                    <small>Child Seats</small>
+                                </div>
+                                <div class="col-6">
+                                    <small>: {{ booking.infant_car_capsule }} Seat{% if booking.infant_car_capsule > 1 %}s{% endif %}</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <small>Child seat rent</small>
+                                </div>
+                                <div class="col-6">
+                                    <small>: {{ booking.infant_total }} €</small>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Total Extra</strong>
+                                </div>
+                                <div class="col-6">
+                                    : <strong>{{ total_extra }} €</strong>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <hr>
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5><strong>Grand Total</strong></h5>
+                                </div>
+                                <div class="col-6">
+                                   <h6>: <strong>{{ booking.grand_total }} €</strong></h6>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
