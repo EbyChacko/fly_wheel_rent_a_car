@@ -10,8 +10,8 @@
                 <div class="col-12 p-3 text-center rounded-1 bg-black">
                     <h4 class="text-warning">{{ request.session.total_rent }} €</h4>
                     <small>
-                        Rental Cost for {% if request.session.hours %}{{ request.session.days }} day{% if request.session.days > 1 %}s{% endif %}
-                        {% if request.session.hours %}{% endif %} & {{ request.session.hours }} hour{% if request.session.hours > 1 %}s {% endif %}{% endif %}
+                        Rental Cost for {% if request.session.days %}{{ request.session.days }} day{% if request.session.days > 1 %}s{% endif %}{% endif %}
+                        {% if request.session.hours %} & {{ request.session.hours }} hour{% if request.session.hours > 1 %}s {% endif %}{% endif %}
                     </small>
                 </div>
                 <div class="col-8 col-md-6 col-lg-12 d-flex justify-content-center mx-auto p-3">

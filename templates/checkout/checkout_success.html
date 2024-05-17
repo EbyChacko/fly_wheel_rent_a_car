@@ -95,9 +95,18 @@
                                     <small>Duration of rent</small>
                                 </div>
                                 <div class="col-6">
-                                    <small>{% if request.session.days %}: {{ request.session.days }} day{% if request.session.days > 1 %}s{% endif %}
-                                        {% if request.session.hours %}{% endif %} & {{ request.session.hours }} 
+                                    <small>{% if request.session.days %}: {{ request.session.days }} day{% if request.session.days > 1 %}s{% endif %}{% endif %}
+                                        {% if request.session.hours %} & {{ request.session.hours }} 
                                         hour{% if request.session.hours > 1 %}s {% endif %}{% endif %}</small>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-6">
+                                    <small>Booked at</small>
+                                </div>
+                                <div class="col-6">
+                                    <small>: {{ booking.booking_time }}</small>
                                 </div>
                             </div>
                             <hr>
@@ -110,7 +119,7 @@
                                     <small>: {{ car.rent }} €</small>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row text-warning">
                                 <div class="col-6">
                                     <strong>Total Rent</strong>
                                 </div>
@@ -160,7 +169,7 @@
                             {% if booking.infant_car_capsule %}
                             <div class="row">
                                 <div class="col-6">
-                                    <small>Child Seats</small>
+                                    <small>Infant car capsule</small>
                                 </div>
                                 <div class="col-6">
                                     <small>: {{ booking.infant_car_capsule }} Seat{% if booking.infant_car_capsule > 1 %}s{% endif %}</small>
@@ -168,14 +177,14 @@
                             </div>
                             <div class="row">
                                 <div class="col-6">
-                                    <small>Child seat rent</small>
+                                    <small>Infant car capsule rent</small>
                                 </div>
                                 <div class="col-6">
                                     <small>: {{ booking.infant_total }} €</small>
                                 </div>
                             </div>
                             {% endif %}
-                            <div class="row">
+                            <div class="row text-warning">
                                 <div class="col-6">
                                     <strong>Total Extra</strong>
                                 </div>
@@ -185,7 +194,7 @@
                             </div>
                             {% endif %}
                             <hr>
-                            <div class="row">
+                            <div class="row text-warning">
                                 <div class="col-6">
                                     <h5><strong>Grand Total</strong></h5>
                                 </div>
