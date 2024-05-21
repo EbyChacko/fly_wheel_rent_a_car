@@ -37,7 +37,7 @@ ALLOWED_HOSTS = [
     '8000-ebychacko-flywheelrenta-qz7v3qtx061.ws-eu112.gitpod.io',
     '8000-ebychacko-flywheelrenta-qz7v3qtx061.ws-eu111.gitpod.io',
     '8000-ebychacko-flywheelrenta-qz7v3qtx061.ws-eu114.gitpod.io',
-    'herokuapp.com'
+    'fly-wheel-rent-c4406dadb89b.herokuapp.com'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
