@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='booking',
             name='country_issued',
-            field=django_countries.fields.CountryField(default=django.utils.timezone.now, max_length=2),
+            field=django_countries.fields.CountryField(default=django.utils.timezone.now, max_length=50),
             preserve_default=False,
         ),
     ]

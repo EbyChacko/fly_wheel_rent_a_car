@@ -17,8 +17,7 @@ def cache_checkout_data(request):
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
-            'bag': json.dumps(request.session.get('bag', {})),
-            'save_info': request.POST.get('save_info'),
+            # 'save_info': request.POST.get('save_info'),
             'username': request.user,
         })
         return HttpResponse(status=200)
@@ -45,8 +44,7 @@ def checkout(request):
     car = get_object_or_404(Car, pk=car_id)
     if request.method == 'POST':
         form = BookingForm(request.POST, request=request)
-        car_id = request.session.get('car_id')
-        car = get_object_or_404(Car, pk=car_id)
+        pid = request.POST.get('client_secret').split('_secret')[0]
         if form.is_valid():
             booking = form.save(commit=False)
 
@@ -74,6 +72,7 @@ def checkout(request):
                 booking.grand_total = request.session.get('grand_total', 0)
                 booking.days = request.session.get('days', 0)
                 booking.hours = request.session.get('hours', 0)
+                booking.pid = pid
                 booking.save()
                 return redirect('checkout_success', booking_number=booking.booking_number)
         else:

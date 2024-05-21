@@ -277,6 +277,7 @@
                                     <small class="text-danger">{{ error }}</small>
                                     {% endfor %}
                                 {% endif %}
+                                <input type="'hidden" value="{{ client_secret }}" name="client_secret" class="d-none">
                             </div>
                         </div>
                     </fieldset>
@@ -292,6 +293,7 @@
                     </fieldset>
                 </div>
                 <small class="text-danger">{{ form.non_field_errors }}</small>
+
                 <div class="d-flex justify-content-end">
                     <button type="submit" id="submit-button" class="btn button-2"> Book & Pay </button>
                 </div>

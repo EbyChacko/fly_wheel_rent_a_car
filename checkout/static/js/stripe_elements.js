@@ -53,27 +53,60 @@ form.addEventListener('submit', function(ev) {
     $('#submit-button').attr('disabled', true);
     $('#payment-form').fadeToggle(100);
     $('#loading-overlay').fadeToggle(100);
-    stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-            card: card,
-        }
-    }).then(function(result) {
-        if (result.error) {
-            var errorDiv = document.getElementById('card-errors');
-            var html = `
-                <span class="icon" role="alert">
-                <i class="fas fa-times"></i>
-                </span>
-                <span>${result.error.message}</span>`;
-            $(errorDiv).html(html);
-            $('#payment-form').fadeToggle(100);
-            $('#loading-overlay').fadeToggle(100);
-            card.update({ 'disabled': false});
-            $('#submit-button').attr('disabled', false);
-        } else {
-            if (result.paymentIntent.status === 'succeeded') {
-                form.submit();
+    
+    // From using {% csrf_token %} in the form
+    var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+    var postData = {
+        'csrfmiddlewaretoken': csrfToken,
+        'client_secret': clientSecret,
+    };
+    var url = '/checkout/cache_checkout_data/';
+
+    $.post(url, postData).done(function () {
+        stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details:{
+                    title:$.trim(form.title.value),
+                    name:$.trim(form.name.value),
+                    mobile:$.trim(form.mobile.value),
+                    email:$.trim(form.email.value),
+                    date_of_birth:$.trim(form.date_of_birth.value),
+                    address_1:$.trim(form.address_1.value),
+                    address_2:$.trim(form.address_2.value),
+                    town:$.trim(form.town.value),
+                    county:$.trim(form.county.value),
+                    eir_code:$.trim(form.eir_code.value),
+                    country:$.trim(from.country.value),
+                    licence_number:$.trim(from.licence_number.value),
+                    licence_expiry:$.trim(from.licence_expiry.value),
+                    personal_id:$.trim(from.personal_id.value),
+                    id_number:$.trim(from.id_number.value),
+                    country_issued:$.trim(from.country_issued.value),
+                    id_expiry:$.trim(from.id_expiry.value),
+                }
             }
-        }
-    });
+        }).then(function(result) {
+            if (result.error) {
+                var errorDiv = document.getElementById('card-errors');
+                var html = `
+                    <span class="icon" role="alert">
+                    <i class="fas fa-times"></i>
+                    </span>
+                    <span>${result.error.message}</span>`;
+                $(errorDiv).html(html);
+                $('#payment-form').fadeToggle(100);
+                $('#loading-overlay').fadeToggle(100);
+                card.update({ 'disabled': false});
+                $('#submit-button').attr('disabled', false);
+            } else {
+                if (result.paymentIntent.status === 'succeeded') {
+                    form.submit();
+                }
+            }
+        });
+    }).fail(function () {
+        // just reload the page, the error will be in django messages
+        location.reload();
+    })
 });
