@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 import stripe
+from .models import Booking
 
 class StripeWH_Handler:
     """Handle Stripe webhooks"""
@@ -33,16 +34,16 @@ class StripeWH_Handler:
         attempt = 1
         while attempt <= 5:
             try:
-                booking = booking.objects.get(
-                    name__iexact=shipping_details.name,
+                booking = Booking.objects.get(
+                    name__iexact=billing_details.name,
                     email__iexact=billing_details.email,
-                    mobile__iexact=shipping_details.mobile,
-                    country__iexact=shipping_details.country,
-                    eir_code__iexact=shipping_details.eir_code,
-                    town__iexact=shipping_details.city,
-                    address_1__iexact=shipping_details.line1,
-                    address_2__iexact=shipping_details.line2,
-                    county__iexact=shipping_details.county,
+                    mobile__iexact=billing_details.mobile,
+                    country__iexact=billing_details.country,
+                    eir_code__iexact=billing_details.eir_code,
+                    town__iexact=billing_details.city,
+                    address_1__iexact=billing_details.line1,
+                    address_2__iexact=billing_details.line2,
+                    county__iexact=billing_details.county,
                     grand_total=grand_total,
                     stripe_pid=pid,
                 )
