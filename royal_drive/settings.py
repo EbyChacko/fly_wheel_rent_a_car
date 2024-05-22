@@ -193,7 +193,7 @@ if 'USE_AWS' in os.environ:
     }
 
     # Bucket Config
-    AWS_STORAGE_BUCKET_NAME = 'fly-wheel-rent'
+    AWS_STORAGE_BUCKET_NAME = 'fly-wheel-rent-a-car'
     AWS_S3_REGION_NAME = 'Europe (Stockholm) eu-north-1'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
