@@ -68,30 +68,54 @@ form.addEventListener('submit', function(ev) {
         stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: card,
-                billing_details:{
-
+                billing_details: {
+                    name: $.trim(form.name.value),
+                    phone: $.trim(form.mobile.value),
+                    email: $.trim(form.email.value),
+                    address:{
+                        line1: $.trim(form.street_address_1.value),
+                        line2: $.trim(form.street_address_2.value),
+                        city: $.trim(form.town.value),
+                        country: $.trim(from.country.value),
+                        postal_code: $.trim(form.eircode.value),
+                        state: $.trim(form.county.value),
+                    }
                 }
             },
-            metadata: {
-                title:$.trim(form.title.value),
-                name:$.trim(form.name.value),
-                mobile:$.trim(form.mobile.value),
-                email:$.trim(form.email.value),
-                date_of_birth:$.trim(form.date_of_birth.value),
-                address_1:$.trim(form.address_1.value),
-                address_2:$.trim(form.address_2.value),
-                town:$.trim(form.town.value),
-                county:$.trim(form.county.value),
-                eir_code:$.trim(form.eir_code.value),
-                country:$.trim(from.country.value),
-                mobile: $.trim(form.mobile.value),
-                licence_number:$.trim(from.licence_number.value),
-                licence_expiry:$.trim(from.licence_expiry.value),
-                personal_id:$.trim(from.personal_id.value),
-                id_number:$.trim(from.id_number.value),
-                country_issued:$.trim(from.country_issued.value),
-                id_expiry:$.trim(from.id_expiry.value),
-            }
+            // shipping: {
+            //     name: $.trim(form.name.value),
+            //     phone: $.trim(form.phone_number.value),
+            //     address: {
+            //         line1: $.trim(form.street_address1.value),
+            //         line2: $.trim(form.street_address2.value),
+            //         city: $.trim(form.town_or_city.value),
+            //         country: $.trim(from.country.value),
+            //         postal_code: $.trim(form.eir_code.value),
+            //         state: $.trim(form.county.value),
+            //     }
+            // },
+
+            // metadata: {
+            //     title:$.trim(form.title.value),
+            //     name:$.trim(form.name.value),
+            //     mobile:$.trim(form.mobile.value),
+            //     email:$.trim(form.email.value),
+            //     date_of_birth:$.trim(form.date_of_birth.value),
+            //     address_1:$.trim(form.address_1.value),
+            //     address_2:$.trim(form.address_2.value),
+            //     town:$.trim(form.town.value),
+            //     county:$.trim(form.county.value),
+            //     eir_code:$.trim(form.eir_code.value),
+            //     country:$.trim(from.country.value),
+            //     mobile: $.trim(form.mobile.value),
+            //     licence_number:$.trim(from.licence_number.value),
+            //     licence_expiry:$.trim(from.licence_expiry.value),
+            //     personal_id:$.trim(from.personal_id.value),
+            //     id_number:$.trim(from.id_number.value),
+            //     country_issued:$.trim(from.country_issued.value),
+            //     id_expiry:$.trim(from.id_expiry.value),
+            // }
+            
         }).then(function(result) {
             if (result.error) {
                 var errorDiv = document.getElementById('card-errors');

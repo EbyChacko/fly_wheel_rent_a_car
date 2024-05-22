@@ -25,12 +25,12 @@ class StripeWH_Handler:
         pid = intent.id
 
         # Get the Charge object
-        # stripe_charge = stripe.Charge.retrieve(
-        #     intent.latest_charge
-        # )
-        # billing_details = stripe_charge.billing_details
-        # metadata = stripe_charge.metadata
-        metadata = intent.metadata
+        stripe_charge = stripe.Charge.retrieve(
+            intent.latest_charge
+        )
+        billing_details = stripe_charge.billing_details
+        metadata = stripe_charge.metadata
+        # metadata = intent.metadata
         grand_total=self.request.session.get('grand_total',0)
         print("inside the webhook")
         print(metadata)
