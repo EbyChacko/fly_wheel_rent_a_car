@@ -77,23 +77,23 @@ form.addEventListener('submit', function(ev) {
                         line2: $.trim(form.street_address_2.value),
                         city: $.trim(form.town.value),
                         country: $.trim(from.country.value),
-                        postal_code: $.trim(form.eircode.value),
+                        postal_code: $.trim(form.eir_code.value),
                         state: $.trim(form.county.value),
                     }
                 }
             },
-            // shipping: {
-            //     name: $.trim(form.name.value),
-            //     phone: $.trim(form.phone_number.value),
-            //     address: {
-            //         line1: $.trim(form.street_address1.value),
-            //         line2: $.trim(form.street_address2.value),
-            //         city: $.trim(form.town_or_city.value),
-            //         country: $.trim(from.country.value),
-            //         postal_code: $.trim(form.eir_code.value),
-            //         state: $.trim(form.county.value),
-            //     }
-            // },
+            shipping: {
+                name: $.trim(form.name.value),
+                phone: $.trim(form.phone_number.value),
+                address: {
+                    line1: $.trim(form.street_address_1.value),
+                    line2: $.trim(form.street_address_2.value),
+                    city: $.trim(form.town.value),
+                    country: $.trim(from.country.value),
+                    postal_code: $.trim(form.eir_code.value),
+                    state: $.trim(form.county.value),
+                }
+            },
 
             // metadata: {
             //     title:$.trim(form.title.value),
