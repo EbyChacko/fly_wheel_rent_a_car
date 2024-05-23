@@ -23,7 +23,7 @@ class StripeWH_Handler:
         """
         intent = event.data.object
         pid = intent.id
-
+        print(pid)
         # Get the Charge object
         stripe_charge = stripe.Charge.retrieve(
             intent.latest_charge
@@ -34,21 +34,20 @@ class StripeWH_Handler:
         grand_total=self.request.session.get('grand_total',0)
         print("inside the webhook")
         print(metadata)
-        print(mobile)
         booking_exists = False
         attempt = 1
         while attempt <= 5:
             try:
                 booking = Booking.objects.get(
-                    name__iexact = metadata.get('name', ''),
-                    email__iexact = metadata.get('email', ''),
-                    mobile__iexact = metadata.get('mobile', ''),
-                    country__iexact = metadata.get('country', ''),
-                    eir_code__iexact = metadata.get('eir_code', ''),
-                    town__iexact = metadata.get('town', ''),
-                    address_1__iexact = metadata.get('address_1', ''),
-                    address_2__iexact = metadata.get('address_2', ''),
-                    county__iexact = metadata.get('county', ''),
+                    name = billing_details.name,
+                    email = billing_details.email,
+                    mobile = billing_details.phone,
+                    country = billing_details.address.country,
+                    eir_code = billing_details.address.postal_code,
+                    town = billing_details.address.city,
+                    address_1 = billing_details.address.line1,
+                    address_2 =billing_details.address.line2,
+                    county = billing_details.address.state,
                     grand_total = grand_total,
                     stripe_pid = pid,
                 )
@@ -66,23 +65,23 @@ class StripeWH_Handler:
             booking = None
             try:
                 booking = Booking.objects.create(
-                    title = metadata.get('title', ''),
-                    name = metadata.get('name', ''),
-                    email = metadata.get('email', ''),
-                    mobile = metadata.get('mobile', ''),
-                    country = metadata.get('country', ''),
-                    date_of_birth = metadata.get('date_of_birth', ''),
-                    eir_code = metadata.get('eir_code', ''),
-                    town = metadata.get('town', ''),
-                    address_1 = metadata.get('address_1', ''),
-                    address_2 = metadata.get('address_2', ''),
-                    county = metadata.get('county', ''),
-                    licence_number = metadata.get('licence_number', ''),
-                    licence_expiry = metadata.get('licence_expiry', ''),
-                    personal_id = metadata.get('personal_id', ''),
-                    id_number = metadata.get('id_number', ''),
-                    country_issued = metadata.get('country_issued', ''),
-                    id_expiry = metadata.get('id_expiry', ''),
+                    title = intent.metadata.title,
+                    name = billing_details.name,
+                    email = billing_details.email,
+                    mobile = billing_details.phone,
+                    country = billing_details.address.country,
+                    date_of_birth = intent.metadata.date_of_birth,
+                    eir_code = billing_details.address.postal_code,
+                    town = billing_details.address.city,
+                    address_1 = billing_details.address.line1,
+                    address_2 = billing_details.address.line2,
+                    county = billing_details.address.state,
+                    licence_number = intent.metadata.licence_number,
+                    licence_expiry = intent.metadata.licence_expiry,
+                    personal_id = intent.metadata.personal_id,
+                    id_number = intent.metadata.id_number,
+                    country_issued = intent.metadata.country_issued,
+                    id_expiry = intent.metadata.id_expiry,
                     
                     car_id = request.session.get('car_id'),
                     pick_up_city = request.session.get('pick_up_city'),

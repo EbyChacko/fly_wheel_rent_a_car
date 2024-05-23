@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [
     '8000-ebychacko-flywheelrenta-qz7v3qtx061.ws-eu112.gitpod.io',
     '8000-ebychacko-flywheelrenta-qz7v3qtx061.ws-eu111.gitpod.io',
     '8000-ebychacko-flywheelrenta-qz7v3qtx061.ws-eu114.gitpod.io',
+    '8001-ebychacko-flywheelrenta-qz7v3qtx061.ws-eu114.gitpod.io',
     'fly-wheel-rent-c4406dadb89b.herokuapp.com'
 ]
 
@@ -46,6 +47,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://8000-ebychacko-flywheelrenta-qz7v3qtx061.ws-eu112.gitpod.io',
     'https://8000-ebychacko-flywheelrenta-qz7v3qtx061.ws-eu111.gitpod.io',
     'https://8000-ebychacko-flywheelrenta-qz7v3qtx061.ws-eu114.gitpod.io',
+    'https://8001-ebychacko-flywheelrenta-qz7v3qtx061.ws-eu114.gitpod.io',
 ]
 # Application definition
 
@@ -222,6 +224,7 @@ STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 
 if 'DEVELOPMENT' in os.environ:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'flywheelrent@example.com'
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_USE_TLS = True

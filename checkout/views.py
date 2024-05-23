@@ -19,6 +19,15 @@ def cache_checkout_data(request):
         stripe.PaymentIntent.modify(pid, metadata={
             'username': request.user.username,
             'mobile': request.POST.get('mobile'),
+            'licence_number':request.POST.get('licence_number'),
+            'licence_expiry':request.POST.get('licence_expiry'),
+            'personal_id':request.POST.get('personal_id'),
+            'id_number':request.POST.get('id_number'),
+            'country_issued':request.POST.get('country_issued'),
+            'id_expiry':request.POST.get('id_expiry'),
+            'title':request.POST.get('title'),
+            'date_of_birth':request.POST.get('date_of_birth'),
+
         })
         return HttpResponse(status=200)
     except Exception as e:

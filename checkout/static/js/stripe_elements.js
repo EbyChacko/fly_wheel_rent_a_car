@@ -63,7 +63,7 @@ form.addEventListener('submit', function(ev) {
         'mobile': $.trim(form.mobile.value),
     };
     var url = '/checkout/cache_checkout_data/';
-
+    console.log(form.street_address_1.value)
     $.post(url, postData).done(function () {
         stripe.confirmCardPayment(clientSecret, {
             payment_method: {
@@ -82,25 +82,25 @@ form.addEventListener('submit', function(ev) {
                     }
                 }
             },
-            shipping: {
-                name: $.trim(form.name.value),
-                phone: $.trim(form.phone_number.value),
-                address: {
-                    line1: $.trim(form.street_address_1.value),
-                    line2: $.trim(form.street_address_2.value),
-                    city: $.trim(form.town.value),
-                    country: $.trim(from.country.value),
-                    postal_code: $.trim(form.eir_code.value),
-                    state: $.trim(form.county.value),
-                }
-            },
+    //         shipping: {
+    //             name: $.trim(form.name.value),
+    //             phone: $.trim(form.phone_number.value),
+    //             address: {
+    //                 line1: $.trim(form.street_address_1.value),
+    //                 line2: $.trim(form.street_address_2.value),
+    //                 city: $.trim(form.town.value),
+    //                 country: $.trim(from.country.value),
+    //                 postal_code: $.trim(form.eir_code.value),
+    //                 state: $.trim(form.county.value),
+    //             }
+    //         },
 
             // metadata: {
-            //     title:$.trim(form.title.value),
+            //     
             //     name:$.trim(form.name.value),
             //     mobile:$.trim(form.mobile.value),
             //     email:$.trim(form.email.value),
-            //     date_of_birth:$.trim(form.date_of_birth.value),
+            //     
             //     address_1:$.trim(form.address_1.value),
             //     address_2:$.trim(form.address_2.value),
             //     town:$.trim(form.town.value),
@@ -108,12 +108,7 @@ form.addEventListener('submit', function(ev) {
             //     eir_code:$.trim(form.eir_code.value),
             //     country:$.trim(from.country.value),
             //     mobile: $.trim(form.mobile.value),
-            //     licence_number:$.trim(from.licence_number.value),
-            //     licence_expiry:$.trim(from.licence_expiry.value),
-            //     personal_id:$.trim(from.personal_id.value),
-            //     id_number:$.trim(from.id_number.value),
-            //     country_issued:$.trim(from.country_issued.value),
-            //     id_expiry:$.trim(from.id_expiry.value),
+
             // }
             
         }).then(function(result) {
@@ -130,9 +125,9 @@ form.addEventListener('submit', function(ev) {
                 card.update({ 'disabled': false});
                 $('#submit-button').attr('disabled', false);
             } else {
-                if (result.paymentIntent.status === 'succeeded') {
-                    form.submit();
-                }
+                // if (result.paymentIntent.status === 'succeeded') {
+                //     form.submit();
+                // }
             }
         });
     }).fail(function () {
