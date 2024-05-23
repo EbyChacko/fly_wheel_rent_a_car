@@ -123,8 +123,15 @@
     </header>
 
     {% if messages %}
-    <div class="message-container"></div>
+    <div class="row bg-warning p-3 d-flex justify-content-center" id="messageContainer">
+        <div class="col-12 col-md-8 col-lg-6 text-center">
+            {% for message in messages %}
+                <small class="text-black"> {{ message }} </small>
+            {% endfor %}
+        </div>
+    </div>
     {% endif %}
+    
 
     {% block page_header %}
     {% endblock %}
@@ -254,11 +261,28 @@
     </footer>
 
     {% block postloadjs %}
+        <script type="text/javascript">
+            $('.toast').toast('show');
+        </script>
     {% endblock %}
 
     <script>
         // Dynamically update the year in the copyright notice
         document.getElementById("year").textContent = new Date().getFullYear();
+
+        // remove message container after 5 sec
+        document.addEventListener('DOMContentLoaded', function () {
+        setTimeout(function () {
+            var messageContainer = document.getElementById('messageContainer');
+            if (messageContainer) {
+                messageContainer.style.transition = 'opacity 0.5s ease';
+                messageContainer.style.opacity = '0';
+                setTimeout(function() {
+                    messageContainer.remove();
+                }, 500); // Match the transition duration
+            }
+        }, 5000); // 5000 milliseconds = 5 seconds
+    });
     </script>
 </body>
 

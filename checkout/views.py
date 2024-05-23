@@ -110,7 +110,7 @@ def checkout(request):
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
     }
-    return render(request, 'checkout/payment.html', context)
+    return render(request, 'payment.html', context)
 
 
 def checkout_success(request, booking_number):
@@ -126,4 +126,4 @@ def checkout_success(request, booking_number):
         'booking' : booking,
         'total_extra' : total_extra,
     }
-    return render(request, 'checkout/checkout_success.html', context)
+    return render(request, 'checkout_success.html', context)
