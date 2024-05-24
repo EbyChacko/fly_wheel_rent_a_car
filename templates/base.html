@@ -123,12 +123,13 @@
     </header>
 
     {% if messages %}
-    <div class="row bg-warning p-3 d-flex justify-content-center" id="messageContainer">
+    <div class="alert bg-warning p-3 alert-dismissible fade show" role="alert" id="messageContainer">
         <div class="col-12 col-md-8 col-lg-6 text-center">
             {% for message in messages %}
                 <small class="text-black"> {{ message }} </small>
             {% endfor %}
         </div>
+        <button type="button" data-bs-dismiss="alert" class="btn-close float-end" aria-label="Close"></button>
     </div>
     {% endif %}
     

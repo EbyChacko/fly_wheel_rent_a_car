@@ -3,7 +3,8 @@ from django.shortcuts import get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 from django.conf import settings
 from .forms import BookingForm
-from cars.models import Car, PersonalDetails
+from cars.models import Car, PersonalDetails, Title, County
+from django_countries import countries
 from.models import Booking
 from django.http import QueryDict
 from django.contrib import messages
@@ -39,14 +40,13 @@ def cache_checkout_data(request):
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
-    grand_total=request.session.get('grand_total',0)
+    grand_total = request.session.get('grand_total', 0)
     stripe_amount = round(grand_total * 100)
     stripe.api_key = stripe_secret_key
     intent = stripe.PaymentIntent.create(
         amount=stripe_amount,
         currency=settings.STRIPE_CURRENCY,
     )
-    print(intent)
     form = BookingForm()
     car_id = request.session.get('car_id')
     car = get_object_or_404(Car, pk=car_id)
@@ -55,11 +55,27 @@ def checkout(request):
         pid = request.POST.get('client_secret').split('_secret')[0]
         if form.is_valid():
             booking = form.save(commit=False)
-
             if request.user.is_authenticated:
-                customer_details = PersonalDetails.objects.get(user=request.user)
-                booking.customer = customer_details
+                try:
+                    customer_details = PersonalDetails.objects.get(user=request.user)
+                except PersonalDetails.DoesNotExist:
+                    customer_details = PersonalDetails(user=request.user)
+                
+                title_id = request.POST.get('title')
+                customer_details.title = get_object_or_404(Title, pk=title_id)
+                customer_details.name = request.POST.get('name')
+                customer_details.address_1 = request.POST.get('address_1')
+                customer_details.address_2 = request.POST.get('address_2')
+                customer_details.date_of_birth = request.POST.get('date_of_birth')
+                customer_details.mobile = request.POST.get('mobile')
+                customer_details.town = request.POST.get('town')
+                county_id = request.POST.get('county')
+                customer_details.county = get_object_or_404(County, pk=county_id) if county_id else None
+                customer_details.eir_code = request.POST.get('eir_code')
+                customer_details.country = request.POST.get('country')
+                customer_details.save()
 
+                booking.customer = customer_details
                 booking.car_id = car_id
                 booking.pick_up_city = request.session.get('pick_up_city')
                 booking.pick_up_county = request.session.get('pick_up_county')
@@ -72,7 +88,6 @@ def checkout(request):
                 booking.booster_seat = request.session.get('booster_quantity', 0)
                 booking.child_seat = request.session.get('childseat_quantity', 0)
                 booking.infant_car_capsule = request.session.get('infant_quantity', 0)
-
                 booking.booster_total = request.session.get('booster_total', 0)
                 booking.childseat_total = request.session.get('childseat_total', 0)
                 booking.infant_total = request.session.get('infant_total', 0)
@@ -82,28 +97,32 @@ def checkout(request):
                 booking.hours = request.session.get('hours', 0)
                 booking.pid = pid
                 booking.save()
+                
                 return redirect('checkout_success', booking_number=booking.booking_number)
         else:
             messages.error(request, 'Fill out the form with valid values')
     else:
         if request.user.is_authenticated:
-            customer_details = PersonalDetails.objects.get(user=request.user)
-            form.initial = {
-                'title': customer_details.title,
-                'name': customer_details.name,
-                'email': customer_details.user.email,
-                'mobile': customer_details.mobile,
-                'date_of_birth': customer_details.date_of_birth,
-                'address_1': customer_details.address_1,
-                'address_2': customer_details.address_2,
-                'town': customer_details.town,
-                'county': customer_details.county,
-                'eir_code': customer_details.eir_code,
-                'country': customer_details.country,
-            }
+            try:
+                customer_details = PersonalDetails.objects.get(user=request.user)
+                form.initial = {
+                    'title': customer_details.title,
+                    'name': customer_details.name,
+                    'email': customer_details.user.email,
+                    'mobile': customer_details.mobile,
+                    'date_of_birth': customer_details.date_of_birth,
+                    'address_1': customer_details.address_1,
+                    'address_2': customer_details.address_2,
+                    'town': customer_details.town,
+                    'county': customer_details.county,
+                    'eir_code': customer_details.eir_code,
+                    'country': customer_details.country,
+                }
+            except PersonalDetails.DoesNotExist:
+                pass
+
     if not stripe_public_key:
-        messages.warning(request, 'Stripe public key is missing. \
-            Did you forget to set it in your environment?')
+        messages.warning(request, 'Stripe public key is missing. Did you forget to set it in your environment?')
     context = {
         'car': car,
         'form': form,
