@@ -7,25 +7,48 @@
 
 
 {% block content %}
-<h1>{% trans "Confirm E-mail Address" %}</h1>
 
-{% if confirmation %}
+<div class="container">
+    <div class="row my-5 d-flex justify-content-center align-items-center">
+      <div class="row my-3">
+        <div class="col-12 col-xl-6 ">
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class=" p-4 text-center">
+              <h3 class=" ">Confirm your E-mail Address</h3>
+                {% if confirmation %}
 
-{% user_display confirmation.email_address.user as user_display %}
+                {% user_display confirmation.email_address.user as user_display %}
 
-<p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
+                <small>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</small>
 
-<form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
-{% csrf_token %}
-    <button type="submit">{% trans 'Confirm' %}</button>
-</form>
+                <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+                {% csrf_token %}
+                    <button type="submit" class="button-3">{% trans 'Confirm' %}</button>
+                </form>
 
-{% else %}
+                {% else %}
 
-{% url 'account_email' as email_url %}
+                {% url 'account_email' as email_url %}
 
-<p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
+                <small>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</small>
 
-{% endif %}
+                {% endif %}
+
+            </div>
+              
+  
+          </div>
+        </div>
+        <div class="col-12 col-xl-6">
+          <img
+            src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712757143/Royal%20Drive/Uploads/signup_image_ukt0ez.webp"
+            alt="Signup car image" style="width:100%;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 
 {% endblock %}
