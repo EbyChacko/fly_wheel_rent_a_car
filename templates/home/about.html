@@ -91,7 +91,8 @@
                 Fly wheel rent a car: We care for you.
             </div>
             <div class="col-12 col-lg-4 py-3">
-                <a href="{% url 'search_cars' %}" class="button-1 rounded-5 py-3">Rent a car</a>
+                <a href="{% if user.is_authenticated %}{% url 'search_cars' %}{% else %}{% url 'login_or_signup' %}{% endif %}" 
+                class="button-1 rounded-5 py-3">Rent a car</a>
             </div>
         </div>
 

@@ -88,6 +88,12 @@
                         <li class="nav-item {% if request.path == 'contact' %}text-purple{% endif %}">
                             <a class="nav-link text-white" href="{% url 'contact' %}">Contact</a>
                         </li>
+                        <li class="nav-item {% if request.path == 'search_cars' %}text-purple{% endif %}">
+                            <a class="nav-link text-white" 
+                            href="{% if user.is_authenticated %}{% url 'search_cars' %}{% else %}{% url 'login_or_signup' %}{% endif %}">
+                            Rent a car
+                            </a>
+                        </li>
                     </ul>
                     {% if user.is_authenticated %}
                     <div class="dropdown">
@@ -193,7 +199,7 @@
                                     </small>
                                     <br>
                                     <small>
-                                        <a href="{% url 'search_cars' %}">
+                                        <a href="{% if user.is_authenticated %}{% url 'search_cars' %}{% else %}{% url 'login_or_signup' %}{% endif %}">
                                             <span><i class="fa-solid fa-circle-arrow-right"></i></span>
                                             Rent a car
                                         </a>

@@ -24,3 +24,7 @@ def contact(request):
 def about(request):
     """To load about page"""
     return render(request, 'home/about.html')
+
+def login_or_signup(request):
+    """To load login_or_signup page"""
+    return render(request, 'home/login_or_signup.html')
