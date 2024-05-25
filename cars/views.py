@@ -203,32 +203,44 @@ def add_extras(request, id):
     hours = request.session.get('hours', 0)
     if id == 1:
         extra_name = 'Booster Seat'
-        booster_quantity = min(request.session.get('booster_quantity', 0) + 1, 4)
-        if hours > 5:
-            days += 1
-        booster_total = booster_quantity * 5 * days
-        request.session['booster_quantity'] = booster_quantity
-        request.session['booster_total'] = booster_total
-        messages.success(request, "Booster Seat added to extra")
+        booster_quantity = request.session.get('booster_quantity', 0)
+        if booster_quantity == 4 :
+            messages.error(request, "Booster Seat reached maximum quantity 4")
+        else:
+            booster_quantity = min(request.session.get('booster_quantity', 0) + 1, 4)
+            if hours > 5:
+                days += 1
+            booster_total = booster_quantity * 5 * days
+            request.session['booster_quantity'] = booster_quantity
+            request.session['booster_total'] = booster_total
+            messages.success(request, "Booster Seat added to extra")
     elif id == 2:
         extra_name = 'Child Seat'
-        childseat_quantity = min(request.session.get('childseat_quantity', 0) + 1, 4)
-        if hours > 5:
-            days += 1
-        childseat_total = childseat_quantity * 5 * days
-        request.session['childseat_quantity'] = childseat_quantity
-        request.session['childseat_total'] = childseat_total
-        messages.success(request, "Child Seat added to extra")
+        childseat_quantity = request.session.get('childseat_quantity', 0)
+        if childseat_quantity == 4 :
+            messages.error(request, "Child Seat reached maximum quantity 4")
+        else:
+            childseat_quantity = min(request.session.get('childseat_quantity', 0) + 1, 4)
+            if hours > 5:
+                days += 1
+            childseat_total = childseat_quantity * 5 * days
+            request.session['childseat_quantity'] = childseat_quantity
+            request.session['childseat_total'] = childseat_total
+            messages.success(request, "Child Seat added to extra")
     else:
         extra_name = 'Infant Car Capsule'
-        infant_quantity = min(request.session.get('infant_quantity', 0) + 1, 4)
-        if hours > 5:
-            days += 1
-        infant_total = 5 * infant_quantity * days
-        request.session['infant_quantity'] = infant_quantity
-        request.session['infant_total'] = infant_total
-        messages.success(request, "Infant Car Capsule added to extra")
-    
+        infant_quantity = request.session.get('infant_quantity', 0)
+        if infant_quantity == 4:
+            messages.error(request, "Infan car capsule reached maximum quantity 4")
+        else:
+            infant_quantity = min(request.session.get('infant_quantity', 0) + 1, 4)
+            if hours > 5:
+                days += 1
+            infant_total = 5 * infant_quantity * days
+            request.session['infant_quantity'] = infant_quantity
+            request.session['infant_total'] = infant_total
+            messages.success(request, "Infant Car Capsule added to extra")
+        
     booster_total = request.session.get('booster_total', 0)
     childseat_total = request.session.get('childseat_total', 0)
     infant_total = request.session.get('infant_total', 0)

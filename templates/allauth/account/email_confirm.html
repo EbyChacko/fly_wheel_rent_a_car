@@ -11,7 +11,7 @@
 <div class="container">
     <div class="row my-5 d-flex justify-content-center align-items-center">
       <div class="row my-3">
-        <div class="col-12 col-xl-6 ">
+        <div class="col-12">
           <div class="row d-flex justify-content-center align-items-center">
             <div class=" p-4 text-center">
               <h3 class=" ">Confirm your E-mail Address</h3>
@@ -23,7 +23,7 @@
 
                 <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
                 {% csrf_token %}
-                    <button type="submit" class="button-3">{% trans 'Confirm' %}</button>
+                    <button type="submit" class="button-2">{% trans 'Confirm' %}</button>
                 </form>
 
                 {% else %}
@@ -38,11 +38,6 @@
               
   
           </div>
-        </div>
-        <div class="col-12 col-xl-6">
-          <img
-            src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712757143/Royal%20Drive/Uploads/signup_image_ukt0ez.webp"
-            alt="Signup car image" style="width:100%;">
         </div>
       </div>
     </div>

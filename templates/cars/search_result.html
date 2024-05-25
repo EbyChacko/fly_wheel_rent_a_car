@@ -66,6 +66,7 @@
             </div>
         </div>
         <div class="col-12 p-2 mx-auto animation1">
+            {% if cars %}
             {% for car in cars %}
             <div class="p-3">
                 <div class="row p-3 rounded-4 border border-secondary">
@@ -207,6 +208,14 @@
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <div class="p-5 text-center">
+                <p>
+                    Sorry, No cars avilable at this moment for the selected date & location.
+                </p>
+                <small>Try another location</small>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
