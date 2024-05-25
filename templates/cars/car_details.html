@@ -3,11 +3,11 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<div class="container-fluid bg-dark">
+<div class="container-fluid bg-black-gradient">
     <div class="row">
         <div class="col-12 col-lg-4 col-xl-3 p-3 animation">
             <div class="rounded-1" style="border: solid 1px #ffc107">
-                <div class="col-12 p-3 text-center rounded-1 bg-black">
+                <div class="col-12 p-3 text-center rounded-1 bg-dark">
                     <h4 class="text-warning">{{ request.session.total_rent }} €</h4>
                     <small>
                         Rental Cost for {% if request.session.days %}{{ request.session.days }} day{% if request.session.days > 1 %}s{% endif %}{% endif %}

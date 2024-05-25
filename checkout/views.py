@@ -16,8 +16,12 @@ import json
 def cache_checkout_data(request):
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
+        print(request)
+        print('cache checkout data')
+        print(request.POST.get('title'))
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
+            'title' : request.POST.get('title'),
             'username': request.user.username,
             'mobile': request.POST.get('mobile'),
             'licence_number':request.POST.get('licence_number'),

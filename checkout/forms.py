@@ -37,10 +37,10 @@ class BookingForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        {
+        placeholders = {
             'title': 'Title',
-            'name': 'Name',
-            'email': 'E-mail',
+            'name': 'Full Name',
+            'email': 'E-mail Address',
             'mobile': 'Mobile number',
             'date_of_birth': 'Date of birth',
             'address_1': 'House number or House name',
@@ -56,8 +56,23 @@ class BookingForm(forms.ModelForm):
             'country_issued':'Country that issue your ID',
             'id_expiry': 'Expiry date of your ID',
         }
+        empty_labels = {
+            'title': 'Choose Title',
+            'county': 'Select County',
+            'country': 'Select Country',
+            'personal_id': 'Choose Personal ID',
+            'country_issued':'Choose Country that issue your ID',
+        }
         self.request = kwargs.pop('request', None)
         super(BookingForm, self).__init__(*args, **kwargs)
+
+        for field in self.fields:
+            placeholder = placeholders.get(field)
+            if placeholder:
+                self.fields[field].widget.attrs['placeholder'] = placeholder
+            if field in empty_labels:
+                self.fields[field].empty_label = empty_labels[field]
+            self.fields[field].widget.attrs['class'] = 'form-control'
 
     def clean_mobile(self):
         mobile = self.cleaned_data.get('mobile')

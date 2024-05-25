@@ -110,7 +110,7 @@
                             {% if request.user.is_superuser %}
                             <a href="" class="dropdown-item">Product Management</a>
                             {% endif %}
-                            <a href="" class="dropdown-item">My Profile</a>
+                            <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
                             {% endif %}
                         </div>
                     </div>
@@ -132,10 +132,10 @@
     </header>
 
     {% if messages %}
-    <div class="alert bg-warning p-3 alert-dismissible fade show" role="alert" id="messageContainer">
-        <div class="col-12 col-md-8 col-lg-6 text-center">
+    <div class="alert bg-warning p-3 alert-dismissible fade show d-flex justify-content-center " role="alert" id="messageContainer">
+        <div class="col-10 col-md-8 col-lg-6">
             {% for message in messages %}
-                <small class="text-black"> {{ message }} </small>
+                <small class="text-black "> {{ message }} </small>
             {% endfor %}
         </div>
         <button type="button" data-bs-dismiss="alert" class="btn-close float-end" aria-label="Close"></button>

@@ -64,7 +64,7 @@ class StripeWH_Handler:
         else:
             booking = None
             try:
-                title_id = billing_details.title
+                title_id = intent.metadata.title
                 county_id = billing_details.address.state
                 booking = Booking.objects.create(
                     title = get_object_or_404(Title, pk=title_id),

@@ -4,11 +4,14 @@
 
 body {
     margin:0 !important;
-    background-color:black;
+    background-color: #000;
     background-size: cover;
     color: #ffffff;
     font-family: 'Comfortaa', sans-serif;
     font-weight: 300;
+}
+.bg-black-gradient {
+  background: linear-gradient(to bottom, black, #000b17);
 }
 
 /* set the shadow class */

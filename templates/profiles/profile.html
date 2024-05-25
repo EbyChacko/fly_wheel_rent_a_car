@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container-fluid bg-black-gradient">
+    <div class="row">
+        <div class="col-12 col-lg-4 col-xl-3 p-3 animation ">
+            <div class="rounded-3 bg-dark">
+                <div class="col-12 p-3 pt-5 text-center rounded-1">
+                    <h5 class="text-warning text-uppercase">{{ request.user }}</h5>
+                    <small>{{ customer_details.user.email }}</small><br>
+                    <small>{{ customer_details.mobile }}</small><br>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-8 col-xl-9 p-3 animation1">
+
+            <div class="row p-3 py-2 ">
+                <h3 class=""><strong>Your Bookings</strong></h3>
+                <hr>
+                {% if bookings %}
+                {% for booking in bookings %}
+                <div class="">
+                    <div class="row p-3 rounded-3 bg-dark">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="col-12 my-2 d-flex justify-content-center">
+                                    <img src="{{ booking.car.image.url }}" alt="Car Image"
+                                        style="width:100%; object-fit: contain;" class="rounded-4">
+                                </div>
+                                <div class="col-12 py-3 my-2">
+                                    <small>{{ booking.car.category }}</small>
+                                    <h5 class="text-warning">{{ booking.car.make }} {{ booking.car.model }}</h5>
+                                    <small>Year: {{ booking.car.year }}</small>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <p class="text-info">Bill Amount : <Strong>{{ booking.grand_total }},00 €</Strong></p>
+                            </div>
+                            <div class=" col-12 col-md-6 d-flex justify-content-end">
+                                <a type="submit" class="btn button-2">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    // fade in animation when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        var animation = document.querySelector('.animation');
+        var animation1 = document.querySelector('.animation1');
+        var animation2 = document.querySelector('.animation2');
+        animation.classList.add('fade-in');
+        animation1.classList.add('fade-in');
+        animation2.classList.add('fade-in');
+    });
+
+</script>
+{% endblock %}

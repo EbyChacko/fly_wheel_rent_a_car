@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import CustomerMessageForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -15,7 +16,8 @@ def contact(request):
         form = CustomerMessageForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('contact')
+            messages.success(request, 'Your Message has been send successfully. We will contact you soon!')
+            return redirect('/')
     return render(request, 'home/contact.html', {
         'form': form,
     })
