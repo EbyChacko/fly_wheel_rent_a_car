@@ -64,8 +64,10 @@ class StripeWH_Handler:
         else:
             booking = None
             try:
+                title_id = billing_details.title
+                county_id = billing_details.address.state
                 booking = Booking.objects.create(
-                    title = intent.metadata.title,
+                    title = get_object_or_404(Title, pk=title_id),
                     name = billing_details.name,
                     email = billing_details.email,
                     mobile = billing_details.phone,
@@ -75,7 +77,7 @@ class StripeWH_Handler:
                     town = billing_details.address.city,
                     address_1 = billing_details.address.line1,
                     address_2 = billing_details.address.line2,
-                    county = billing_details.address.state,
+                    county = get_object_or_404(County, pk=county_id) if county_id else None,
                     licence_number = intent.metadata.licence_number,
                     licence_expiry = intent.metadata.licence_expiry,
                     personal_id = intent.metadata.personal_id,
