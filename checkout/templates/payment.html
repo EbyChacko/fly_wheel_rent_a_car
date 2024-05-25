@@ -15,10 +15,9 @@
             {% csrf_token %}
             <div class="row">
                 <div class="col-12 col-md-6 p-4 animation1">
-                    <div class="rounded-3" style="border: solid 1px #a4a4a4">
-                        <div class="col-12 rounded-3 bg-black p-3">
-                            <h5>Payment Summary</h5>
-                        </div>
+                    <h3 class="text-warning"><strong>Payment Summary</strong></h3>
+                    <hr>
+                    <div>
                         <div class="col-12 p-3 my-2">
                             <div class="row">
                                 <div class="col-8">
@@ -91,12 +90,12 @@
                                 </div>
                                 <hr>
                                 {% endif %}
-                                <div class="col-8 text-warning">
+                                <div class="col-8 text-info">
                                     <h5>
                                         <strong>Grand Total</strong><br>
                                     </h5>
                                 </div>
-                                <div class="col-4 text-end text-warning">
+                                <div class="col-4 text-end text-info">
                                     <h5>
                                         <storng>
                                             {{ request.session.grand_total }} €
@@ -104,15 +103,25 @@
                                     </h5>
                                 </div>
                                 <hr>
-                                <div class="col-12 text-end">
-                                    <small>
-                                        Price includes all taxes & fees
-                                    </small>
+                                <h3 class="text-warning"><strong>Pick Up and Drop Off</strong></h3>
+                                <hr>
+                                <div class="col-12 p-3">
+                                    <h5> Pick-Up</h5>
+                                    <h6>{{ request.session.pick_up_city }}, {{ request.session.pick_up_county }}</h6>
+                                    <small>Date : {{ request.session.drop_off_date }}</small><br>
+                                    <small>Time : {{ request.session.pick_up_time_formatted }}</small>
+                                </div>
+                                <div class="col-12 p-3">
+                                    <h5>Drop Off</h5>
+                                    <h6 class="disabled">{{ request.session.drop_off_city }}, {{ request.session.drop_off_county }}</h6>
+                                    <small>Date : {{ request.session.drop_off_date }}</small><br>
+                                    <small>Time : {{ request.session.drop_off_time_formatted }}</small>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-12 col-md-6 p-4">
                     <h3 class="text-warning"><strong>Checkout</strong></h3>
                     <hr>
