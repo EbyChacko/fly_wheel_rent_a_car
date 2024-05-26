@@ -21,30 +21,35 @@
                 <hr>
                 {% if bookings %}
                 {% for booking in bookings %}
-                <div class="">
-                    <div class="row p-3 rounded-3 bg-dark">
+                <div class="py-2">
+                    <div class="row p-3 rounded-3 border border-secondary">
                         <div class="row">
-                            <div class="col-4">
-                                <div class="col-12 my-2 d-flex justify-content-center">
-                                    <img src="{{ booking.car.image.url }}" alt="Car Image"
-                                        style="width:100%; object-fit: contain;" class="rounded-4">
-                                </div>
-                                <div class="col-12 py-3 my-2">
-                                    <small>{{ booking.car.category }}</small>
-                                    <h5 class="text-warning">{{ booking.car.make }} {{ booking.car.model }}</h5>
-                                    <small>Year: {{ booking.car.year }}</small>
-                                </div>
+                            <div class="col-12 col-md-8">
+                                <p class="text-info">{{ booking.booking_number }}</p>
                             </div>
-                            
+                            <div class="col-12 col-md-4 pb-2">
+                                <small>{{ booking.booking_time }}</small>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-12 col-md-4 col-lg-5 col-xl-4 my-2 d-flex justify-content-center">
+                                <img src="{{ booking.car.image.url }}" alt="Car Image"
+                                    style="width:100%; object-fit: contain;" class="rounded-4">
+                            </div>
+                            <div class="col-12 col-md-8 col-lg-7 col-xl-8 py-3 my-2">
+                                <small>{{ booking.car.category }}</small>
+                                <h5>{{ booking.car.make }} {{ booking.car.model }}</h5>
+                            </div>
                         </div>
                         <hr>
 
                         <div class="row">
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-start">
                                 <p class="text-info">Bill Amount : <Strong>{{ booking.grand_total }},00 €</Strong></p>
                             </div>
-                            <div class=" col-12 col-md-6 d-flex justify-content-end">
-                                <a type="submit" class="btn button-2">View Details</a>
+                            <div class=" col-12 col-md-6 d-flex justify-content-center justify-content-md-end">
+                                <a type="submit" href="{% url 'booking_details' booking.id %}" class="btn button-2">View Details</a>
                             </div>
                         </div>
                     </div>

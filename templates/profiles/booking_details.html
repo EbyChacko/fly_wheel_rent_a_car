@@ -1,0 +1,367 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container-fluid bg-black-gradient">
+    <div class="row">
+        <div class="col-12 col-lg-4 p-3 animation">
+            <div class="rounded-1" style="border: solid 1px #ffc107">
+                <div class="col-12 p-3 text-center rounded-1 bg-dark">
+                    <h4 class="text-warning">{{ booking.grand_total }},00 €</h4>
+                    <small>
+                        Total Amount of Booking
+                    </small>
+                </div>
+                <div class="col-8 col-md-6 col-lg-12 d-flex justify-content-center mx-auto p-3">
+                    <img src="{{ car.image.url }}" alt="Car Image" style="width:100%; object-fit: contain;"
+                        class="rounded-4">
+                </div>
+                <div class="col-12 p-3">
+                    <small>{{ booking.car.category }}</small>
+                    <h5 class="text-warning">{{ booking.car.make }} {{ booking.car.model }}</h5>
+                    <small>Year: {{ booking.car.year }}</small>
+                </div>
+                <hr>
+                <div class="col-12 p-3">
+                    <h5>Pick-Up</h5>
+                    <h6>{{ booking.pick_up_city }}, {{ booking.pick_up_county }}</h6>
+                    <small>Date : {{ booking.pick_up_date }}</small><br>
+                    <small>Time : {{ booking.pick_up_time }}</small>
+                </div>
+                <div class="col-12 p-3">
+                    <h5>Drop Off</h5>
+                    <h6 class="disabled">{{ booking.drop_off_city }}, {{ booking.drop_off_county }}</h6>
+                    <small>Date : {{ booking.drop_off_date }}</small><br>
+                    <small>Time : {{ booking.drop_off_time }}</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-8 p-4 mt-2 animation1">
+            <div>
+                <a href="{% url 'profile' %}">Back</a>
+            </div>
+            <div class="row pt-5 ">
+                <h3 class=""><strong>Booking Details...</strong></h3>
+                <hr>
+                <div class="col-12 ">
+                    <div class="alert alert-warning text-black" role="alert">
+                        <i class="fa-regular fa-clock"></i> Free cancellation up to 48 hours before pick-up. 
+                    </div>
+                </div>
+
+                <div class="col-12 py-3 my-2">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-info">Car Features</h5>
+                        </div>
+                        <div class="col-6 col-xl-4">
+                            <small>{{ booking.car.seats }} Seats</small>
+                        </div>
+                        <div class="col-6 col-xl-4">
+                            <small>{{ booking.car.fuel }}</small>
+                        </div>
+                        <div class="col-6 col-xl-4">
+                            <small>{{ booking.car.doors }} Doors</small>
+                        </div>
+                        <div class="col-6 col-xl-4">
+                            <small>{{ booking.car.gear_box }}</small>
+                        </div>
+                        <div class="col-6 col-xl-4">
+                            <small>Large Bags : {{ booking.car.large_bags }}</small>
+                        </div>
+                        <div class="col-6 col-xl-4">
+                            <small>Small Bags : {{ booking.car.small_bags }}</small>
+                        </div>
+                        <div class="col-6 col-xl-4">
+                            {% if booking.car.air_condition %}
+                            <small>A/C : Yes </small>
+                            {% else %}
+                            <small>A/C : No </small>
+                            {% endif %}
+                        </div>
+                        <div class="col-6 col-xl-4">
+                            {% if booking.car.abs %}
+                            <small>ABS : Yes </small>
+                            {% else %}
+                            <small>ABS : No </small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-12 py-3 my-2">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-info">Included In Price</h5>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Instant booking confirmation
+                            </small><br>
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Second Driver
+                            </small><br>
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Third party
+                            </small><br>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Theft and fire protection
+                            </small><br>
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Personal Accident protection
+                            </small><br>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-12 py-3 my-2">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-info">Great choice!</h5>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Customer Rating : {{ booking.car.rating }} / 5.0
+                            </small><br>
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Most popular fuel policy
+                            </small><br>
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Short queues
+                            </small><br>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Easy to find counter
+                            </small><br>
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Helpful counter staff
+                            </small><br>
+                            <small><i class="text-warning fa-regular fa-circle-check"></i>
+                                Free Cancellation
+                            </small><br>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                {% if booking.child_seat or booking.booster_seat or booking.infant_car_capsule %}
+                <div class="col-12 py-3 my-2" >
+                    <div class="row" style="max-width:600px">
+                        <div class="col-12">
+                            <h5 class="text-info">Extras</h5>
+                        </div>
+                        {% if booking.booster_seat %}
+                        <div class="col-12 my-2">
+                            <div class="row p-3">
+                                <div class="col-3">
+                                    <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1714679891/Royal%20Drive/Uploads/booster_seat_plvdyj.png"
+                                        alt="Car Image" style="width:100%; max-height:100% ;" class="rounded-4">
+                                </div>
+                                <div class="col-9">
+                                    <h6>BOOSTER SEAT (5 - 10 YEARS)</h6>
+                                    <small>Booster seats are recommended if your child is between 15-36 kg.</small><br>
+                                    <small class="text-warning pt-2">Quantity : {{ booking.booster_seat }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if booking.child_seat %}
+                        <div class="col-12 my-2">
+                            <div class="row p-3">
+                                <div class="col-3">
+                                    <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1714682522/Royal%20Drive/Uploads/child_seat_ztjq6m.webp"
+                                        alt="Car Image" style="width:100%; max-height:100% ;" class="rounded-4">
+                                </div>
+                                <div class="col-9">
+                                    <h6>CHILD SEAT (1 - 5 YEARS)</h6>
+                                    <small>Child seats are normally used for children between (2-19 kg).</small><br>
+                                    <small class="text-warning pt-2">Quantity : {{ booking.booster_seat }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if  booking.infant_car_capsule %}
+                        <div class="col-12 my-2">
+                            <div class="row p-3">
+                                <div class="col-3">
+                                    <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1714681132/Royal%20Drive/Uploads/infant_car_capsule_bhe6mr.webp"
+                                        alt="Car Image" style="width:100%; max-height:100% ;" class="rounded-4">
+                                </div>
+                                <div class="col-9">
+                                    <h6>INFANT CAR CAPSULE (0 - 1 YEARS)</h6>
+                                    <small>Infant Car Capsule (0 - 1 years)</small><br>
+                                    <small class="text-warning pt-2">Quantity : {{ booking.booster_seat }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <hr>
+                {% endif %}
+                <div class="col-12 w-100 pb-4">
+                    <div >
+                        <div class="col-12 rounded-1 bg-black p-3">
+                            <h4>Payment Summary</h4>
+                        </div>
+                        <div class="col-12 p-3 my-2">
+                            <div class="row">
+                                <div class="col-8">
+                                    <p>
+                                        <strong> Car Rent</strong><br>
+                                        <small>For 1 day </small>
+                                    </p>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <storng>
+                                        {{ booking.car.rent }} €
+                                        </strong>
+                                </div>
+                                <div class="col-8">
+                                    <p>
+                                        <strong>Total Rent</strong><br>
+                                        <small>{{ booking.days }} day{% if booking.days > 1 %}s{% endif %}
+                                            {% if booking.hours %} & {{ bookimg.hours }} hours{% endif %}</small>
+                                    </p>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <storng>
+                                        {{ booking.total_rent }} €
+                                        </strong>
+                                </div>
+                                <hr>
+                                {% if booking.booster_seat or booking.child_seat or booking.infant_car_capsule %}
+                                <h5>Extras</h5>
+                                {% endif %}
+                                {% if booking.booster_seat %}
+                                <div class="col-8">
+                                    <p>
+                                        <strong> Booster Seat</strong><br>
+                                        <small>Quantity : {{ booking.booster_seat }} </small>
+                                    </p>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <storng>
+                                        {{ booking.booster_total }} €
+                                        </strong>
+                                </div>
+                                <hr>
+                                {% endif %}
+        
+                                {% if booking.child_seat %}
+                                <div class="col-8">
+                                    <p>
+                                        <strong> Child Seat</strong><br>
+                                        <small>Quantity : {{ booking.child_seat }} </small>
+                                    </p>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <storng>
+                                        {{ booking.childseat_total }} €
+                                        </strong>
+                                </div>
+                                <hr>
+                                {% endif %}
+                                {% if booking.infant_car_capsule %}
+                                <div class="col-8">
+                                    <p>
+                                        <strong> Infant Car Capsule</strong><br>
+                                        <small>Quantity : {{ booking.infant_car_capsule }} </small>
+                                    </p>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <storng>
+                                        {{ booking.infant_total }} €
+                                        </strong>
+                                </div>
+                                <hr>
+                                {% endif %}
+                                <div class="col-8 text-warning">
+                                    <h5>
+                                        <strong>Grand Total</strong><br>
+                                    </h5>
+                                </div>
+                                <div class="col-4 text-warning text-end">
+                                    <h5>
+                                        <storng>
+                                            {{ booking.grand_total }} €
+                                            </strong>
+                                    </h5>
+                                </div>
+                                <hr>
+                                <div class="col-12 text-end">
+                                    <small>
+                                        Price includes all taxes & fees
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 py-3 my-2">
+                    <div class="row">
+                        <h5 class="text-info">Your pick-up checklist</h5>
+                        <br>
+                        <div class="p-3 rounded-2 border border-secondary my-2">
+                            <p class="text-warning"><strong><i class="fa-regular fa-clock"></i> Arrive On Time</strong>
+                            </p>
+                            <p><small>Rental companies only allow you to get your keys at your allocated pick-up time,
+                                    they'll usually hold your car for a limited time after you're due to pick it up -
+                                    then
+                                    it's likely to be passed to another customer.</small></p>
+                            <p class="text-info"><small>Your pick-up time is {{ request.session.pick_up_time_formatted }}</small></p>
+                        </div>
+
+                        <div class="p-3 rounded-2 border border-secondary my-2">
+                            <p class="text-warning"><strong><i class="fa-solid fa-id-card"></i> Bring with you</strong>
+                            </p>
+                            <p><small>When you pick the car up, you'll need:</small></p>
+                            <p><small><i class="text-warning fa-regular fa-circle-check"></i> A passport or national ID
+                                    card</small></p>
+                            <p><small><i class="text-warning fa-regular fa-circle-check"></i> All drivers to provide
+                                    their driver's licence(s)</small></p>
+                            <p><small><i class="text-warning fa-regular fa-circle-check"></i> A credit card in the main
+                                    driver's name, to hold the security deposit</small></p>
+                        </div>
+                        <div class="p-3 rounded-2 border border-secondary my-2">
+                            <p class="text-warning"><strong><i class="fa-regular fa-credit-card"></i> refundable
+                                    Deposit</strong></p>
+                            <p><small>At pick-up, the main driver will need €1,500 available on their credit card for a
+                                    refundable security deposit.
+                                    Cash and debit cards aren't accepted.</small></p>
+                            <p class="text-info"><small><strong class="text-uppercase">Accepted cards:</strong>
+                                    Mastercard, Visa, American Express</small></p>
+                        </div>
+                        <small>Click here for <a href="{% url 'terms' %}" target="_blank">Terms and
+                                Conditions</a></small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class=" col-12 d-flex justify-content-end">
+                <a href="{% url 'checkout' %}" class="button-2">Delete Booking</a>
+            </div>
+        </div>
+        
+    </div>
+</div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    // fade in animation when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        var animation = document.querySelector('.animation');
+        var animation1 = document.querySelector('.animation1');
+        var animation2 = document.querySelector('.animation2');
+        animation.classList.add('fade-in');
+        animation1.classList.add('fade-in');
+        animation2.classList.add('fade-in');
+    });
+
+</script>
+{% endblock %}

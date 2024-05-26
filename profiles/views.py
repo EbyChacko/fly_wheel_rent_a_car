@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from cars.models import PersonalDetails
 from checkout.models import Booking
@@ -22,3 +22,16 @@ def profile(request):
         'bookings': bookings
     }
     return render(request, 'profiles/profile.html', context)
+
+def booking_details(request, id):
+
+    booking = get_object_or_404(Booking, id=id)
+
+    if booking.customer.user != request.user:
+        messages.error(request, "You do not have permission to view this booking.")
+        return redirect('profile')
+
+    context = {
+        'booking': booking,
+    }
+    return render(request, 'profiles/booking_details.html', context)
