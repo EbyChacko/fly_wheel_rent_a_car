@@ -8,13 +8,8 @@
         <div class="col-12 p-4">
             <a href="{% url 'profile' %}"> <i class="fa-solid fa-circle-left"></i> Back to profile</a>
         </div>
-        <div class="col-12 col-lg-4 p-3 animation">
+        <div class="col-12 col-lg-3 p-3 animation">
             <div class="rounded-1" style="border: solid 1px #494949">
-                <div class="col-12 p-3 rounded-1 bg-dark">
-                    <small>Booking Details</small><br><br>
-                    <h6 class="text-warning">{{ booking.booking_number }}</h6>
-                    <small>{{ booking.booking_time }}</small>
-                </div>
                 <div class="col-8 col-md-6 col-lg-12 d-flex justify-content-center mx-auto p-3">
                     <img src="{{ car.image.url }}" alt="Car Image" style="width:100%; object-fit: contain;"
                         class="rounded-4">
@@ -39,16 +34,21 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-8 px-4 pb-4 animation1">
+        <div class="col-12 col-lg-9 px-4 pb-4 animation1">
             <div class="row pt-3 ">
                 <h3 class=""><strong>Booking Details...</strong></h3>
                 <hr>
                 <div class="col-12 ">
                     <div class="alert alert-warning text-black" role="alert">
-                        <i class="fa-regular fa-clock"></i> Free cancellation up to 48 hours before pick-up. 
+                        <i class="fa-regular fa-clock"></i> Free cancellation up to 48 hours before pick-up.
+                        {% if pick_up_datetime > now %}Your pick up time is {{ pick_up_datetime }}{% endif %}
                     </div>
                 </div>
-
+                <div class="col-12 p-3">
+                    <h6 class="text-warning">Ref No : {{ booking.booking_number }}</h6>
+                    <small>Time : {{ booking.booking_time }}</small>
+                </div>
+                <hr>
                 <div class="col-12 py-3 my-2">
                     <div class="row">
                         <div class="col-12">
@@ -426,7 +426,12 @@
             </div>
             
             <div class=" col-12 d-flex justify-content-end">
-                <a href="#" class="{% if disable_delete %}disabled{% endif %} button-2">Delete Booking</a>
+                <a href="#" 
+                class="btn button-2 {% if disable_delete %}disabled{% endif %}" 
+                tabindex="{% if disable_delete %}-1{% endif %}" 
+                aria-disabled="{% if disable_delete %}true{% endif %}">
+                Delete Booking
+                </a>
             </div>
         </div>
         

@@ -36,8 +36,12 @@ def booking_details(request, id):
     pick_up_datetime = datetime.combine(booking.pick_up_date, booking.pick_up_time)
     time_difference = pick_up_datetime - now
     disable_delete = time_difference < timedelta(hours=48)
-
+    disable_cancel = pick_up_datetime < now
     context = {
         'booking': booking,
+        'disable_delete': disable_delete,
+        'time_difference':time_difference,
+        'now':now,
+        'pick_up_datetime':pick_up_datetime,
     }
     return render(request, 'profiles/booking_details.html', context)
