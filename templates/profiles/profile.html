@@ -43,10 +43,20 @@
                             </div>
                         </div>
                         <hr>
-
+                        <div class="row pb-2">
+                            <div class="col-12 col-md-6">
+                                <small class="text-warning">Pick Up : {{ booking.pick_up_city }}, {{ booking.pick_up_county }}</Small><br>
+                                <small >{{ booking.pick_up_date }}, {{ booking.pick_up_time }}</small>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <Small class="text-warning">Drop Off: {{ booking.drop_off_city }}, {{ booking.drop_off_county }}</Small><br>
+                                <small >{{ booking.drop_off_date }}, {{ booking.drop_off_time }}</small>
+                            </div>
+                        </div>
+                        <hr>
                         <div class="row">
                             <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-start">
-                                <p class="text-info">Bill Amount : <Strong>{{ booking.grand_total }},00 €</Strong></p>
+                                <p >Bill Amount : <Strong class="text-info">{{ booking.grand_total }},00 €</Strong></p>
                             </div>
                             <div class=" col-12 col-md-6 d-flex justify-content-center justify-content-md-end">
                                 <a type="submit" href="{% url 'booking_details' booking.id %}" class="btn button-2">View Details</a>

@@ -32,6 +32,14 @@
                     <small>Date : {{ booking.drop_off_date }}</small><br>
                     <small>Time : {{ booking.drop_off_time }}</small>
                 </div>
+                <hr>
+                <div class="col-12 p-3">
+                    <h5>Duration</h5>
+                    <small>
+                        {% if booking.days %}{{ booking.days }} day{% if booking.days > 1 %}s{% endif %}{% endif %}
+                        {% if booking.hours %} & {{ booking.hours }} hour{% if booking.hours > 1 %}s {% endif %}{% endif %}
+                    </small>
+                </div>
             </div>
         </div>
         <div class="col-12 col-lg-9 px-4 pb-4 animation1">
