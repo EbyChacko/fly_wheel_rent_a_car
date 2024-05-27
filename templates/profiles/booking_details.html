@@ -5,13 +5,15 @@
 {% block content %}
 <div class="container-fluid bg-black-gradient">
     <div class="row">
+        <div class="col-12 p-4">
+            <a href="{% url 'profile' %}"> <i class="fa-solid fa-circle-left"></i> Back to profile</a>
+        </div>
         <div class="col-12 col-lg-4 p-3 animation">
-            <div class="rounded-1" style="border: solid 1px #ffc107">
-                <div class="col-12 p-3 text-center rounded-1 bg-dark">
-                    <h4 class="text-warning">{{ booking.grand_total }},00 €</h4>
-                    <small>
-                        Total Amount of Booking
-                    </small>
+            <div class="rounded-1" style="border: solid 1px #494949">
+                <div class="col-12 p-3 rounded-1 bg-dark">
+                    <small>Booking Details</small><br><br>
+                    <h6 class="text-warning">{{ booking.booking_number }}</h6>
+                    <small>{{ booking.booking_time }}</small>
                 </div>
                 <div class="col-8 col-md-6 col-lg-12 d-flex justify-content-center mx-auto p-3">
                     <img src="{{ car.image.url }}" alt="Car Image" style="width:100%; object-fit: contain;"
@@ -37,11 +39,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-8 p-4 mt-2 animation1">
-            <div>
-                <a href="{% url 'profile' %}">Back</a>
-            </div>
-            <div class="row pt-5 ">
+        <div class="col-12 col-lg-8 px-4 pb-4 animation1">
+            <div class="row pt-3 ">
                 <h3 class=""><strong>Booking Details...</strong></h3>
                 <hr>
                 <div class="col-12 ">
@@ -151,7 +150,7 @@
                 <div class="col-12 py-3 my-2" >
                     <div class="row" style="max-width:600px">
                         <div class="col-12">
-                            <h5 class="text-info">Extras</h5>
+                            <h5 class="text-info">Added Extras</h5>
                         </div>
                         {% if booking.booster_seat %}
                         <div class="col-12 my-2">
@@ -202,10 +201,10 @@
                 </div>
                 <hr>
                 {% endif %}
-                <div class="col-12 w-100 pb-4">
+                <div class="col-12 w-100 pb-4 bg-dark">
                     <div >
-                        <div class="col-12 rounded-1 bg-black p-3">
-                            <h4>Payment Summary</h4>
+                        <div class="col-12 rounded-1 p-3 pt-5">
+                            <h5 class="text-info">Payment Summary</h5>
                         </div>
                         <div class="col-12 p-3 my-2">
                             <div class="row">
@@ -300,6 +299,91 @@
                             </div>
                         </div>
                     </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-12" >
+                            <div class="col-12 rounded-1 p-2">
+                                <h5 class="text-info">Billing Details</h5>
+                            </div>
+                            <div class="col-12 p-3">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>Name</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <p>: {{ booking.title }}. {{ booking.name }}</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>Address</p>
+                                    </div>
+                                    <div class="col-8 ">
+                                        <p>: {{ booking.address_1 }}</p>
+                                        <p> {{ booking.address_2 }}</p>
+                                        <p> {{ booking.town }}</p>
+                                        <p> {{ booking.county }}, {{ booking.country.name }}</p>
+                                        <p> {{ booking.eir_code }}</p>
+                                        
+                                    </div>
+                                    <div class="col-4">
+                                        <p>E mail</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <p>: {{ booking.email }}</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>Mobile</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <p>
+                                            : {{ booking.mobile }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="col-12" >
+                            <div class="col-12 rounded-1 p-2">
+                                <h5 class="text-info">Licence and ID Details</h5>
+                            </div>
+                            <div class="col-12 p-3">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>Licence Number</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <p>: {{ booking.licence_number }}</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>Licence expiry</p>
+                                    </div>
+                                    <div class="col-8 ">
+                                        <p>: {{ booking.licence_expiry }}</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>E mail</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <p>
+                                            : {{ booking.personal_id }}
+                                        </p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>ID Number</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <p>: {{ booking.id_number }}</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>Country Issued</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <p>: {{ booking.country_issued.name }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12 py-3 my-2">
                     <div class="row">
@@ -342,7 +426,7 @@
             </div>
             
             <div class=" col-12 d-flex justify-content-end">
-                <a href="{% url 'checkout' %}" class="button-2">Delete Booking</a>
+                <a href="#" class="{% if disable_delete %}disabled{% endif %} button-2">Delete Booking</a>
             </div>
         </div>
         

@@ -45,7 +45,7 @@
                                     <small>Pick-Up Location</small>
                                 </div>
                                 <div class="col-6">
-                                    <small>: {{ request.session.pick_up_city }}, {{ request.session.pick_up_county }}</small>
+                                    <small>: {{ booking.pick_up_city }}, {{ booking.pick_up_county }}</small>
                                 </div>
                             </div>
                             <div class="row">
@@ -61,7 +61,7 @@
                                     <small>Time</small>
                                 </div>
                                 <div class="col-6">
-                                    <small>: {{ request.session.pick_up_time_formatted }}</small>
+                                    <small>: {{ booking.pick_up_time_formatted }}</small>
                                 </div>
                             </div>
                             <hr>
@@ -70,7 +70,7 @@
                                     <small>Drop Off Location</small>
                                 </div>
                                 <div class="col-6">
-                                    <small>: {{ request.session.drop_off_city }}, {{ request.session.drop_off_county }}</small>
+                                    <small>: {{ booking.drop_off_city }}, {{ booking.drop_off_county }}</small>
                                 </div>
                             </div>
                             <div class="row">
@@ -78,7 +78,7 @@
                                     <small>Date</small>
                                 </div>
                                 <div class="col-6">
-                                    <small>: {{ booking.drop_off_date }}}</small>
+                                    <small>: {{ booking.drop_off_date }}</small>
                                 </div>
                             </div>
                             <div class="row">
@@ -86,7 +86,7 @@
                                     <small>Time</small>
                                 </div>
                                 <div class="col-6">
-                                    <small>: {{ request.session.drop_off_time_formatted }}</small>
+                                    <small>: {{ booking.drop_off_time_formatted }}</small>
                                 </div>
                             </div>
                             <hr>
@@ -95,9 +95,9 @@
                                     <small>Duration of rent</small>
                                 </div>
                                 <div class="col-6">
-                                    <small>{% if request.session.days %}: {{ request.session.days }} day{% if request.session.days > 1 %}s{% endif %}{% endif %}
-                                        {% if request.session.hours %} & {{ request.session.hours }} 
-                                        hour{% if request.session.hours > 1 %}s {% endif %}{% endif %}</small>
+                                    <small>{% if booking.days %}: {{ booking.days }} day{% if booking.days > 1 %}s{% endif %}{% endif %}
+                                        {% if booking.hours %} & {{ booking.hours }} 
+                                        hour{% if booking.hours > 1 %}s {% endif %}{% endif %}</small>
                                 </div>
                             </div>
                             <hr>

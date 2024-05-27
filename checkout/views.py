@@ -64,20 +64,22 @@ def checkout(request):
                     customer_details = PersonalDetails.objects.get(user=request.user)
                 except PersonalDetails.DoesNotExist:
                     customer_details = PersonalDetails(user=request.user)
-                
-                title_id = request.POST.get('title')
-                customer_details.title = get_object_or_404(Title, pk=title_id)
-                customer_details.name = request.POST.get('name')
-                customer_details.address_1 = request.POST.get('address_1')
-                customer_details.address_2 = request.POST.get('address_2')
-                customer_details.date_of_birth = request.POST.get('date_of_birth')
-                customer_details.mobile = request.POST.get('mobile')
-                customer_details.town = request.POST.get('town')
-                county_id = request.POST.get('county')
-                customer_details.county = get_object_or_404(County, pk=county_id) if county_id else None
-                customer_details.eir_code = request.POST.get('eir_code')
-                customer_details.country = request.POST.get('country')
-                customer_details.save()
+                if customer_details.title:
+                    pass
+                else:
+                    title_id = request.POST.get('title')
+                    customer_details.title = get_object_or_404(Title, pk=title_id)
+                    customer_details.name = request.POST.get('name')
+                    customer_details.address_1 = request.POST.get('address_1')
+                    customer_details.address_2 = request.POST.get('address_2')
+                    customer_details.date_of_birth = request.POST.get('date_of_birth')
+                    customer_details.mobile = request.POST.get('mobile')
+                    customer_details.town = request.POST.get('town')
+                    county_id = request.POST.get('county')
+                    customer_details.county = get_object_or_404(County, pk=county_id) if county_id else None
+                    customer_details.eir_code = request.POST.get('eir_code')
+                    customer_details.country = request.POST.get('country')
+                    customer_details.save()
 
                 booking.customer = customer_details
                 booking.car_id = car_id

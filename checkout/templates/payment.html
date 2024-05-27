@@ -10,16 +10,17 @@
 {% block content %}
 <div class="container-flex bg-black-gradient">
     <div class=" animation p-3">
-
+        <h3 class="text-warning text-center"><strong>Checkout</strong></h3>
+        <hr>
         <form method="post" action="{% url 'checkout' %}"  id="payment-form">
             {% csrf_token %}
             <div class="row">
                 <div class="col-12 col-md-6 p-4 animation1">
-                    <h3 class="text-warning"><strong>Payment Summary</strong></h3>
-                    <hr>
                     <div>
+                        <h5 class="text-info ps-3"><strong>Payment Summary</strong></h5>
                         <div class="col-12 p-3 my-2">
                             <div class="row">
+                                
                                 <div class="col-8">
                                     <p>
                                         <strong> Car Rent</strong><br>
@@ -90,21 +91,18 @@
                                 </div>
                                 <hr>
                                 {% endif %}
-                                <div class="col-8 text-info">
-                                    <h5>
+                                <div class="col-8 text-warning">
+                                    <p>
                                         <strong>Grand Total</strong><br>
-                                    </h5>
+                                    </p>
                                 </div>
-                                <div class="col-4 text-end text-info">
-                                    <h5>
-                                        <storng>
-                                            {{ request.session.grand_total }} €
-                                            </strong>
-                                    </h5>
+                                <div class="col-4 text-end text-warning">
+                                    <p>
+                                        <storng>{{ request.session.grand_total }} €</strong>
+                                    </p>
                                 </div>
                                 <hr>
-                                <h3 class="text-warning"><strong>Pick Up and Drop Off</strong></h3>
-                                <hr>
+                                <h5 class="text-info"><strong>Pick Up and Drop Off</strong></h5>
                                 <div class="col-12 p-3">
                                     <h5> Pick-Up</h5>
                                     <h6>{{ request.session.pick_up_city }}, {{ request.session.pick_up_county }}</h6>
@@ -123,8 +121,6 @@
                 </div>
 
                 <div class="col-12 col-md-6 p-4">
-                    <h3 class="text-warning"><strong>Checkout</strong></h3>
-                    <hr>
                     <fieldset>
                         <div class="row py-2">
                             <h5 class="text-info pb-3">Billing Details</h5>

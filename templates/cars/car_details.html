@@ -237,9 +237,9 @@
                             </p>
                             <p><small>Rental companies only allow you to get your keys at your allocated pick-up time,
                                     they'll usually hold your car for a limited time after you're due to pick it up -
-                                    then
-                                    it's likely to be passed to another customer.</small></p>
-                            <p class="text-info"><small>Your pick-up time is {{ request.session.pick_up_time_formatted }}</small></p>
+                                    then it's likely to be passed to another customer.</small></p>
+                            <p class="text-info"><small>Your pick-up time is {{ request.session.pick_up_time_formatted
+                                    }}</small></p>
                         </div>
 
                         <div class="p-3 rounded-2 border border-secondary my-2">
@@ -266,9 +266,141 @@
                                 Conditions</a></small>
                     </div>
                 </div>
+                <div class="col-12 d-xl-none p-3">
+                    <div class="rounded-1 bg-warning" style="border: solid 1px #ffc107">
+                        <div class="col-12 rounded-1 bg-black p-3">
+                            <h4>Payment Summary</h4>
+                        </div>
+                        <div class="col-12 p-3 my-2 text-black">
+                            <div class="row">
+                                <div class="col-8">
+                                    <p>
+                                        <strong> Car Rent</strong><br>
+                                        <small>For 1 day </small>
+                                    </p>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <storng>
+                                        {{ car.rent }} €
+                                        </strong>
+                                </div>
+                                <div class="col-8">
+                                    <p>
+                                        <strong>Total Rent</strong><br>
+                                        <small>{{ request.session.days }} day{% if request.session.days > 1 %}s{% endif %}
+                                            {% if request.session.hours %} & {{ request.session.hours }} hours{% endif %}</small>
+                                    </p>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <storng>
+                                        {{ request.session.total_rent }} €
+                                        </strong>
+                                </div>
+                                <hr>
+                                {% if request.session.booster_quantity or request.session.childseat_quantity or request.session.infant_quantity %}
+                                <h5>Extras</h5>
+                                {% endif %}
+                                {% if request.session.booster_quantity %}
+                                <div class="col-8">
+                                    <p>
+                                        <strong> Booster Seat</strong><br>
+                                        <small>Quantity {{ request.session.booster_quantity }} </small>
+                                    </p>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <storng>
+                                        {{ request.session.booster_total }} €
+                                        </strong>
+                                </div>
+                                <div class="col-12 d-flex justify-content-end">
+                                    <form class="form" action="{% url 'remove_extras' id=1 %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="row py-3 d-none">
+                                            {{ form.as_p }}
+                                        </div>
+                                        <button type="submit" class="remove-button">Remove</button>
+                                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                    </form>
+                                </div>
+                                <hr>
+                                {% endif %}
+        
+                                {% if request.session.childseat_quantity %}
+                                <div class="col-8">
+                                    <p>
+                                        <strong> Child Seat</strong><br>
+                                        <small>Quantity {{ request.session.childseat_quantity }} </small>
+                                    </p>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <storng>
+                                        {{ request.session.childseat_total }} €
+                                        </strong>
+                                </div>
+                                <div class="col-12 d-flex justify-content-end">
+                                    <form class="form" action="{% url 'remove_extras' id=2 %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="row py-3 d-none">
+                                            {{ form.as_p }}
+                                        </div>
+                                        <button type="submit" class="remove-button">Remove</button>
+                                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                    </form>
+                                </div>
+                                <hr>
+                                {% endif %}
+                                {% if request.session.infant_quantity %}
+                                <div class="col-8">
+                                    <p>
+                                        <strong> Infant Car Capsule</strong><br>
+                                        <small>Quantity {{ request.session.infant_quantity }} </small>
+                                    </p>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <storng>
+                                        {{ request.session.infant_total }} €
+                                        </strong>
+                                </div>
+                                <div class="col-12 d-flex justify-content-end">
+                                    <form class="form" action="{% url 'remove_extras' id=3 %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="row py-3 d-none">
+                                            {{ form.as_p }}
+                                        </div>
+                                        <button type="submit" class="remove-button">Remove</button>
+                                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                    </form>
+                                </div>
+                                <hr>
+                                {% endif %}
+                                <div class="col-8">
+                                    <h5>
+                                        <strong>Grand Total</strong><br>
+                                    </h5>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <h5>
+                                        <storng>
+                                            {{ request.session.grand_total }} €
+                                            </strong>
+                                    </h5>
+                                </div>
+                                <hr>
+                                <div class="col-12 text-end">
+                                    <small>
+                                        Price includes all taxes & fees
+                                    </small>
+                                </div>
+                                <div class="pt-2 d-flex justify-content-end">
+                                    <a href="{% url 'checkout' %}" class="button-2">Check Out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-12 col-xl-3 p-3 animation2">
+        <div class="col-12 col-xl-3 d-none d-xl-block p-3 animation2">
             <div class="rounded-1 bg-warning" style="border: solid 1px #ffc107">
                 <div class="col-12 rounded-1 bg-black p-3">
                     <h4>Payment Summary</h4>
