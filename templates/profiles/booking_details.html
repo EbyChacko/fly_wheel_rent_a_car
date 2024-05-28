@@ -434,17 +434,15 @@
             </div>
             
             <div class=" col-12 d-flex justify-content-end">
-                <a href="{% url 'delete_booking' id=booking.id %}" 
+                <a href="#" 
                 class="btn button-2 {% if disable_delete %}disabled{% endif %}" 
                 tabindex="{% if disable_delete %}-1{% endif %}" 
-                aria-disabled="{% if disable_delete %}true{% endif %}">
+                id="delete-button">
                 Delete Booking
                 </a>
             </div>
         </div>
-        
     </div>
-</div>
 </div>
 {% endblock %}
 
@@ -458,6 +456,19 @@
         animation.classList.add('fade-in');
         animation1.classList.add('fade-in');
         animation2.classList.add('fade-in');
+    });
+
+    $(document).ready(function() {
+        $('#website-name').text('FlyWheel Rent a car');
+
+        $('#delete-button').on('click', function(e) {
+            e.preventDefault();
+            const confirmDelete = confirm('Are you sure you want to delete this booking?');
+
+            if (confirmDelete) {
+                window.location.href = '{% url "delete_booking" id=booking.id %}';
+            }
+        });
     });
 
 </script>

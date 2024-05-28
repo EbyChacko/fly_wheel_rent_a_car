@@ -102,6 +102,7 @@ def checkout(request):
                 booking.days = request.session.get('days', 0)
                 booking.hours = request.session.get('hours', 0)
                 booking.pid = pid
+                booking.status = 'Booked'
                 booking.save()
                 
                 return redirect('checkout_success', booking_number=booking.booking_number)

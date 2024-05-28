@@ -106,6 +106,7 @@ class StripeWH_Handler:
                     days = request.session.get('days', 0),
                     hours = request.session.get('hours', 0),
                     stripe_pid=pid,
+                    status = 'Booked'
                 )
             except Exception as e:
                 if booking:

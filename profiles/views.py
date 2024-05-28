@@ -13,8 +13,6 @@ def profile(request):
 
     try:
         bookings = Booking.objects.filter(customer=customer_details).order_by('-booking_time') if customer_details else []
-        if not bookings:
-            messages.info(request, 'Sorry, no bookings yet for this profile.')
     except Exception as e:
         messages.error(request, f'Sorry, an error occurred: {e}')
 

@@ -7,22 +7,41 @@
     <div class="row">
         <div class="col-12 col-lg-4 col-xl-3 p-3 animation ">
             <div class="rounded-3 bg-dark">
-                <div class="col-12 p-3 pt-5 text-center rounded-1">
-                    <h5 class="text-warning text-uppercase">{{ request.user }}</h5>
+                <div class="col-12 p-2 pt-5 text-center">
+                    <h5 class="text-warning text-uppercase">{{ customer_details.title }}. {{ customer_details.name }}</h5>
                     <small>{{ customer_details.user.email }}</small><br>
                     <small>{{ customer_details.mobile }}</small><br>
                 </div>
+                <hr>
+                <div class="col-12 ps-3">
+                    <small>Address : </small><br>
+                    <small>{{ customer_details.address_1 }}</small><br>
+                    <small>{{ customer_details.address_2 }}</small><br>
+                    <small>{{ customer_details.town }}, {{ customer_details.county }}</small><br>
+                    <small>{{ customer_details.eir_code }}</small><br>
+                </div>
+                <hr>
+                <div class="col-12 ps-3">
+                    <small>Date of Birth :</small>
+                    <small>{{ customer_details.date_of_birth }}</small><br>
+                </div>
+                <hr>
+                <div class="col-12 pb-4 text-center">
+                    <a href="">Update Details</a>
+                </div>
+
             </div>
         </div>
         <div class="col-12 col-lg-8 col-xl-9 p-3 animation1">
 
-            <div class="row p-3 py-2 ">
+            <div class="row p-3 py-2">
                 <h3 class=""><strong>Your Bookings</strong></h3>
                 <hr>
                 {% if bookings %}
                 {% for booking in bookings %}
                 <div class="py-2">
-                    <div class="row p-3 rounded-3 border border-secondary booking-bg">
+                    <div class="row p-3 rounded-3 border border-secondary
+                    {% if booking.status == 'Booked' %} booking_bg_green {% else %} booking-bg {% endif %}">
                         <div class="row">
                             <div class="col-12 col-md-8">
                                 <p class="text-info">{{ booking.booking_number }}</p>
@@ -66,6 +85,14 @@
                 </div>
                 {% endfor %}
                 {% else %}
+                <div class="py-5 text-center">
+                    <h1 class="text-info"><i class="fa-solid fa-car-on"></i></h1>
+                    <p>Sorry, You don't have any booking yet</p>
+                    <small class="text-uppercase"> 
+                        <a href="{% if user.is_authenticated %}{% url 'search_cars' %}{% else %}{% url 'login_or_signup' %}{% endif %}">
+                            click to book now</a>
+                    </small>
+                </div>
                 {% endif %}
             </div>
 
