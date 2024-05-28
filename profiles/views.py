@@ -74,11 +74,7 @@ def cancel_booking(request, id):
         return redirect('profile')
 
     booking.status = 'Canceled'
-    if booking.stripe_pid == '':
-        booking.stripe_pid = 0
-    print(booking.status)
     booking.save()
-    booking = get_object_or_404(Booking, id=id)
-    print(booking.status)
+
     messages.success(request, 'Booking has been canceled successfully.')
     return redirect('profile')
