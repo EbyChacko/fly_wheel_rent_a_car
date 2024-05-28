@@ -11,7 +11,7 @@ body {
     font-weight: 300;
 }
 .bg-black-gradient {
-  background: linear-gradient(to bottom, black, #000b17);
+  background: linear-gradient(to bottom, black, #00162e);
 }
 
 /* set the shadow class */
@@ -41,7 +41,12 @@ body {
 }
 
 .dark-blue {
-  background-color: #1c0341; 
+  background-color: #2f0252; 
+}
+
+
+.booking-bg {
+  background-color: #17002579; 
 }
 
 .bg-transparent{
