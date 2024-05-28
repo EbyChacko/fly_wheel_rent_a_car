@@ -185,7 +185,7 @@
                                 <div class="col-9">
                                     <h6>CHILD SEAT (1 - 5 YEARS)</h6>
                                     <small>Child seats are normally used for children between (2-19 kg).</small><br>
-                                    <small class="text-warning pt-2">Quantity : {{ booking.booster_seat }}</small>
+                                    <small class="text-warning pt-2">Quantity : {{ booking.child_seat }}</small>
                                 </div>
                             </div>
                         </div>
@@ -200,7 +200,7 @@
                                 <div class="col-9">
                                     <h6>INFANT CAR CAPSULE (0 - 1 YEARS)</h6>
                                     <small>Infant Car Capsule (0 - 1 years)</small><br>
-                                    <small class="text-warning pt-2">Quantity : {{ booking.booster_seat }}</small>
+                                    <small class="text-warning pt-2">Quantity : {{ booking.infant_car_capsule }}</small>
                                 </div>
                             </div>
                         </div>
@@ -435,10 +435,10 @@
             
             <div class=" col-12 d-flex justify-content-end">
                 <a href="#" 
-                class="btn button-2 {% if disable_delete %}disabled{% endif %}" 
+                class="btn button-2" 
                 tabindex="{% if disable_delete %}-1{% endif %}" 
-                id="delete-button">
-                Delete Booking
+                id="cancel-button">
+                Cancel Booking
                 </a>
             </div>
         </div>
@@ -459,14 +459,12 @@
     });
 
     $(document).ready(function() {
-        $('#website-name').text('FlyWheel Rent a car');
-
-        $('#delete-button').on('click', function(e) {
+        $('#cancel-button').on('click', function(e) {
             e.preventDefault();
-            const confirmDelete = confirm('Are you sure you want to delete this booking?');
+            const confirmDelete = confirm('Are you sure you want to cancel this booking?');
 
             if (confirmDelete) {
-                window.location.href = '{% url "delete_booking" id=booking.id %}';
+                window.location.href = '{% url "cancel_booking" id=booking.id %}';
             }
         });
     });

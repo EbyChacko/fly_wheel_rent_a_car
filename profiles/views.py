@@ -64,3 +64,21 @@ def delete_booking(request, id):
     booking.delete()
     messages.success(request, "Booking deleted successfully.")
     return redirect('profile')
+
+
+def cancel_booking(request, id):
+    booking = get_object_or_404(Booking, id=id)
+
+    if booking.customer.user != request.user:
+        messages.error(request, 'You do not have permission to cancel this booking.')
+        return redirect('profile')
+
+    booking.status = 'Canceled'
+    if booking.stripe_pid == '':
+        booking.stripe_pid = 0
+    print(booking.status)
+    booking.save()
+    booking = get_object_or_404(Booking, id=id)
+    print(booking.status)
+    messages.success(request, 'Booking has been canceled successfully.')
+    return redirect('profile')

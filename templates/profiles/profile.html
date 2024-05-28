@@ -41,10 +41,14 @@
                 {% for booking in bookings %}
                 <div class="py-2">
                     <div class="row p-3 rounded-3 border border-secondary
-                    {% if booking.status == 'Booked' %} booking_bg_green {% else %} booking-bg {% endif %}">
+                    {% if booking.status == 'Booked' %} booking-bg-green 
+                    {% elif booking.status == 'Cancel' %} booking-bg-red
+                    {% elif booking.status == 'Finished' %} booking-bg-orange
+                    {% else %} booking-bg {% endif %}">
                         <div class="row">
                             <div class="col-12 col-md-8">
-                                <p class="text-info">{{ booking.booking_number }}</p>
+                                <small class="text-info">{{ booking.booking_number }}</small><br>
+                                <small>Status : {{ booking.status }}</small>
                             </div>
                             <div class="col-12 col-md-4 pb-2">
                                 <small>{{ booking.booking_time }}</small>
