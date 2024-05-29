@@ -15,10 +15,7 @@ import json
 @require_POST
 def cache_checkout_data(request):
     try:
-        # form = BookingForm(request.POST, request=request)
-        
         pid = request.POST.get('client_secret').split('_secret')[0]
-        print(request.POST)
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
             'title' : request.POST.get('title'),
@@ -101,7 +98,7 @@ def checkout(request):
                 booking.grand_total = request.session.get('grand_total', 0)
                 booking.days = request.session.get('days', 0)
                 booking.hours = request.session.get('hours', 0)
-                booking.pid = pid
+                booking.stripe_pid = pid
                 booking.status = 'Booked'
                 booking.save()
                 
