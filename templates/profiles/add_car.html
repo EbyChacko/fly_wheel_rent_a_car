@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container-flex">
+    <div class="container p-3">
+        <div class=" animation d-flex justify-content-center">
+            <div class="row">
+                <div class="col-12 text-start mx-auto py-4" style="max-width:800px">
+                    <h1>Add a New Car</h1>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        <div class="p-1">
+                            {{ form.image.label_tag }}<br>
+                            {{ form.image|add_class:"form-control" }}
+                            {{ form.image.errors }}
+                        </div>
+                        <div class="p-2">
+                            {{ form.make.label_tag }}<br>
+                            {{ form.make|add_class:"form-control" }}
+                            {{ form.make.errors }}
+                        </div>
+                        <div class="p-2">
+                            {{ form.model.label_tag }}<br>
+                            {{ form.model|add_class:"form-control" }}
+                            {{ form.model.errors }}
+                        </div>
+                        <div class="p-2">
+                            {{ form.category.label_tag }}<br>
+                            {{ form.category|add_class:"form-control" }}
+                            {{ form.category.errors }}
+                        </div>
+                        <div class="p-2">
+                            {{ form.year.label_tag }}<br>
+                            {{ form.year|add_class:"form-control" }}
+                            {{ form.year.errors }}
+                        </div>
+                        <div class="p-2">
+                            {{ form.rent.label_tag }}<br>
+                            {{ form.rent|add_class:"form-control" }}
+                            {{ form.rent.errors }}
+                        </div>
+                        <div class="p-2">
+                            {{ form.fuel.label_tag }}<br>
+                            {{ form.fuel|add_class:"form-control" }}
+                            {{ form.fuel.errors }}
+                        </div>
+                        <div class="p-2">
+                            {{ form.seats.label_tag }}<br>
+                            {{ form.seats|add_class:"form-control" }}
+                            {{ form.seats.errors }}
+                        </div>
+                        <div class="p-2">
+                            {{ form.doors.label_tag }}<br>
+                            {{ form.doors|add_class:"form-control" }}
+                            {{ form.doors.errors }}
+                        </div>
+                        <div class="p-2">
+                            {{ form.gear_box.label_tag }}<br>
+                            {{ form.gear_box|add_class:"form-control" }}
+                            {{ form.gear_box.errors }}
+                        </div>
+                        <div class="p-2">
+                            {{ form.large_bags.label_tag }}<br>
+                            {{ form.large_bags|add_class:"form-control" }}
+                            {{ form.large_bags.errors }}
+                        </div>
+                        <div class="p-2">
+                            {{ form.small_bags.label_tag }}<br>
+                            {{ form.small_bags|add_class:"form-control" }}
+                            {{ form.small_bags.errors }}
+                        </div>
+                        <div class="p-2">
+                            {{ form.air_condition.label_tag }}
+                            {{ form.air_condition }}
+                            {{ form.air_condition.errors }}
+                        </div>
+                        <div class="p-2">
+                            {{ form.abs.label_tag }}
+                            {{ form.abs }}
+                            {{ form.abs.errors }}
+                        </div>
+                        <div class="p-2">
+                            {{ form.rating.label_tag }}<br>
+                            {{ form.rating|add_class:"form-control" }}
+                            {{ form.rating.errors }}
+                        </div>
+                        <div class="p-2">
+                            {{ form.city.label_tag }}<br>
+                            {{ form.city|add_class:"form-control" }}
+                            {{ form.city.errors }}
+                        </div>
+                        <div class="p-2 d-flex justify-content-end">
+                            <button type="submit" class="btn button-2">Save Car</button>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    // fade in animation when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        var animation = document.querySelector('.animation');
+        var animation1 = document.querySelector('.animation1');
+        animation.classList.add('fade-in');
+        animation1.classList.add('fade-in');
+    });
+</script>
+{% endblock %}

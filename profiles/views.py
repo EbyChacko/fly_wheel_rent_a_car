@@ -3,6 +3,7 @@ from django.contrib import messages
 from cars.models import PersonalDetails
 from checkout.models import Booking
 from datetime import datetime, timedelta
+from .forms import CarForm
 
 
 def profile(request):
@@ -78,3 +79,14 @@ def cancel_booking(request, id):
 
     messages.success(request, 'Booking has been canceled successfully.')
     return redirect('profile')
+
+
+def add_car(request):
+    if request.method == 'POST':
+        form = CarForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = CarForm()
+    return render(request, 'profiles/add_car.html', {'form': form})
