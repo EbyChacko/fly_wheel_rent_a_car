@@ -5,7 +5,7 @@ from django.conf import settings
 from .forms import BookingForm
 from cars.models import Car, PersonalDetails, Title, County
 from django_countries import countries
-from.models import Booking
+from .models import Booking
 from django.http import QueryDict
 from django.contrib import messages
 import stripe
@@ -15,24 +15,23 @@ import json
 @require_POST
 def cache_checkout_data(request):
     try:
+        # form = BookingForm(request.POST, request=request)
+        
         pid = request.POST.get('client_secret').split('_secret')[0]
-        print(request)
-        print('cache checkout data')
-        print(request.POST.get('title'))
+        print(request.POST)
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
             'title' : request.POST.get('title'),
             'username': request.user.username,
             'mobile': request.POST.get('mobile'),
-            'licence_number':request.POST.get('licence_number'),
-            'licence_expiry':request.POST.get('licence_expiry'),
-            'personal_id':request.POST.get('personal_id'),
-            'id_number':request.POST.get('id_number'),
-            'country_issued':request.POST.get('country_issued'),
-            'id_expiry':request.POST.get('id_expiry'),
-            'title':request.POST.get('title'),
+            'licence_number': request.POST.get('licence_number'),
+            'licence_expiry': request.POST.get('licence_expiry'),
+            'personal_id': request.POST.get('personal_id'),
+            'id_number': request.POST.get('id_number'),
+            'country_issued': request.POST.get('country_issued'),
+            'id_expiry': request.POST.get('id_expiry'),
             'date_of_birth':request.POST.get('date_of_birth'),
-
+            'grand_total' : request.session.get('grand_total')
         })
         return HttpResponse(status=200)
     except Exception as e:
@@ -57,6 +56,7 @@ def checkout(request):
     if request.method == 'POST':
         form = BookingForm(request.POST, request=request)
         pid = request.POST.get('client_secret').split('_secret')[0]
+        print(pid)
         if form.is_valid():
             booking = form.save(commit=False)
             if request.user.is_authenticated:

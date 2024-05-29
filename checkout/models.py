@@ -45,8 +45,8 @@ class Booking(models.Model):
     grand_total = models.IntegerField()
     days = models.IntegerField()
     hours = models.IntegerField()
-    stripe_pid = models.CharField(max_length=254, null=False, blank=False, default='')
-    status = models.CharField(max_length=50, null=False, blank=False, default='')
+    stripe_pid = models.CharField(max_length=254, null=True, blank=True)
+    status = models.CharField(max_length=50, null=True, blank=True)
 
     def _Generate_booking_number(self):
         return uuid.uuid4().hex.upper()

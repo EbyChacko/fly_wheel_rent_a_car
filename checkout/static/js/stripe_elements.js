@@ -7,7 +7,6 @@
 */
 
 var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
-console.log(stripePublicKey);
 var clientSecret = $('#id_client_secret').text().slice(1, -1);
 var stripe = Stripe(stripePublicKey);
 var elements = stripe.elements();
@@ -52,12 +51,20 @@ form.addEventListener('submit', function(ev) {
     ev.preventDefault();
     card.update({ 'disabled': true});
     $('#submit-button').attr('disabled', true);
-
     // From using {% csrf_token %} in the form
     var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
     var postData = {
         'csrfmiddlewaretoken': csrfToken,
         'client_secret': clientSecret,
+        'title': $.trim(form.title.value),
+        'licence_number': $.trim(form.licence_number.value),
+        'mobile':$.trim(form.mobile.value),
+        'licence_expiry': $.trim(form.licence_expiry.value),
+        'personal_id': $.trim(form.personal_id.value),
+        'id_number': $.trim(form.id_number.value),
+        'country_issued': $.trim(form.country_issued.value),
+        'id_expiry': $.trim(form.id_expiry.value),
+        'date_of_birth': $.trim(form.date_of_birth.value),
     };
     var url = '/checkout/cache_checkout_data/';
 
