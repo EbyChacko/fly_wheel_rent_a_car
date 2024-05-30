@@ -433,13 +433,14 @@
                 </div>
             </div>
             
-            <div class=" col-12 d-flex justify-content-end">
-                <a href="#" 
-                class="btn button-2" 
-                tabindex="{% if disable_delete %}-1{% endif %}" 
-                id="cancel-button">
-                Cancel Booking
-                </a>
+            <div class="col-12 d-flex justify-content-end">
+                <form method="POST" action="{% url 'cancel_booking' booking.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="status" value="Canceled">
+                    <button class="btn button-2" id="cancel-button" type="submit">
+                        Cancel Booking
+                    </button>
+                </form>
             </div>
         </div>
     </div>

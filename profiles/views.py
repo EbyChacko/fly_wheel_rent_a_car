@@ -3,7 +3,7 @@ from django.contrib import messages
 from cars.models import PersonalDetails
 from checkout.models import Booking
 from datetime import datetime, timedelta
-from .forms import CarForm
+from .forms import CarForm, cancelBookingForm
 
 
 def profile(request):
@@ -74,10 +74,15 @@ def cancel_booking(request, id):
         messages.error(request, 'You do not have permission to cancel this booking.')
         return redirect('profile')
 
-    booking.status = 'Canceled'
-    booking.save()
+    if request.method == "POST":
+        form = cancelBookingForm(request.POST, instance=booking)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Booking has been canceled successfully.')
+            return redirect('profile')
+        else:
+            messages.error(request, 'Error canceling booking. Please try again.')
 
-    messages.success(request, 'Booking has been canceled successfully.')
     return redirect('profile')
 
 

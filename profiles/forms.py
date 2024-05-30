@@ -1,5 +1,6 @@
 from django import forms
 from cars.models import Car
+from checkout.models import Booking
 from django.core.validators import MinValueValidator, MaxValueValidator
 from datetime import datetime
 
@@ -28,3 +29,9 @@ class CarForm(forms.ModelForm):
         if rating < 0 or rating > 5:
             raise forms.ValidationError("Rating must be between 0 and 5.")
         return rating
+
+
+class cancelBookingForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ['status']

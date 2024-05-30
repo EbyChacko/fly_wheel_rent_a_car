@@ -51,10 +51,10 @@ class Booking(models.Model):
     def _Generate_booking_number(self):
         return uuid.uuid4().hex.upper()
 
-    def save(self, *arg, **kwargs):
+    def save(self, *args, **kwargs):
         if not self.booking_number:
             self.booking_number = self._Generate_booking_number()
             super(Booking, self).save(*args, **kwargs)
 
-    def __str__(self):
-        return f"Booking for {self.customer.user.username} - {self.car}, {self.booking_number}"
+    # def __str__(self):
+    #     return f"Booking for {self.customer.user.username} - {self.car}, {self.booking_number}"
