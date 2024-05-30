@@ -10,6 +10,7 @@ body {
     font-family: 'Comfortaa', sans-serif;
     font-weight: 300;
 }
+
 .bg-black-gradient {
   background: linear-gradient(to bottom, black, #00162e);
 }
@@ -41,7 +42,7 @@ body {
 }
 
 .dark-blue {
-  background-color: #2f0252; 
+  background-color: #1a1d4c; 
 }
 
 

@@ -106,7 +106,7 @@ class Car(models.Model):
     city = models.ForeignKey(Cities, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.make} {self.model}"
+        return f"{self.make} {self.model} - {self.city}"
 
 
 class PersonalDetails(models.Model):
@@ -124,7 +124,7 @@ class PersonalDetails(models.Model):
     country = CountryField()
 
     def __str__(self):
-        return f"{self.user.username}'s Personal Details"
+        return f"{self.user.username}"
     class Meta:
         verbose_name_plural = "Personal Details"
         ordering = ['name']

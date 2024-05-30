@@ -54,7 +54,7 @@ class Booking(models.Model):
     def save(self, *arg, **kwargs):
         if not self.booking_number:
             self.booking_number = self._Generate_booking_number()
-            super().save(*arg, **kwargs)
+            super(Booking, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"Booking for {self.customer.user.username} - {self.car}, {self.booking_number}"
