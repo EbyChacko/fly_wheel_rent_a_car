@@ -7,7 +7,7 @@ import uuid
 
 class Booking(models.Model):
     booking_number = models.CharField(max_length=32, null=False, editable=False)
-    customer = models.ForeignKey(PersonalDetails, on_delete=models.CASCADE)
+    customer = models.ForeignKey(PersonalDetails, on_delete=models.SET_NULL, null=True, blank=True)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     pick_up_city = models.CharField(max_length=250)
     pick_up_county = models.CharField(max_length=250)
