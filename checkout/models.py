@@ -57,4 +57,5 @@ class Booking(models.Model):
         super(Booking, self).save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.customer.user.username} - {self.car}, {self.booking_number}"
+        customer_username = self.customer.user.username if self.customer and self.customer.user else "Unknown Customer"
+        return f"{customer_username} - {self.car}, {self.booking_number}"

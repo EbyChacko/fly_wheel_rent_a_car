@@ -50,17 +50,12 @@ def checkout(request):
     form = BookingForm()
     car_id = request.session.get('car_id')
     car = get_object_or_404(Car, pk=car_id)
-    print('FORM 53: ', form)
 
     if request.method == 'POST':
         form = BookingForm(request.POST, request=request)
-        print('FORM 55: ', form)
         pid = request.POST.get('client_secret').split('_secret')[0]
-        print(pid)
         if form.is_valid():
-            print('FORM 58: ', form)
             booking = form.save(commit=False)
-            print('BOOKING 59: ', booking)
             if request.user.is_authenticated:
                 try:
                     customer_details = PersonalDetails.objects.get(user=request.user)
@@ -83,7 +78,6 @@ def checkout(request):
                     customer_details.country = request.POST.get('country')
                     customer_details.save()
 
-                print('BOOKING: ', booking)
                 booking.customer = customer_details
                 booking.car_id = car_id
                 booking.pick_up_city = request.session.get('pick_up_city')

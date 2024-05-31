@@ -113,7 +113,6 @@ class PersonalDetails(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     title = models.ForeignKey(Title, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
-    address_1 = models.CharField(max_length=250)
     date_of_birth = models.DateField()
     mobile = models.CharField(max_length=20)
     address_1 = models.CharField(max_length=250)

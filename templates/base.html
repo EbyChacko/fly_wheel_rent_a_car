@@ -100,7 +100,7 @@
                     </ul>
                     {% if user.is_authenticated %}
                     <div class="dropdown">
-                        <a href="#" class="text-uppercase me-4 mb-3 dropdown-toggle" type="button"
+                        <a href="#" class="text-uppercase me-4 mb-3 mt-3 dropdown-toggle" type="button"
                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user"></i> {{ user }}
                         </a>
@@ -114,16 +114,16 @@
                             {% endif %}
                         </div>
                     </div>
-                    <p class=" me-4 mb-3 nav-item nav-link d-none d-xl-block">|</p>
-                    <a class=" me-4 mb-3 nav-item nav-link text-warning" href="{% url 'account_logout' %}"
+                    <p class=" me-4 mb-3 mt-3 nav-item nav-link d-none d-xl-block">|</p>
+                    <a class=" me-4 mb-3 nav-item nav-link text-warning  mt-3 " href="{% url 'account_logout' %}"
                         role="button">
                         Log out</a>
                     {% else %}
-                    <a class=" me-4 mb-3 nav-item nav-link" href="{% url 'account_signup' %}" role="button"
+                    <a class=" me-4 mb-3 nav-item nav-link  mt-3 " href="{% url 'account_signup' %}" role="button"
                         id="sign_up">
                         Register</a>
-                    <p class=" me-4 mb-3 nav-item nav-link d-none d-xl-block">|</p>
-                    <a class=" mb-3 nav-item nav-link text-warning" href="{% url 'account_login' %}" role="button"
+                    <p class=" me-4 mb-3 nav-item nav-link d-none d-xl-block  mt-3 ">|</p>
+                    <a class=" mb-3 nav-item nav-link text-warning  mt-3 " href="{% url 'account_login' %}" role="button"
                         id="login">Login</a>
                     {% endif %}
                 </div>
