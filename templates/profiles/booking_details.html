@@ -433,14 +433,9 @@
                 </div>
             </div>
             
-            <div class="col-12 d-flex justify-content-end">
-                <form method="POST" action="{% url 'cancel_booking' booking.id %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="status" value="Canceled">
-                    <button class="btn button-2" id="cancel-button" type="submit">
-                        Cancel Booking
-                    </button>
-                </form>
+            <div class="col-12 d-flex justify-content-end align-items-center">
+                <a href="#" id="delete-button" class="px-2">Delete Booking | </a>
+                <a href="#" class="btn button-2" id="cancel-button">Cancel Booking</a>
             </div>
         </div>
     </div>
@@ -466,6 +461,14 @@
 
             if (confirmDelete) {
                 window.location.href = '{% url "cancel_booking" id=booking.id %}';
+            }
+        });
+        $('#delete-button').on('click', function(e) {
+            e.preventDefault();
+            const confirmDelete = confirm('Are you sure you want to permenently delete this booking?');
+
+            if (confirmDelete) {
+                window.location.href = '{% url "delete_booking" id=booking.id %}';
             }
         });
     });

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container-fluid ">
+    <div class="row py-3 mx-auto animation1" style="max-width:900px">
+        <div class="col-12 py-3 px-2  d-flex justify-content-end">
+            <div class="bg-dark rounded-4 p-3 text-center filter-trigger" style="--bs-bg-opacity: .7; max-width:250px">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleDiv"
+                    aria-controls="toggleDiv" aria-expanded="false" aria-label="Toggle navigation">
+                    <span><i class="fa-solid fa-city"></i> </span>Add City 
+                </button>
+            </div>
+        </div>
+        <div>
+            <div class="collapse navbar-collapse" id="toggleDiv">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    <div class="row">
+                        <div class="p-2 col-12 col-md-6">
+                            {{ form.city.label_tag }}<br>
+                            {{ form.city|add_class:"form-control" }}
+                            {{ form.city.errors }}
+                        </div>
+                        <div class="p-2 col-12 col-md-6">
+                            {{ form.county.label_tag }}<br>
+                            {{ form.county|add_class:"form-control" }}
+                            {{ form.county.errors }}
+                        </div>
+                    </div>
+                    <div class="p-2 d-flex justify-content-end">
+                        <button type="submit" class="btn button-2">Save City</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row animation d-flex justify-content-center align-item-center">
+        <div class="col-12 p-4 pt-5" style="max-width:900px">
+            {% if cities %}
+            <h3 class="pb-3 text-info">City list</h3>
+            <hr>
+            {% for city in cities %}
+            <div class="row py-1">
+                <div class="col-6 col-lg-9 py-2">
+                    <small>{{ city.city }}, {{ city.county }}</small>
+                </div>
+                <div class="col-6 col-lg-3 d-flex justify-content-end  py-2">
+                    <a href="{% url 'confirm_delete_city' city.id %}" class="delete_button"><span><i class="fa-solid fa-xmark"></i></span>Delete</a>
+                </div>
+            </div>
+            <hr>
+            {% endfor %}
+            {% else %}
+            <div>
+                <P>No city added yet</P>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    // fade in animation when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        var animation = document.querySelector('.animation');
+        var animation1 = document.querySelector('.animation1');
+        animation.classList.add('fade-in');
+        animation1.classList.add('fade-in');
+    });
+</script>
+{% endblock %}

@@ -108,7 +108,7 @@
                             data-bs-theme="dark">
                             {% if request.user.is_authenticated %}
                             {% if request.user.is_superuser %}
-                            <a href="{% url 'add_car' %}" class="dropdown-item">Product Management</a>
+                            <a href="{% url 'car_and_city' %}" class="dropdown-item">Data Management</a>
                             {% endif %}
                             <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
                             {% endif %}

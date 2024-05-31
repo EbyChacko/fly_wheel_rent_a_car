@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-from cars.models import PersonalDetails
+from cars.models import PersonalDetails, Car, Cities
 from checkout.models import Booking
 from datetime import datetime, timedelta
-from .forms import CarForm, cancelBookingForm
+from .forms import CarForm, CityForm
 
 
 def profile(request):
@@ -13,7 +13,7 @@ def profile(request):
         customer_details = None
 
     try:
-        bookings = Booking.objects.filter(customer=customer_details).order_by('-booking_time') if customer_details else []
+       bookings = Booking.objects.filter(customer=customer_details).exclude(status="Deleted").order_by('-booking_time') if customer_details else []
     except Exception as e:
         messages.error(request, f'Sorry, an error occurred: {e}')
 
@@ -49,21 +49,15 @@ def booking_details(request, id):
 
 def delete_booking(request, id):
     booking = get_object_or_404(Booking, id=id)
-    
-    if request.user != booking.customer.user:
-        messages.error(request, "You are not authorized to delete this booking.")
+
+    if booking.customer.user != request.user:
+        messages.error(request, 'You do not have permission to delete this booking.')
         return redirect('profile')
 
-    now = datetime.now()
-    pick_up_datetime = datetime.combine(booking.pick_up_date, booking.pick_up_time)
-    time_difference = pick_up_datetime - now
-    disable_delete = time_difference < timedelta(hours=48)
-    if disable_delete:
-        messages.error(request, "Cannot delete the booking within 48 hours of the pickup time.")
-        return redirect('profile')
+    booking.status = 'Deleted'
+    booking.save()
 
-    booking.delete()
-    messages.success(request, "Booking deleted successfully.")
+    messages.success(request, 'Booking has been deleted successfully.')
     return redirect('profile')
 
 
@@ -74,16 +68,15 @@ def cancel_booking(request, id):
         messages.error(request, 'You do not have permission to cancel this booking.')
         return redirect('profile')
 
-    if request.method == "POST":
-        form = cancelBookingForm(request.POST, instance=booking)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Booking has been canceled successfully.')
-            return redirect('profile')
-        else:
-            messages.error(request, 'Error canceling booking. Please try again.')
+    booking.status = 'Canceled'
+    booking.save()
 
+    messages.success(request, 'Booking has been canceled successfully.')
     return redirect('profile')
+
+
+def car_and_city(request):
+    return render(request, 'profiles/car_and_city.html')
 
 
 def add_car(request):
@@ -91,7 +84,58 @@ def add_car(request):
         form = CarForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('profile')
+            return redirect('add_car')
     else:
         form = CarForm()
-    return render(request, 'profiles/add_car.html', {'form': form})
+    cars = Car.objects.all()
+    context={
+        'form': form,
+        'cars': cars,
+    }
+    return render(request, 'profiles/add_car.html',  context)
+
+
+def confirm_delete_car(request, id):
+    car = get_object_or_404(Car, id=id)
+    context = {
+        'car': car,
+    }
+    return render(request, 'profiles/confirm_delete_car.html', context)
+
+
+def delete_car(request, id):
+    car = get_object_or_404(Car, id=id)
+    car.delete()
+    messages.success(request, 'Car details has been removed successfully.')
+    return redirect('add_car')
+
+
+def add_city(request):
+    if request.method == 'POST':
+        form = CityForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('add_city')
+    else:
+        form = CityForm()
+    cities = Cities.objects.all()
+    context={
+        'form': form,
+        'cities': cities,
+    }
+    return render(request, 'profiles/add_city.html',  context)
+
+
+def confirm_delete_city(request, id):
+    city = get_object_or_404(Cities, id=id)
+    context = {
+        'city': city,
+    }
+    return render(request, 'profiles/confirm_delete_city.html', context)
+
+
+def delete_city(request, id):
+    city = get_object_or_404(Cities, id=id)
+    city.delete()
+    messages.success(request, 'City details has been removed successfully.')
+    return redirect('add_city')

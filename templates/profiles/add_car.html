@@ -4,104 +4,153 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<div class="container-flex">
-    <div class="container p-3">
-        <div class=" animation d-flex justify-content-center">
-            <div class="row">
-                <div class="col-12 text-start mx-auto py-4" style="max-width:800px">
-                    <h1>Add a New Car</h1>
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{ form.non_field_errors }}
-                        <div class="p-2">
+<div class="container-fluid ">
+    <div class="row py-3 my-3 mx-auto animation1" style="max-width:900px">
+        <div class="col-12 py-3 px-2 my-2  d-flex justify-content-end">
+            <div class="bg-dark rounded-4 p-3 text-center filter-trigger" style="--bs-bg-opacity: .7; max-width:250px">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleDiv"
+                    aria-controls="toggleDiv" aria-expanded="false" aria-label="Toggle navigation">
+                    <span><i class="fa-solid fa-car"></i> </span>Add New Car 
+                </button>
+            </div>
+        </div>
+        <div>
+            <div class="collapse navbar-collapse" id="toggleDiv">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    <div class="row">
+                        <div class="p-2 col-12 col-md-6">
                             {{ form.image.label_tag }}<br>
                             {{ form.image|add_class:"form-control" }}
                             {{ form.image.errors }}
                         </div>
-                        <div class="p-2">
+                        <div class="p-2 col-12 col-md-6">
                             {{ form.make.label_tag }}<br>
                             {{ form.make|add_class:"form-control" }}
                             {{ form.make.errors }}
                         </div>
-                        <div class="p-2">
-                            {{ form.model.label_tag }}<br>
-                            {{ form.model|add_class:"form-control" }}
-                            {{ form.model.errors }}
-                        </div>
-                        <div class="p-2">
-                            {{ form.category.label_tag }}<br>
-                            {{ form.category|add_class:"form-control" }}
-                            {{ form.category.errors }}
-                        </div>
-                        <div class="p-2">
-                            {{ form.year.label_tag }}<br>
-                            {{ form.year|add_class:"form-control" }}
-                            {{ form.year.errors }}
-                        </div>
-                        <div class="p-2">
-                            {{ form.rent.label_tag }}<br>
-                            {{ form.rent|add_class:"form-control" }}
-                            {{ form.rent.errors }}
-                        </div>
-                        <div class="p-2">
-                            {{ form.fuel.label_tag }}<br>
-                            {{ form.fuel|add_class:"form-control" }}
-                            {{ form.fuel.errors }}
-                        </div>
-                        <div class="p-2">
-                            {{ form.seats.label_tag }}<br>
-                            {{ form.seats|add_class:"form-control" }}
-                            {{ form.seats.errors }}
-                        </div>
-                        <div class="p-2">
-                            {{ form.doors.label_tag }}<br>
-                            {{ form.doors|add_class:"form-control" }}
-                            {{ form.doors.errors }}
-                        </div>
-                        <div class="p-2">
-                            {{ form.gear_box.label_tag }}<br>
-                            {{ form.gear_box|add_class:"form-control" }}
-                            {{ form.gear_box.errors }}
-                        </div>
-                        <div class="p-2">
-                            {{ form.large_bags.label_tag }}<br>
-                            {{ form.large_bags|add_class:"form-control" }}
-                            {{ form.large_bags.errors }}
-                        </div>
-                        <div class="p-2">
-                            {{ form.small_bags.label_tag }}<br>
-                            {{ form.small_bags|add_class:"form-control" }}
-                            {{ form.small_bags.errors }}
-                        </div>
-                        <div class="p-2">
+                    </div>
+                    <div class="row">
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.model.label_tag }}<br>
+                        {{ form.model|add_class:"form-control" }}
+                        {{ form.model.errors }}
+                    </div>
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.category.label_tag }}<br>
+                        {{ form.category|add_class:"form-control" }}
+                        {{ form.category.errors }}
+                    </div>
+                </div>
+                    <div class="row">
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.year.label_tag }}<br>
+                        {{ form.year|add_class:"form-control" }}
+                        {{ form.year.errors }}
+                    </div>
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.rent.label_tag }}<br>
+                        {{ form.rent|add_class:"form-control" }}
+                        {{ form.rent.errors }}
+                    </div>
+                </div>
+                    <div class="row">
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.fuel.label_tag }}<br>
+                        {{ form.fuel|add_class:"form-control" }}
+                        {{ form.fuel.errors }}
+                    </div>
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.seats.label_tag }}<br>
+                        {{ form.seats|add_class:"form-control" }}
+                        {{ form.seats.errors }}
+                    </div>
+                </div>
+                    <div class="row">
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.doors.label_tag }}<br>
+                        {{ form.doors|add_class:"form-control" }}
+                        {{ form.doors.errors }}
+                    </div>
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.gear_box.label_tag }}<br>
+                        {{ form.gear_box|add_class:"form-control" }}
+                        {{ form.gear_box.errors }}
+                    </div>
+                </div>
+                    <div class="row">
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.large_bags.label_tag }}<br>
+                        {{ form.large_bags|add_class:"form-control" }}
+                        {{ form.large_bags.errors }}
+                    </div>
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.small_bags.label_tag }}<br>
+                        {{ form.small_bags|add_class:"form-control" }}
+                        {{ form.small_bags.errors }}
+                    </div>
+                </div>
+                    
+                    <div class="row">
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.rating.label_tag }}<br>
+                        {{ form.rating|add_class:"form-control" }}
+                        {{ form.rating.errors }}
+                    </div>
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.city.label_tag }}<br>
+                        {{ form.city|add_class:"form-control" }}
+                        {{ form.city.errors }}
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="p-2 col-12 col-md-6">
                             {{ form.air_condition.label_tag }}
                             {{ form.air_condition }}
                             {{ form.air_condition.errors }}
                         </div>
-                        <div class="p-2">
+                        <div class="p-2 col-12 col-md-6">
                             {{ form.abs.label_tag }}
                             {{ form.abs }}
                             {{ form.abs.errors }}
                         </div>
-                        <div class="p-2">
-                            {{ form.rating.label_tag }}<br>
-                            {{ form.rating|add_class:"form-control" }}
-                            {{ form.rating.errors }}
-                        </div>
-                        <div class="p-2">
-                            {{ form.city.label_tag }}<br>
-                            {{ form.city|add_class:"form-control" }}
-                            {{ form.city.errors }}
-                        </div>
-                        <div class="p-2 d-flex justify-content-end">
-                            <button type="submit" class="btn button-2">Save Car</button>
-                        </div>
-                        
-                    </form>
-                </div>
+                    </div>
+                    <div class="p-2 d-flex justify-content-end">
+                        <button type="submit" class="btn button-2">Save Car</button>
+                    </div>
+                    
+                </form>
             </div>
         </div>
     </div>
+    <div class="row animation d-flex justify-content-center align-item-center">
+        <div class="col-12 p-4 pt-5" style="max-width:900px">
+            {% if cars %}
+            <h3 class="pb-3 text-info">Car list</h3>
+            <hr>
+            {% for car in cars %}
+            <div class="row py-1">
+                <div class="col-6 col-lg-5 py-2">
+                    <small>{{ car.make }} {{ car.model }}</small>
+                </div>
+                <div class="col-6 col-lg-4 py-2">
+                    <small>{{ car.city }}</small>
+                </div>
+                <div class="col-12 col-lg-3 d-flex justify-content-end  py-2">
+                    <a href="{% url 'confirm_delete_car' car.id %}" class="delete_button"><span><i class="fa-solid fa-xmark"></i></span>Delete</a>
+                </div>
+            </div>
+            <hr>
+            {% endfor %}
+            {% else %}
+            <div>
+                <P>No cars in the list</P>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}

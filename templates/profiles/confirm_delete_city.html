@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container-fluid ">
+    <div class="row animation d-flex align-item-center">
+        <div class="col-12 col-xl-6 d-flex align-item-center justify-content-center">
+            <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712853252/Royal%20Drive/Uploads/search_page_image_nb157w.webp"
+                alt="Fly Wheel - car image" style="width:100%; max-width:600px;">
+        </div>
+        <div class="col-12 col-xl-6 p-3 py-5 my-3 d-flex justify-content-center mx-auto">
+            <div class="col-12">
+                <div class="row ">
+                    <div class="col-12 pb-3">
+                        <h3 class="text-white">Remove City ?</h3>
+                        <small>Are you sure, you want to remove the city from the list?</small>
+                    </div>
+                    <hr>
+                    <div class="col-12">
+                        <div style="max-width:250px">
+                                <a class="px-3" href="{% url 'add_city' %}">No, go back</a><small> | </small>
+                                <a  class="delete_button px-3" href="{% url 'delete_city' city.id %}" >Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    // fade in animation when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        var animation = document.querySelector('.animation');
+        var animation1 = document.querySelector('.animation1');
+        animation.classList.add('fade-in');
+        animation1.classList.add('fade-in');
+    });
+</script>
+{% endblock %}

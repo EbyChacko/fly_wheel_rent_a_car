@@ -69,13 +69,17 @@ body {
 
 
 a{
-  color: inherit;
+  color:#ffffff;
   text-decoration: none;
 }
 
 a:hover{
   color:#ffe600 !important;
   cursor: pointer;
+}
+
+a.delete_button{
+  color:red;
 }
 
 

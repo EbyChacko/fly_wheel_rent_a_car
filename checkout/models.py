@@ -1,6 +1,6 @@
 from django.db import models
 
-from cars.models import PersonalDetails, Car, Title, County, Cities
+from cars.models import PersonalDetails, Car, Title, County
 from cars.models import PersonalId
 from django_countries.fields import CountryField
 import uuid
@@ -48,13 +48,13 @@ class Booking(models.Model):
     stripe_pid = models.CharField(max_length=254, null=True, blank=True)
     status = models.CharField(max_length=50, null=True, blank=True)
 
-    def _Generate_booking_number(self):
+    def _generate_booking_number(self):
         return uuid.uuid4().hex.upper()
 
     def save(self, *args, **kwargs):
         if not self.booking_number:
-            self.booking_number = self._Generate_booking_number()
-            super(Booking, self).save(*args, **kwargs)
+            self.booking_number = self._generate_booking_number()
+        super(Booking, self).save(*args, **kwargs)
 
-    # def __str__(self):
-    #     return f"Booking for {self.customer.user.username} - {self.car}, {self.booking_number}"
+    def __str__(self):
+        return f"{self.customer.user.username} - {self.car}, {self.booking_number}"
