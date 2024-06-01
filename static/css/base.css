@@ -82,6 +82,14 @@ a.delete_button{
   color:red;
 }
 
+.text-white a {
+  color:#FFFFFF;
+}
+
+a.text-purple {
+  color: #c409ce !important;
+}
+
 
 span{
   margin-right: 10px;

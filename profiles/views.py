@@ -3,7 +3,8 @@ from django.contrib import messages
 from cars.models import PersonalDetails, Car, Cities
 from checkout.models import Booking
 from datetime import datetime, timedelta
-from .forms import CarForm, CityForm
+from .forms import CarForm, CityForm, PersonalDetailsForm
+from django.contrib.auth.decorators import login_required
 
 
 def profile(request):
@@ -139,3 +140,21 @@ def delete_city(request, id):
     city.delete()
     messages.success(request, 'City details has been removed successfully.')
     return redirect('add_city')
+
+@login_required
+def update_profile(request):
+    try:
+        personal_details = PersonalDetails.objects.get(user=request.user)
+    except PersonalDetails.DoesNotExist:
+        personal_details = PersonalDetails(user=request.user)
+
+    if request.method == 'POST':
+        form = PersonalDetailsForm(request.POST, instance=personal_details)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Personal details updated successfully.')
+            return redirect('profile')
+    else:
+        form = PersonalDetailsForm(instance=personal_details)
+
+    return render(request, 'profiles/update_profile.html', {'form': form})

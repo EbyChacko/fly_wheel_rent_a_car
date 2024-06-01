@@ -28,9 +28,15 @@
                                 <h5 class="text-warning">{{ car.make }} {{ car.model }}</h5>
                                 <small>Year: {{ car.year }}</small>
                             </div>
-                            <div class="col-12 py-4">
-                                <a class="button-2" href="{% url 'home' %}">Return to home</a>
+                            <div class="row">
+                                <div class="col-6 py-4">
+                                    <a class="button-2" href="{% url 'home' %}">Return to home</a>
+                                </div>
+                                <div class="col-6 py-4">
+                                    <a class="button-2" href="{% url 'profile' %}">Visit Profile</a>
+                                </div>
                             </div>
+                            
                         </div>
                     </div>
                     <div class="col-12 mx-auto pt-4">

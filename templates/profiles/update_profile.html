@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container-fluid ">
+    <div class="row py-3 my-3 mx-auto animation" style="max-width:900px">
+        <div>
+            <h3>Update your personal details</h3>
+            <hr>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="row">
+                    <div class="p-2 col-3">
+                        {{ form.title.label_tag }}<br>
+                        {{ form.title|add_class:"form-control" }}
+                        {{ form.title.errors }}
+                    </div>
+                    <div class="p-2 col-9">
+                        {{ form.name.label_tag }}<br>
+                        {{ form.name|add_class:"form-control" }}
+                        {{ form.name.errors }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.date_of_birth.label_tag }}<br>
+                        {{ form.date_of_birth|add_class:"form-control" }}
+                        {{ form.date_of_birth.errors }}
+                    </div>
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.mobile.label_tag }}<br>
+                        {{ form.mobile|add_class:"form-control" }}
+                        {{ form.mobile.errors }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.address_1.label_tag }}<br>
+                        {{ form.address_1|add_class:"form-control" }}
+                        {{ form.address_1.errors }}
+                    </div>
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.address_2.label_tag }}<br>
+                        {{ form.address_2|add_class:"form-control" }}
+                        {{ form.address_2.errors }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.town.label_tag }}<br>
+                        {{ form.town|add_class:"form-control" }}
+                        {{ form.town.errors }}
+                    </div>
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.county.label_tag }}<br>
+                        {{ form.county|add_class:"form-control" }}
+                        {{ form.county.errors }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.country.label_tag }}<br>
+                        {{ form.country|add_class:"form-control" }}
+                        {{ form.country.errors }}
+                    </div>
+                    <div class="p-2 col-12 col-md-6">
+                        {{ form.eir_code.label_tag }}<br>
+                        {{ form.eir_code|add_class:"form-control" }}
+                        {{ form.eir_code.errors }}
+                    </div>
+                </div>
+                <div class="p-2 d-flex justify-content-end">
+                    <button type="submit" class="btn button-2">Update</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    // fade in animation when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        var animation = document.querySelector('.animation');
+        var animation1 = document.querySelector('.animation1');
+        animation.classList.add('fade-in');
+        animation1.classList.add('fade-in');
+    });
+</script>
+{% endblock %}

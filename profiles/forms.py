@@ -1,8 +1,10 @@
 from django import forms
-from cars.models import Car, Categories, Fuel, GearBox, Seats, Cities
+from cars.models import Car, Categories, Fuel, GearBox, Seats, Cities, PersonalDetails
 from django.core.validators import MinValueValidator, MaxValueValidator
 from datetime import datetime
+from django.utils import timezone
 from django.forms import ModelChoiceField
+from django.forms import widgets
 
 class CarForm(forms.ModelForm):
     category = ModelChoiceField(
@@ -87,3 +89,39 @@ class CityForm(forms.ModelForm):
         if not county:
             raise ValidationError('County name cannot be empty')
         return county
+
+
+class PersonalDetailsForm(forms.ModelForm):
+    class Meta:
+        model = PersonalDetails
+        fields = [
+            'title', 'name', 'date_of_birth', 'mobile', 
+            'address_1', 'address_2', 'town', 
+            'county', 'eir_code', 'country'
+        ]
+        widgets = {
+            'title': forms.Select(attrs={'placeholder': 'Title', 'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'placeholder': 'Full Name', 'class': 'form-control'}),
+            'date_of_birth': forms.DateInput(attrs={'placeholder': 'Date of Birth (YYYY-MM-DD)', 'class': 'form-control', 'type': 'date'}),
+            'mobile': forms.TextInput(attrs={'placeholder': 'Mobile Number', 'class': 'form-control'}),
+            'address_1': forms.TextInput(attrs={'placeholder': 'Address Line 1', 'class': 'form-control'}),
+            'address_2': forms.TextInput(attrs={'placeholder': 'Address Line 2', 'class': 'form-control'}),
+            'town': forms.TextInput(attrs={'placeholder': 'Town/City', 'class': 'form-control'}),
+            'county': forms.Select(attrs={'placeholder': 'County', 'class': 'form-control'}),
+            'eir_code': forms.TextInput(attrs={'placeholder': 'Eir Code', 'class': 'form-control'}),
+            'country': widgets.Select(attrs={'class': 'form-control'}),
+        }
+
+    def clean_mobile(self):
+        mobile = self.cleaned_data.get('mobile')
+        if not mobile.isdigit():
+            raise forms.ValidationError("Enter a valid mobile number.")
+        if len(mobile) < 10 or len(mobile) > 15:
+            raise forms.ValidationError("Mobile number must be between 10 to 15 digits.")
+        return mobile
+
+    def clean_date_of_birth(self):
+        date_of_birth = self.cleaned_data.get('date_of_birth')
+        if date_of_birth >= timezone.now().date():
+            raise forms.ValidationError("Date of birth must be in the past.")
+        return date_of_birth

@@ -15,4 +15,5 @@ urlpatterns = [
     path('add_city/', views.add_city, name='add_city'),
     path('delete_city/<int:id>/', views.delete_city, name='delete_city'),
     path('confirm_delete_city/<int:id>/', views.confirm_delete_city, name='confirm_delete_city'),
+    path('update_profile/', views.update_profile, name='update_profile'),
 ]
