@@ -1,5 +1,5 @@
 from django import forms
-from .models import CustomerMessage
+from .models import CustomerMessage, MailChimpMails
 from django.forms import widgets
 import re
 
@@ -21,6 +21,21 @@ class CustomerMessageForm(forms.ModelForm):
         if not mobile.isdigit() or len(mobile) != 10:
             raise forms.ValidationError("Please enter a valid 10-digit mobile number.")
         return mobile
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if not re.match(r'^[\w\.-]+@[\w\.-]+\.\w+$', email):
+            raise forms.ValidationError("Please enter a valid email address.")
+        return email
+
+
+class MailChimpMailForm(forms.ModelForm):
+    class Meta:
+        model = MailChimpMails
+        fields = ['email']
+        widgets = {
+            'email': widgets.TextInput(attrs={'class': 'form-control text-start', 'placeholder': 'Your e-mail address'}),
+        }
 
     def clean_email(self):
         email = self.cleaned_data.get('email')

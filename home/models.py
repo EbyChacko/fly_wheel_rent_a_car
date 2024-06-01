@@ -10,3 +10,10 @@ class CustomerMessage(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class MailChimpMails(models.Model):
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.email
