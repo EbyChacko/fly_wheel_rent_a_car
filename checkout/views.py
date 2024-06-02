@@ -35,8 +35,6 @@ def cache_checkout_data(request):
         messages.error(request, 'Sorry, your payment cannot be processed right now. Please try again later.')
         return HttpResponse(content=e, status=400)
 
-
-
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -59,11 +57,23 @@ def checkout(request):
             if request.user.is_authenticated:
                 try:
                     customer_details = PersonalDetails.objects.get(user=request.user)
+                    has_data = any([
+                        customer_details.title,
+                        customer_details.name,
+                        customer_details.address_1,
+                        customer_details.address_2,
+                        customer_details.date_of_birth,
+                        customer_details.mobile,
+                        customer_details.town,
+                        customer_details.county,
+                        customer_details.eir_code,
+                        customer_details.country,
+                    ])
                 except PersonalDetails.DoesNotExist:
                     customer_details = PersonalDetails(user=request.user)
-                if customer_details.title:
-                    pass
-                else:
+                    has_data = False
+
+                if not has_data:
                     title_id = request.POST.get('title')
                     customer_details.title = get_object_or_404(Title, pk=title_id)
                     customer_details.name = request.POST.get('name')
@@ -101,7 +111,7 @@ def checkout(request):
                 booking.stripe_pid = pid
                 booking.status = 'Booked'
                 booking.save()
-                
+
                 return redirect('checkout_success', booking_number=booking.booking_number)
         else:
             messages.error(request, 'Fill out the form with valid values')
@@ -110,7 +120,7 @@ def checkout(request):
             try:
                 customer_details = PersonalDetails.objects.get(user=request.user)
                 form.initial = {
-                    'title': customer_details.title,
+                    'title': customer_details.title.id if customer_details.title else None,
                     'name': customer_details.name,
                     'email': customer_details.user.email,
                     'mobile': customer_details.mobile,
@@ -118,7 +128,7 @@ def checkout(request):
                     'address_1': customer_details.address_1,
                     'address_2': customer_details.address_2,
                     'town': customer_details.town,
-                    'county': customer_details.county,
+                    'county': customer_details.county.id if customer_details.county else None,
                     'eir_code': customer_details.eir_code,
                     'country': customer_details.country,
                 }
