@@ -1,0 +1,22 @@
+
+{% load i18n %}
+{% autoescape off %}
+{% blocktrans %}Hello {{ booking.name }},{% endblocktrans %}
+
+{% blocktrans %}Thank you for your booking with FlyWheel Rent a Car!{% endblocktrans %}
+
+{% blocktrans %}Here are your booking details:{% endblocktrans %}
+
+{% blocktrans %}Booking Number: {{ booking.booking_number }}{% endblocktrans %}
+{% blocktrans %}Car: {{ booking.car.make }} {{ booking.car.model }}{% endblocktrans %}
+{% blocktrans %}Category: {{ booking.car.category }}{% endblocktrans %}
+{% blocktrans %}Pick-up Location: {{ booking.pick_up_city }}, {{ booking.pick_up_county }}{% endblocktrans %}
+{% blocktrans %}Drop-off Location: {{ booking.drop_off_city }}, {{ booking.drop_off_county }}{% endblocktrans %}
+{% blocktrans %}Pick-up Date and Time: {{ booking.pick_up_date }} at {{ booking.pick_up_time }}{% endblocktrans %}
+{% blocktrans %}Drop-off Date and Time: {{ booking.drop_off_date }} at {{ booking.drop_off_time }}{% endblocktrans %}
+
+{% blocktrans %}Thank you for choosing FlyWheel Rent a Car!{% endblocktrans %}
+
+{% blocktrans %}Best regards,{% endblocktrans %}
+{% blocktrans %}FlyWheel Rent a Car Team{% endblocktrans %}
+{% endautoescape %}

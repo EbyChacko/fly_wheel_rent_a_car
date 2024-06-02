@@ -13,7 +13,7 @@
       <div class="row my-3">
         <div class="col-12">
           <div class="row d-flex justify-content-center align-items-center">
-            <div class=" p-4 text-center">
+            <div class=" p-4">
               <h3 class=" ">Confirm your E-mail Address</h3>
                 {% if confirmation %}
 
@@ -21,7 +21,7 @@
 
                 <small>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</small>
 
-                <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+                <form class="py-3" method="post" action="{% url 'account_confirm_email' confirmation.key %}">
                 {% csrf_token %}
                     <button type="submit" class="button-2">{% trans 'Confirm' %}</button>
                 </form>
