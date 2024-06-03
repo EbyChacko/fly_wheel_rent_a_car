@@ -433,8 +433,11 @@
             </div>
             
             <div class="col-12 d-flex justify-content-end align-items-center">
-                <a href="#" id="delete-button" class="px-2">Delete Booking | </a>
+                <a href="#" id="delete-button" class="delete_button">Delete Booking</a>
+                {% if booking.status == 'Booked' %}
+                <small class="px-2"> | </small>
                 <a href="#" class="btn button-2" id="cancel-button">Cancel Booking</a>
+                {% endif %}
             </div>
         </div>
     </div>

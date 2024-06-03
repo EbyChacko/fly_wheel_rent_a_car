@@ -122,3 +122,9 @@ class BookingForm(forms.ModelForm):
             raise forms.ValidationError("ID expiry must be after the drop-off date.")
 
         return id_expiry
+    
+    def clean_country_issued(self):
+        country_issued = self.cleaned_data.get('country_issued')
+        if country_issued != 'IE':
+            raise forms.ValidationError("Please select Ireland (IE) as the country.")
+        return country_issued

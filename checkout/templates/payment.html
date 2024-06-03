@@ -250,7 +250,7 @@
                             </div>
                             <div class="col-12 col-sm-6 col-md-12 col-xl-6 form-group pb-3 ">
                                 <label for="id_personal_id">Personal ID</label>
-                                {% render_field form.personal_id class="form-control" %}
+                                {% render_field form.personal_id class="form-control" id="id_personal_id" %}
                                 {% if form.personal_id.errors %}
                                     {% for error in form.personal_id.errors %}
                                     <small class="text-danger">{{ error }}</small>
@@ -259,13 +259,13 @@
                             </div>
                             <div class="col-12 col-sm-6 col-md-12 col-xl-6 form-group pb-3 ">
                                 <label for="id_country_issued">Country Issued</label>
-                                {% render_field form.country_issued class="form-control" %}
+                                {% render_field form.country_issued class="form-control" id="id_country_issued" %}
                                 {% if form.country_issued.errors %}
                                     {% for error in form.country_issued.errors %}
                                     <small class="text-danger">{{ error }}</small>
                                     {% endfor %}
                                 {% endif %}
-                            </div>
+                            </div>                            
                             <div class="col-12 col-sm-6 col-md-12 col-xl-6 form-group pb-3 ">
                                 <label for="id_id_number">ID Number</label>
                                 {% render_field form.id_number class="form-control" %}

@@ -5,8 +5,8 @@
 {% block content %}
 <div class="container-fluid bg-black-gradient">
     <div class="row">
-        <!-- {% if customer_details.title %} -->
-        <div class="col-12 col-lg-4 col-xl-3 p-3 animation ">
+        {% if customer_details %}
+        <div class="col-12 col-lg-4 col-xl-3 p-3 animation1">
             <div class="rounded-3 bg-dark">
                 <div class="col-12 p-2 pt-5 text-center">
                     <h5 class="text-warning text-uppercase">{{ customer_details.title }}. {{ customer_details.name }}</h5>
@@ -27,16 +27,15 @@
                     <small>{{ customer_details.date_of_birth }}</small><br>
                 </div>
                 <hr>
-                <div class="col-12 pb-4 text-center">
+                <div class="col-12 pe-4 pb-4 text-end">
                     <a href="{% url 'update_profile' %}">Update Details</a>
                 </div>
-
             </div>
         </div>
-        <!-- {% endif %} -->
-        <div class="col-12 col-lg-8 col-xl-9 p-3 animation1">
+        {% endif %}
+        <div class="col-12 col-lg-8 col-xl-9 p-3 animation mx-auto">
             <div class="row p-3 py-2">
-                <h3 class=""><strong>Your Bookings</strong></h3>
+                <h3><strong>Your Bookings</strong></h3>
                 <hr>
                 {% if bookings %}
                 {% for booking in bookings %}
@@ -69,20 +68,21 @@
                         <div class="row pb-2">
                             <div class="col-12 col-md-6">
                                 <small class="text-warning">Pick Up : {{ booking.pick_up_city }}, {{ booking.pick_up_county }}</Small><br>
-                                <small >{{ booking.pick_up_date }}, {{ booking.pick_up_time }}</small>
+                                <small>{{ booking.pick_up_date }}, {{ booking.pick_up_time }}</small>
                             </div>
                             <div class="col-12 col-md-6">
                                 <Small class="text-warning">Drop Off: {{ booking.drop_off_city }}, {{ booking.drop_off_county }}</Small><br>
-                                <small >{{ booking.drop_off_date }}, {{ booking.drop_off_time }}</small>
+                                <small>{{ booking.drop_off_date }}, {{ booking.drop_off_time }}</small>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-start">
-                                <p >Bill Amount : <Strong class="text-info">{{ booking.grand_total }},00 €</Strong></p>
+                                <p>Bill Amount : <Strong class="text-info">{{ booking.grand_total }},00 €</Strong></p>
                             </div>
                             <div class=" col-12 col-md-6 d-flex justify-content-center justify-content-md-end">
-                                <a type="submit" href="{% url 'booking_details' booking.id %}" class="btn button-2">View Details</a>
+                                <a type="submit" href="{% url 'booking_details' booking.id %}" class="btn button-2">View
+                                    Details</a>
                             </div>
                         </div>
                     </div>
@@ -92,18 +92,17 @@
                 <div class="py-5 text-center">
                     <h1 class="text-info"><i class="fa-solid fa-car-on"></i></h1>
                     <p>Sorry, You don't have any booking yet</p>
-                    <small class="text-uppercase"> 
+                    <small class="text-uppercase">
                         <a href="{% if user.is_authenticated %}{% url 'search_cars' %}{% else %}{% url 'login_or_signup' %}{% endif %}">
                             click to book now</a>
                     </small>
                 </div>
                 {% endif %}
             </div>
-
         </div>
     </div>
 </div>
-</div>
+
 {% endblock %}
 
 {% block postloadjs %}
@@ -112,10 +111,8 @@
     document.addEventListener("DOMContentLoaded", function () {
         var animation = document.querySelector('.animation');
         var animation1 = document.querySelector('.animation1');
-        var animation2 = document.querySelector('.animation2');
         animation.classList.add('fade-in');
         animation1.classList.add('fade-in');
-        animation2.classList.add('fade-in');
     });
 
 </script>
