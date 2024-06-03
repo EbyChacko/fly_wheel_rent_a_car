@@ -1,0 +1,13 @@
+{% load i18n %}
+{% autoescape off %}
+{% blocktrans %}Hello {{ booking.name }},{% endblocktrans %}
+
+{% blocktrans %}We regret to inform you that your booking with booking number {{ booking_number }} has been canceled.{% endblocktrans %}
+
+{% blocktrans %}If you have any further questions or concerns, please contact us at {{ company_contact_number }} or via email at {{ company_email }}.{% endblocktrans %}
+
+{% blocktrans %}Thank you for choosing FlyWheel Rent a Car!{% endblocktrans %}
+
+{% blocktrans %}Best regards,{% endblocktrans %}
+{% blocktrans %}FlyWheel Rent a Car Team{% endblocktrans %}
+{% endautoescape %}
