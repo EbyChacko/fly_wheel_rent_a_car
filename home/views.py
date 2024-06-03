@@ -30,3 +30,8 @@ def about(request):
 def login_or_signup(request):
     """To load login_or_signup page"""
     return render(request, 'home/login_or_signup.html')
+
+
+def privacy(request):
+    """To load login_or_signup page"""
+    return render(request, 'home/privacy.html')
