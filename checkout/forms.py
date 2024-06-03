@@ -125,6 +125,9 @@ class BookingForm(forms.ModelForm):
     
     def clean_country_issued(self):
         country_issued = self.cleaned_data.get('country_issued')
-        if country_issued != 'IE':
-            raise forms.ValidationError("Please select Ireland (IE) as the country.")
+        personal_id = self.cleaned_data.get('personal_id')
+        
+        if personal_id == 'Irish Government Travel Document' and country_issued != 'IE':
+            raise forms.ValidationError("For Irish Government Travel Document, please select Ireland (IE) as the country.")
+        
         return country_issued
