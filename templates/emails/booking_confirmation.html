@@ -2,23 +2,23 @@
 {% autoescape off %}
 <html>
 <body>
-    <div style="text-align: center;">
+    <div style="text-align: center; padding-bottom: 30px;">
         <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712694082/Royal%20Drive/Uploads/Fly_wheels_logo_big_rfq8ov.png" 
-        alt="FlyWheel Rent a Car Logo" style="width: 200px; height: auto;">
-        <h3>FlyWheel Rent a car</h3>
+        alt="FlyWheel Rent a Car Logo" style="width: 150px; height: auto;">
     </div>
-    <p>{% blocktrans %}Hello {{ booking.name }},{% endblocktrans %}</p>
+    <p>{% blocktrans %}Hello {{ name }},{% endblocktrans %}</p>
     <p>{% blocktrans %}Thank you for your booking with FlyWheel Rent a Car!{% endblocktrans %}</p>
     <p>{% blocktrans %}Here are your booking details:{% endblocktrans %}</p>
     <ul>
-        <li>{% blocktrans %}Booking Number: {{ booking.booking_number }}{% endblocktrans %}</li>
-        <li>{% blocktrans %}Car: {{ booking.car.make }} {{ booking.car.model }}{% endblocktrans %}</li>
-        <li>{% blocktrans %}Category: {{ booking.car.category }}{% endblocktrans %}</li>
-        <li>{% blocktrans %}Pick-up Location: {{ booking.pick_up_city }}, {{ booking.pick_up_county }}{% endblocktrans %}</li>
-        <li>{% blocktrans %}Pick-up Date and Time: {{ booking.pick_up_date }} at {{ booking.pick_up_time }}{% endblocktrans %}</li>
-        <li>{% blocktrans %}Drop-off Location: {{ booking.drop_off_city }}, {{ booking.drop_off_county }}{% endblocktrans %}</li>
-        <li>{% blocktrans %}Drop-off Date and Time: {{ booking.drop_off_date }} at {{ booking.drop_off_time }}{% endblocktrans %}</li>
+        <li>{% blocktrans %}Booking Number: {{ booking_number }}{% endblocktrans %}</li>
+        <li>{% blocktrans %}Car: {{ make }} {{ model }}{% endblocktrans %}</li>
+        <li>{% blocktrans %}Category: {{ category }}{% endblocktrans %}</li>
+        <li>{% blocktrans %}Pick-up Location: {{ pick_up_city }}, {{ pick_up_county }}{% endblocktrans %}</li>
+        <li>{% blocktrans %}Pick-up Date and Time: {{ pick_up_date }} at {{ pick_up_time }}{% endblocktrans %}</li>
+        <li>{% blocktrans %}Drop-off Location: {{ drop_off_city }}, {{ drop_off_county }}{% endblocktrans %}</li>
+        <li>{% blocktrans %}Drop-off Date and Time: {{ drop_off_date }} at {{ drop_off_time }}{% endblocktrans %}</li>
     </ul>
+    <h5 style="text-align: center; padding-bottom: 30px;">{% blocktrans %}Total Amount paid : {{ grand_total }}{% endblocktrans %}</h5>
     <p>{% blocktrans %}Thank you for choosing FlyWheel Rent a Car!{% endblocktrans %}</p>
     <p>{% blocktrans %}Best regards,{% endblocktrans %}</p>
     <p>{% blocktrans %}FlyWheel Rent a Car Team{% endblocktrans %}</p>
