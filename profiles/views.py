@@ -48,6 +48,13 @@ def booking_details(request, id):
     return render(request, 'profiles/booking_details.html', context)
 
 
+def confirm_delete_booking(request, id):
+    context = {
+        'id': id,
+    }
+    return render(request, 'profiles/confirm_delete_booking.html', context)
+
+
 def delete_booking(request, id):
     booking = get_object_or_404(Booking, id=id)
 
@@ -60,6 +67,14 @@ def delete_booking(request, id):
 
     messages.success(request, 'Booking has been deleted successfully.')
     return redirect('profile')
+
+
+
+def confirm_cancel_booking(request, id):
+    context = {
+        'id': id,
+    }
+    return render(request, 'profiles/confirm_cancel_booking.html', context)
 
 
 def cancel_booking(request, id):
