@@ -361,3 +361,170 @@ Super users, typically administrators or staff with higher privileges, have an a
 
 ![Profile menu](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717507593/Royal%20Drive/readme/profile_menu_ls0pq2.png)
 </details>
+
+### Profile Page
+
+In the profile section, there are two main areas:
+
+<details>
+<summary>Profile page without booking</summary>
+
+![Profile page without booking](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717510269/Royal%20Drive/readme/profile_without_booking_uefdat.png)
+</details>
+
+#### Personal Details:
+
+- This section displays the user's personal information, such as their name, email address, phone number, address and date of birth.
+- Users can review their details and ensure that all information is up-to-date.
+- There is an option to edit and update these details, allowing users to keep their profile current.
+
+For users who wish to modify their personal information, a dedicated "Update Profile" button will be located within the "Personal Details" section. Clicking this button will direct them to a "Update Personal Details" page. This dedicated page will provide a user-friendly form, allowing them to effortlessly modify their personal information.
+
+The same form can be accessed by clicking the "Update Profile" button in the drop down menu in the user name button.
+
+<details>
+<summary>Update Profile form</summary>
+
+![Update Profile form](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717512179/Royal%20Drive/readme/update_profile_form_th7tdn.png)
+</details>
+
+#### List of Bookings:
+
+- This section provides an overview of the user's booking history.
+- Each booking entry includes details such as the car model, pickup and drop-off locations, dates, times, and the status of the booking (e.g., Booked or canceled).
+- Users can click on individual bookings to view more detailed information, including rental costs, selected extras, and any applicable terms and conditions.
+- This section helps users keep track of their past and upcoming rentals, providing easy access to all relevant booking information.
+
+    To make it easier to understand the status of each booking, different background colors are used for different booking statuses. 
+
+    For example: 
+    - Green for booked
+    - Dark pink for canceled
+
+    <details>
+    <summary>Profile page with bookings</summary>
+
+    ![Profile page with bookings](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717510848/Royal%20Drive/readme/Profile_page_with_booking_owlbcx.png)
+    </details>
+
+These two sections ensure that users have a comprehensive view of their personal information and booking history, enhancing their overall experience with the rental service.
+
+### Booking details
+
+
+To view the specifics of a booking, users can simply click the "View Details" button associated with that booking. This action will direct them to a dedicated booking details page. This page will provide a clear overview of all relevant booking informations same as the the car details page, with added information about the billing details and the licence and personal id details.
+
+<details>
+<summary>Booking Details</summary>
+
+![Booking Details](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717513051/Royal%20Drive/readme/Booking_details_r4wash.png)
+</details>
+
+At the bottom of the page, you'll find two options: "Cancel Booking" and "Delete Booking".
+
+1. Cancel Booking: 
+    
+    Clicking "Cancel Booking" redirect to the confirm cancel page. if the customer choose cancel again, it will change the booking status to "Canceled." You'll then be redirected back to your profile page with a successful message. Canceled bookings remain accessible for your reference and will display a "Canceled" status.
+    <details>
+    <summary>Cancel Booking confirmation  Page</summary>
+
+    ![Cancel Booking confirmation  Page](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717514026/Royal%20Drive/readme/Cancel_Booking_yfbjlm.png)
+    </details>
+
+2. Delete Booking: 
+
+    Selecting "Delete Booking" redirect to the confirm cancel page. if the customer choose cancel again, it will permanently remove the booking from the user profile. Once deleted, the user won't be able to see the booking details. However, administrators can still access deleted bookings through the admin panel with a "Deleted" status.
+    <details>
+    <summary>Delete Booking confirmation Page</summary>
+
+    ![Delete Booking confirmation Page](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717514026/Royal%20Drive/readme/Delete_Booking_skvkdl.png)
+    </details>
+
+### Data Management
+
+The data management page is accessible through the dropdown menu under the username button in the navbar by only the super user. This page offers functionalities for managing both cities and cars.
+
+<details>
+<summary>Data Management page</summary>
+
+![Data Management page](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717515995/Royal%20Drive/readme/data_management_umrnza.png)
+</details>
+
+
+
+1. City management:
+
+    the user can see a list of all currently added cities.
+    <details>
+    <summary>city List</summary>
+
+    ![city List](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717515993/Royal%20Drive/readme/city_list_m6v7z6.png)
+    </details>
+
+    - Adding a new city is as simple as clicking the "Add City" button. A form will then appear on the same page, allowing the user to enter the city name and its corresponding county.
+        <details>
+        <summary>Add city form</summary>
+
+        ![Add city form](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717515992/Royal%20Drive/readme/add_city_form_iwp9r7.png)
+        </details>
+
+    - To remove a city, you can click the "Delete" button next to its name. However, keep in mind that this action will take you to a confirmation page, and choosing "Delete" permanently removes the city from the system and redirected to the car lists with a success message.
+
+        <details>
+        <summary>Remove City confirm page</summary>
+
+        ![Remove City confirm page](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717516366/Royal%20Drive/readme/remove_city_n901ju.png)
+        </details>
+
+2. Car management:
+    It follows a similar structure. You'll find a list of existing cars.
+    <details>
+    <summary>Car List</summary>
+
+    ![Car List](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717515992/Royal%20Drive/readme/car_list_vttukf.png)
+    </details>
+
+    - To add City: There will be an "Add Car" button for new entries. Clicking this button will display a form where you can enter all the relevant car details. 
+        <details>
+        <summary>Add Car form</summary>
+
+        ![Add Car form](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717515991/Royal%20Drive/readme/add_car_form_maggio.png)
+        </details>
+
+    - To delete Car, each car listing has a "Delete" button. Clicking it leads to a confirmation page, and confirming deletion will permanently remove the car information from the database and redirected to the car lists with a success message.
+
+        <details>
+        <summary>Remove car confirm page</summary>
+
+        ![Remove car confirm page](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717515996/Royal%20Drive/readme/remove_car_lavv1m.png)
+        </details>
+
+
+
+## Admin
+
+Most of the functionality available on the main website to staff users is also available through the admin panel. All the models are registered to allow admin users to perform CRUD functionality through the admin panel.
+
+In some cases CRUD functionality is only available through the admin panel. For example, "Title" are registered with admin but there's no functionality available through the management dashboard on the main site. 
+
+Similarly, users and user profiles can be managed through the admin panel, including deleting users, but this functionality is not present on the management dashboard to discourage staff from attempting to manipulate the user database. Users are able to edit their own profile details or delete their account themselves, but these options are available to them through their profile as they have the right to manage their own personal information.
+
+
+## Future Features
+
+1. __Improved data Management__:
+    - Data management can be improved to allow users more control on data management. 
+2. __Book Again__:
+    - For registered users you could offer an "Book Again" button for the car in their booking history. This could be as simple as clicking the button to create booking bu just doing the checkout.
+3. __Creating a PDF Bill__: 
+    - When the user creates a booking, The user want recieve a PDF formated bill in the mail and can be downloaded from the website(in the booking details page).
+4. __Booking management by the super user__:
+    - The super user can update the details of a booking if the booking need any updations. Now this feature is available only in the admin panel. 
+
+
+# Agile Methodology
+## Epics, User Stories
+
+The project board can be found [here](https://github.com/users/EbyChacko/projects/6).
+
+
