@@ -1,4 +1,4 @@
-# The Chillibox
+# Flywheel rent a car
 # Testing
 
 Below is the testing performed for the project. Wherever possible, screenshots were taken to document the testing.
@@ -219,88 +219,57 @@ JavaScript validation was performed using [JSHint](https://jshint.com/) to check
 </details>
 
 
-## Automated Testing
-
-Automated testig was performed using Django's testing tools and measured using coverage. The pages of the coverage report are below.
-
-<details>
-<summary>Coverage Pg1</summary>
-
-![Coverage 1](readme-docs/testing/coverage_one.webp)
-</details>
-
-<details>
-<summary>Coverage Pg2</summary>
-
-![Coverage 2](readme-docs/testing/coverage_two.webp)
-</details>
-
-<details>
-<summary>Coverage Pg3</summary>
-
-![Coverage 3](readme-docs/testing/coverage_three.webp)
-</details>
-
-
 ## Manual Testing
-Below the steps for manual testing of the site have been arranged into tables. User stories are matched to the manual tests which demonstrate their fulfillment in the User Story column. The User Story numbers can be found on the project board under their Epics or in the main README file under Agile Methodology - Epics & User Stories.
+Below the steps for manual testing of the site have been arranged into tables. All available incidents on the website have been manually tested, and the results are as follows: <br>
+### **Before sign Up / Login**
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | 
+|-------------|------------|---------------------|-------------------|
+| Open the website | Click the link | Open the home page | Works as expected |
+| SignUp & login Buttons | When open the website before login | Must show the sugnup/ login button | Works as expected |
+| Flywheel rent a car details visible to all the visiters | open the website | User can navigate though all the details of the flywheel rent a car including Home,About us and contact us pages | Works as expected |
+| signup or login page | click on ony of the rent a car button | as the rent a car option is restricted to only the user who are authenticated. So redirected to to a a page signup or login | Works as expected |
+| Footer Links | click on the links | Navigate to deferent pages same as the header Nav buttons | Works as expected |
+| Click the number/ email to open call/email option | click the number/email | clicking on the number/mail will open the call/ mail app | Works as expected |
+| Social Media | click on the icon in the footer | Open the social media app | Works as expected |
+|contact us page | click on the contact us button | A contact page is open with necessory contact details, additionally a form is avilable to write any message to the hospital if the user want to| Works as expected |
+| contact form | input invalid data and submit | error messages shown | works as expected |
+| contact form | input valid data and submit | message submitted and show a confirmation message | works as expected |
+| Booking Creation only for authorised users | click on any of the "rent a car" button in the website before login | Navigate to the Signup / login Page to inform the user that to create an appointment, they should signup or login | Works as expected |
+| Fade-in animation works | on loading page | A fade-in animation is expected to happen for the home page when the user open the website | Works as expected|
+| logo animation carausel | page load | an automated animation carausel of deferent car company logoes | Works as expected |
+|Subscribe form | input mail id and click subscribe button | The given mail id is save in the mail chimp account for future use | Works as expected |
 
-The fulfillment of acceptance criteria for user stories is not the focus of the manual testing as this was documented when features were implemented in comments on each user story on the project board.
+### **Sign Up**
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | 
+|-------------|------------|---------------------|-------------------|
+| signup page | Click the signup button | Open the signup page | Works as expected |
+| form submission fails | input invalid details | Show error in the form | Works as expected |
+|form submission success | input valid details | navigate to the success page display a message "confirmation mail has been send to the email" and send an email with the link to confirm the email | works as expected |
+| Confirm the email page | Click on the link provided in the email | navigate to the website page with a button "confirm" | Works as expected |
+|confirm email | Click on the "Confirm" button | The email will be confirmed and navigate to the login page with a success message | Works as expected |
 
-<details>
-<summary>Manual Testing for User Authentication</summary>
+### **Login**
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | 
+|-------------|------------|---------------------|-------------------|
+| Login page |  Signup/Click the signup button in the navbar | Open the login page | Works as expected |
+| login form fails | Input invalid details | Show error in the form | Works as expected |
+|login for success | Input valid data(username and password) | Navigated to homepage with success message and the signup and login button disappear, also the user name and logout buttons visible in the navbar | Works as expected |
 
-![User Authentication](readme-docs/testing/testing_allauth.webp)
-</details>
+### **After Login**
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | 
+|-------------|------------|---------------------|-------------------|
+|home, about us,and contact pages | click on each button | Works as same as before login | Wors as expected |
+| Search car | click on ony of the 'rent a car' button | if the user is authenticated, it will navigate to the car search page | works as expected |
+| User name button | click on the user name in the navbar | a drop down menu will appear with "my prifile" and "Update Profile" buttons | Works as expected |
 
-<details>
-<summary>Manual Testing for User Profiles</summary>
-
-![User Profiles](readme-docs/testing/testing_profiles.webp)
-</details>
-
-<details>
-<summary>Manual Testing for Home</summary>
-
-![Home](readme-docs/testing/testing_home.webp)
-</details>
-
-<details>
-<summary>Manual Testing for Products</summary>
-
-![Products](readme-docs/testing/testing_products.webp)
-</details>
-
-<details>
-<summary>Manual Testing for Cart</summary>
-
-![Cart](readme-docs/testing/testing_cart.webp)
-</details>
-
-<details>
-<summary>Manual Testing for Checkout</summary>
-
-![Checkout](readme-docs/testing/testing_checkout.webp)
-</details>
-
-<details>
-<summary>Manual Testing for Management Pt1</summary>
-
-![Managment Pt1](readme-docs/testing/testing_management.webp)
-</details>
-
-<details>
-<summary>Manual Testing for Management Pt2</summary>
-
-![Management Pt2](readme-docs/testing/testing_management_2.webp)
-</details>
-
-<details>
-<summary>Manual Testing for Recipes</summary>
-
-![Recipes](readme-docs/testing/testing_recipes.webp)
-</details>
-
+### **Car search and Booking**
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | 
+|-------------|------------|---------------------|-------------------|
+|car search form | click on ony of the 'rent a car' button | if the user is authenticated, it will navigate to the car search page with a search form | works as expected |
+| car search form fail | input invalid data like pickup date is after drop off date | show form error | Works as expected |
+|Car search success | Input valid data | load the search result page with available car and its details | works as expected |
+|car search without any car | search the car with valida data | if any of the car in the flywheel is not available on the input date, at the pickup location, an empty result page with a message to search for other location or date. | Works as expected |
+| Filter form | click on the filter button in the search result page | A filter form will appear in the same page with additional filters like gearbox, number of searts etc. | works as expected |
 
 ## Browser Compatibility
 
