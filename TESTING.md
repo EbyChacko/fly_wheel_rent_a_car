@@ -220,7 +220,9 @@ JavaScript validation was performed using [JSHint](https://jshint.com/) to check
 
 
 ## Manual Testing
-Below the steps for manual testing of the site have been arranged into tables. All available incidents on the website have been manually tested, and the results are as follows: <br>
+Below the steps for manual testing of the site have been arranged into tables. All available incidents on the website have been manually tested, and the results are as follows: 
+<br>
+
 ### **Before sign Up / Login**
 | **Feature** | **Action** | **Expected Result** | **Actual Result** | 
 |-------------|------------|---------------------|-------------------|
@@ -234,10 +236,11 @@ Below the steps for manual testing of the site have been arranged into tables. A
 |contact us page | click on the contact us button | A contact page is open with necessory contact details, additionally a form is avilable to write any message to the hospital if the user want to| Works as expected |
 | contact form | input invalid data and submit | error messages shown | works as expected |
 | contact form | input valid data and submit | message submitted and show a confirmation message | works as expected |
-| Booking Creation only for authorised users | click on any of the "rent a car" button in the website before login | Navigate to the Signup / login Page to inform the user that to create an appointment, they should signup or login | Works as expected |
+| Booking Creation only for authorised users | click on any of the "rent a car" button in the website before login | Navigate to the Signup/login Page to inform the user that to create an appointment, they should signup or login | Works as expected |
 | Fade-in animation works | on loading page | A fade-in animation is expected to happen for the home page when the user open the website | Works as expected|
 | logo animation carausel | page load | an automated animation carausel of deferent car company logoes | Works as expected |
 |Subscribe form | input mail id and click subscribe button | The given mail id is save in the mail chimp account for future use | Works as expected |
+| Privacy policy | click on the privacy policy link in the footer | The user is navigated to the privacy policy of the company in a new window | works as expected |
 
 ### **Sign Up**
 | **Feature** | **Action** | **Expected Result** | **Actual Result** | 
@@ -272,35 +275,72 @@ Below the steps for manual testing of the site have been arranged into tables. A
 | Filter form | click on the filter button in the search result page | A filter form will appear in the same page with additional filters like gearbox, number of searts etc. | works as expected |
 | filter form fails | input invalid data | show error in the form | Works as expected |
 |filter form success | Input valid data | Add fiter to the search result and show filtered result of car | Works as expected |
+| View deal/ car details page | click the "View Deal" button in the search result page | Navigate to the details page of the seletced car with all the relevent details of the car, Pickup and drop off details and the payment summery with a calculation of duration of the rental | Works as expected |
+| add extra | click on the add button for the required extra | Add the details of the selected extra to the payment summary and calculated and show the grand total. | Works as expected |
+| terms and conditions | click on the terms and conditions link in the bottom of the car details page | A new window opened and show the terms and conditions | Works as expected |
+| check out page | click on the "checkout" button in the payment summary | navigated to the checkout page. The page will contain the payment summary, pickup and drop off details and the checkout form. If the user already added personal details, the billing details automatically filled by that details.| works as expected |
+| checkout form fail | fill invalid data and click "checkout" button | errror message will show in the form | Works as expected |
+|checkout form success | fill valid data and click "checkout" button | Payment and booking has been success and navigate to the checkout success page. Also the a mail send to the user email with relevent details about the booking | Works as expected |
+|check out success page | procede checkout | the user will navigated to the checkout succes page. This page show the booking details, car details and the pickup and drop off details. Also two buttons to navigate to the home page or profile page | Works as expected |
+
+### **Profile**
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | 
+|-------------|------------|---------------------|-------------------|
+|profile page | click the profile button in the drop down menu in the navbar or visit profile button in the checkout success page | The user navigated to the profile page. This page show all the bookings that are crreated by the user and the personal details | works as expected |
+| blank profile page | click profile button | if the user not created any booking and not updated the personal details, The page will show a message, there are no booking to show and a button to create a booking | Works as expected |
+| update Profile | click the update profile button from the drop down menu in the navbar or the update details button in the personal details section in the profile page | Navigated to the update profile page, contains a persona details form | works as expected |
+| udate details | fill the details and click update | Update the deta base and redirected to the profile page with a success message | Works as expected |
+| booking status | | when creating a booking, the status will be "Booked", if the user cancel the booking The status change to "Canceled", If the user deleted the booking, the status change to "Deleted". For each status there is a deferent colour background for the bookings. | works as expected |
+| booking details | click on the view details button in the booking | The user navigated to the details of the booking. In this page all the datails of the booking such as car details, pickup and dropoff details, billing details, licence and personal id details and the payment summary is shown.| works as expected |
+| Cancel the booking | click on the cancel button in the bottom of the booking details page | The user navigated to the confirm cancel booking page if the user choose to cancel in this page the booking canceled and the status of the booking change to "Canceled" and the page is navigated to profile page.The background colour will change to dark purple. if user choose to go back, the booking will not be canceled and return back to the booking details page | works as expected |
+| Delete the booking | click on the Delete button in the bottom of the booking details page | The user navigated to the confirm Delete booking page if the user choose to Delete in this page the booking Deleted and the status of the booking change to "Delete" and the page is navigated to profile page.The booking details will be permenently removed from the list. if user choose to go back, the booking will not be deleted and return back to the booking details page | works as expected |
+| hide cancel button | cancel the booking and view details again | if the booking is already canceled then the cancel button will not be displayed | works as expected |
+|back to profile button | click on the back to profile button in the booking details page | navigated to the profile page | works as expected |
+
+### **Data Management**
+This feature is only availble to the super user.
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | 
+|-------------|------------|---------------------|-------------------|
+| data mabagement page | click on the data management button in the drop down menu in the navbar | navigated to data management page. This page contain two buttons. 1. manage city and 2. manage car | works as expected |
+| Manage city | click on the manage city button in the data management page | navigated to the city list page. In this page there will be all the added list of the cities and a button add city | works as expected |
+| add city form | click on the add city button | a form will appear in the same page and the user can add cities | works as expected |
+| delete city | click on the delete button near the name of the already added city | redirected to a confirmation page. if the user choose to delete on this page, the city detail will be deleted from the list, if the user choose go back, then navigated back to the city list | works as expected |
+| Manage car | click on the manage car button in the data management page | navigated to the car list page. In this page there will be list of all the added cars and a button add car | works as expected |
+| add car form | click on the add car button | a form will appear in the same page and the user can add cars | works as expected |
+| delete car | click on the delete button near the name of the already added cars | redirected to a confirmation page. if the user choose to delete on this page, the car detail will be deleted from the list, if the user choose go back, then navigated back to the car list | works as expected |
+
 
 
 ## Browser Compatibility
 
 The website was tested on:
 
-- Chrome Version 108.0.5359.125
+- Chrome Version 125.0.6422.78
 - Firefox Version 108.0
 - Edge Version 108.0.1462.54
 - Safari iOS Version 16.1.1
+- mobile screen size are tested using the chrome dev tools and Original iphone 13 pro max
 
+For all the browsers and devices, the website works perfect and responsive.
 
 ## Bugs
 ### Fixed Bugs
 
-- Comment options:
-    - **Issue**: "Edit" and "Delete" options for comment available for everyone
-    - **Description**: On launch, the "Edit" and "Delete" options for every comment was available for everyone. This was due to a error in the if statement of the template checking the user. It check if the user matched the "comment.commenter" when it should have been checking against "comment.user".
-    - **Fix**: Edit template to check for "comment.user"
+- Error while creating booking if there is no personal data stored:
+    - **Issue**: Error while creating booking if there is no personal data stored
+    - **Description**: Having trouble to create a booking if the user did not updated the personal details.
+    - **Fix**: [Used a has_data check](https://github.com/EbyChacko/fly_wheel_rent_a_car/commit/dedcc4e4947a7826483cb7532deb8475a0a8b318)
 
-- Accessing profile:
-    - **Issue**: Unable to access user profiles
-    - **Description**: Following changes to the order model when integrating Stripe webshooks, users were unable to access their profiles and user accounts were unable to be altered in admin. This was due to migrations not being done on the live site.
-    - **Fix**: Migrated tables on the live site.
-
-- Stock:
-    - **Issue**: Users able to add more items than in stock
-    - **Description**: When users added the maximum amount of stock to their cart, they were able to reload the page and even with 0 quantity of a product variant in stock they could add to their cart (but only 1 item). This was due to the "Add To Cart" button not being disabled when a variant was selected.
-    - **Fix**: Edit script to check for and disable "Add To Cart" when stock is 0
+- Stripe PID :
+    - **Issue**: Unable to save the stripe pid
+    - **Description**: When crrating the booking the stripe pid was not saving to the data base. Because the variable user was mistake in the checkout view. pid instrad of stripe_pid
+    - **Fix**: [change variable pid to stripe_pid](https://github.com/EbyChacko/fly_wheel_rent_a_car/commit/21d91c5df1fd5c9bd025ef3921f5acdd646ab37b).
 
 ### Known Bugs
-There are currently no known bugs.
+
+Due to time constraints, I am leaving the following known errors unfixed.
+
+- country_issued validation :
+    - **Issue**: Unable to validate the country_issued in the checkout form
+    - **Description**: If the user choose the personal id as Irish government travel document, the country must be ireland, i tried to fix that using the javascript. it won't work, so itried to fix it using the form validation in the django(cleaned function). It also won't work.
+    - **Fix**: [Validation try](https://github.com/EbyChacko/fly_wheel_rent_a_car/commit/bcf2f255fb9b3201b26f3421e9c9a1b316539ecd#diff-075000420d0f27b9c7afccd0c34e817e2374c79f1290793dd2bad1ac0b7e1911).
