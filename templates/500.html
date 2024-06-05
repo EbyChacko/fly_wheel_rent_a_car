@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container-fluid ">
+    <div class="row animation d-flex align-item-center">
+        <div class="col-12 col-xl-6 d-flex align-item-center justify-content-center">
+            <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712853252/Royal%20Drive/Uploads/search_page_image_nb157w.webp"
+                alt="Fly Wheel - car image" style="width:100%; max-width:600px;">
+        </div>
+        <div class="col-12 col-xl-6 p-3 py-5 my-3 d-flex justify-content-center mx-auto">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 pb-3 text-center">
+                        <h1 class="text-white">☹️</h1>
+                        <h2 class="text-white">500</h2>
+                        <h5>Internal Server Error</h5>
+                        <small>Sorry, Something went wrong !</small><br>
+                        {% if messages %}
+                        {% for message in messages %}
+                            <small> {{ message }} </small>
+                        {% endfor %}
+                        {% endif  %}
+                        
+                    </div>
+                    <hr>
+                    <div class="col-12 d-flex justify-content-center">
+                        <div style="max-width:250px" class=" ">
+                                <a href="{% url 'home' %} " class="text-center">Back to Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+

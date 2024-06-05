@@ -36,7 +36,7 @@ def booking_details(request, id):
     if booking.customer.user != request.user:
         messages.error(
             request, "You do not have permission to view this booking.")
-        return redirect('profile')
+        return render(request, '404.html', status=404)
 
     now = datetime.now()
     pick_up_datetime = datetime.combine(
