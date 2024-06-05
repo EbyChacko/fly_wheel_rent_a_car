@@ -528,3 +528,409 @@ Similarly, users and user profiles can be managed through the admin panel, inclu
 The project board can be found [here](https://github.com/users/EbyChacko/projects/6).
 
 
+# Design
+
+## Colour
+
+The 90 % of the project is done using the black background. And the letters are white.
+Most of the colouring are done using the bootstrap colours.
+
+1. Black
+2. Dark
+3. Secondary
+4. Warning
+5. Info
+6. White
+
+
+Additionally in the CSS I have use the following colours. Some of them are used as reduced transparency in the website.
+<details>
+<summary>Colour Palette</summary>
+
+![Colour Palette](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717519524/Royal%20Drive/readme/Colour_pallet_oeh0di.png)
+</details>
+
+## Wireframes
+
+Wireframes were created using [Figma](https://www.figma.com). They were created for initial planning for the layout of the website.
+
+<details>
+<summary>Index</summary>
+
+![Index](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717437200/Royal%20Drive/readme/Flywheel_Wireframe_0_xnfpx6.jpg)
+</details>
+
+<details>
+<summary>Contact</summary>
+
+![Contact](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717437200/Royal%20Drive/readme/Flywheel_Wireframe_2_kheou0.jpg)
+</details>
+
+<details>
+<summary>About Us</summary>
+
+![About Us](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717437201/Royal%20Drive/readme/Flywheel_Wireframe_1_rahmdt.jpg)
+</details>
+
+<details>
+<summary>Search car Form</summary>
+
+![Search car Form](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717437199/Royal%20Drive/readme/Flywheel_Wireframe_3_facxca.jpg)
+</details>
+
+<details>
+<summary>Search result</summary>
+
+![Search result](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717437199/Royal%20Drive/readme/Flywheel_Wireframe_4_ef0mfd.jpg)
+</details>
+
+<details>
+<summary>Car details</summary>
+
+![Car details](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717437199/Royal%20Drive/readme/Flywheel_Wireframe_5_pnswwm.jpg)
+</details>
+
+<details>
+<summary>Checkout</summary>
+
+![Checkout](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717437200/Royal%20Drive/readme/Flywheel_Wireframe_6_gxhkw6.jpg)
+</details>
+
+<details>
+<summary>Profile</summary>
+
+![Profile](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717437201/Royal%20Drive/readme/Flywheel_Wireframe_7_gz5ehp.jpg)
+</details>
+
+<details>
+<summary>Bokking Details</summary>
+
+![Bokking Details](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717437200/Royal%20Drive/readme/Flywheel_Wireframe_8_gudzvh.jpg)
+</details>
+
+
+
+## Entity Relationship Diagrams
+
+ER diagram is created using the [dbdiagram.io](https://dbdiagram.io/)
+<details>
+<summary>ERD</summary>
+
+![ERD](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717529044/Royal%20Drive/readme/ER_Diagram_rjstl1.png)
+</details>
+
+<br>
+
+## Flow chart
+
+The flow chart is created using the [figma.com](https://figma.com/)
+<details>
+<summary>Flow Chart</summary>
+
+![Flow Chart](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717535678/Royal%20Drive/readme/Flywheel_Rent_a_car_flow_chart_digram_1_y3sske.png)
+</details>
+
+<br>
+
+# SEO and Marketing
+
+## SEO, Keywords
+
+Based on the Institute's SEO video, I have compiled a list of key terms. Using [Wordtracker](https://www.wordtracker.com/), I discovered the following keywords to be the most effective for optimizing the website's SEO:
+- car rentals
+- Auto rentals near me
+- premium car rental
+- Luxuary car rental
+- affordable car rental
+
+Some of the searches are given below.
+<details>
+<summary>affordable car rental</summary>
+
+![affordable car rental](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717530703/Royal%20Drive/readme/SEO_4_gerhkp.png)
+</details>
+
+<details>
+<summary>Premium car rental</summary>
+
+![Premium car rental](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717530702/Royal%20Drive/readme/SEO_3_eeoses.png)
+</details>
+
+
+<details>
+<summary>car rental</summary>
+
+![car rental](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717530702/Royal%20Drive/readme/SEO_1_jaj1pe.png)
+</details>
+
+
+<details>
+<summary>auto rentals near me</summary>
+
+![auto rentsls near me](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717530701/Royal%20Drive/readme/SEO_2_xfsaof.png)
+</details>
+
+
+## Marketing
+Based on Code Institute's Web Marketing, questions were collected to try to decide on marketing for the website.
+
+- What kind of business is it?
+  - B2C
+- Who are your customers?
+  - High-end clientele looking for premium car rental experiences
+  - Includes business travelers, vacationers, and car enthusiasts
+- Which online platforms would you find lots of your users?
+  - Social media platforms like Instagram, Facebook, and YouTube to showcase fleet and lifestyle content
+  - Luxury travel blogs and magazines to reach affluent travelers
+  - Car enthusiast forums and websites to connect with car lovers
+- What do your users need?
+  - Large collection of premium luxuary cars
+- Would your business run sales or offer discounts? How do you think your users would most like to hear about these offers?
+  - Sales and discounts could be offered. Either through posting alerts for sales on social media or sending discount codes to people on the newsletter.
+- Would your business have a budget to spend on advertising? Or would it need to work with free or low cost options to market itself?
+  - Possibly a small budget. It would start with low cost options like social media and newsletters.
+
+The e-commerce businesses that inspired aspects of this website include:
+  - [rentalcars.com](https://www.rentalcars.com/)
+
+
+## Social Media
+
+
+Above is a mock up of the Facebook business page for the Flywheel. This would be the primary social media site for the business to communicate with customers.
+
+
+<details>
+<summary>Facebook page 1</summary>
+
+![Facebook page](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717532266/Royal%20Drive/readme/fb-3_fycheg.png)
+</details>
+
+<details>
+<summary>Facebook page 2</summary>
+
+![Facebook page](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717532265/Royal%20Drive/readme/fb-2_jn49yq.png)
+</details>
+
+
+<details>
+<summary>Facebook Add</summary>
+
+![Facebook add](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717532267/Royal%20Drive/readme/fb-1_sqv481.png)
+</details>
+
+<br>
+Instagram and YouTube should be consider with site expansion as Flywheel is getting popular.
+
+
+I am glad to inform that the Facebook page has been noticed by someone, and a customer has inquired about car rentals. The Facebook chat is given below.
+
+<details>
+<summary>Facebook chat with customer</summary>
+
+![Facebook chat](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717531966/Royal%20Drive/readme/Screenshot_2024-06-04_at_21.11.43_2_sx7qk1.png)
+</details>
+
+## Email
+
+Through a subscription form in the footer, the website implements newsletter using Mailchimp. The intention with the newsletter would be to update customers when new cars are arrived or new offers are launched.
+
+
+# Technologies Used
+
+- [HTML5](https://en.wikipedia.org/wiki/HTML5): mark-up language.
+- [CSS3](https://en.wikipedia.org/wiki/CSS): styling.
+- [JavaScript](https://www.javascript.com/): programming language.
+- [Python 3](https://www.python.org/): programming language.
+- [Django 3.2](https://www.djangoproject.com/)
+  - [Django allath](https://django-allauth.readthedocs.io/en/latest/index.html): user authentication.
+  - [widget tweaks](https://pypi.org/project/django-widget-tweaks/): for forms.
+  - [Django countries](https://pypi.org/project/django-countries/): for countries in forms.
+  - [Pillow](https://pypi.org/project/Pillow/): python imagining library.
+- [Stripe](https://stripe.com): payments.
+- [JQuery](https://jquery.com/)
+- [Bootstrap](https://getbootstrap.com/): styling.
+- [Cloudinary](https://cloudinary.com/): store static and media files.
+- [GIT](https://git-scm.com/): for version control.
+- [GitHub](https://github.com/): for host repository.
+- [Gitpod](https://www.gitpod.io/): online IDE.
+- [Heroku](https://heroku.com/): deployment
+- [Google Fonts](https://fonts.google.com/): to import fonts.
+- [Font Awesome](https://fontawesome.com/): to import icons.
+- [figma](https://www.figma.com/): to create wireframes.
+- [dbdiagram.io](https://dbdiagram.io/home): for Entity Relationship Diagram.
+- [Photoshop](https://www.gimp.org/): to edit images and create logo
+- [Coolers](https://coolors.co/): create colour palette.
+
+
+
+# Testing
+
+Testing for the site can be found at the below link:
+
+[Link to TESTING.md](TESTING.md)
+
+
+# Deployment
+
+## Steps to deploy site using Heroku:
+- Assuming gunicorn, dj_database_url, psycopg2 and django-cloudinary-storage have been installed
+- Create an external database with ElephantSQL
+  - Register/login to your ElephantSQL dashboard and click "Create New Instance"
+  - Select a name and plan for your database
+  - Then click "Select Region"
+  - Select a region and data center close to you
+  - Click "Review", then check your details are correct and click "Create Instance"
+  - Select the database from your dashboard and you can see the URL for your database
+- On the Heroku dashboard, select "New" and click "Create new app"
+  - Create a unique app name - this will be added to allowed hosts in the project settings
+  - Select your region
+  - Click "Create app"
+- Go to the Resources tab:
+  - Search for "postgres" in the add-ons search bar and select "Heroku Postgres"
+  - Click "Submit Order Form"
+- Go to the settings tab:
+  - Scroll down to the config vars section and select "Reveal Config Vars"
+  - Add a new config var for DATABASE_URL - copy the URL from your ElephantSQL database that you created earlier
+  - Add a new config var for SECRET_KEY - create your own or use a django secret key generator
+  - Add a new config var for CLOUDINARY_URL - copy the "API Environment variable" from your cloudinary dashboard, do not include "CLOUDINARY_URL="
+  - Add a new config var for STRIPE_PUBLIC_KEY - copy your public key from stripe
+  - Add a new config var for STRIPE_SECRET_KEY - copy your secret key from stripe
+  - Add a new config var for STRIPE_WH_SECRET - copy your webhook secret from stripe from when you connected your endpoint
+  - Add a new config var for EMAIL_HOST_USER - enter the gmail address you're using for this project
+  - Add a new config var for EMAIL_HOST_PASS - enter the 16 digit key gmail app password
+  - Add a new config var for DISABLE_COLLECTSTATIC, with the value 1 - this will be removed before deployment
+- In your project, for your environment variables:
+  - Create a new env.py file in the top level directory
+  - In env.py:
+    - Import os
+    - Add 'os.environ["DATABASE_URL"] = "Paste the DATABASE_URL from the Heroku app here"'
+    - Add 'os.environ["SECRET_KEY"] = "Paste your new secret key here"'
+    - Add 'os.environ["CLOUDINARY_URL"] = "Paste your CLOUDINARY_URL as in the Heroku app here"'
+    - Add 'os.environ["STRIPE_PUBLIC_KEY"] = "Paste your STRIPE_PUBLIC_KEY here"' - this isn't required to be secret, but for sake of keeping these keys together
+    - Add 'os.environ["STRIPE_SECRET_KEY"] = "Paste your STRIPE_SECRET_KEY here"'
+    - Add 'os.environ["STRIPE_WH_SECRET"] = "Paste your STRIPE_WH_SECRET here"'
+  ```
+  import os
+
+  os.environ['DATABASE_URL'] = 'postgres://exampledatabaseurl'
+  os.environ['SECRET_KEY'] = 'examplesecretkey'
+  os.environ['CLOUDINARY_URL'] = 'cloudinary://examplecloudinaryurl'
+  os.environ['STRIPE_PUBLIC_KEY'] = 'examplestripepublickey'
+  os.environ['STRIPE_SECRET_KEY'] = 'examplestripesecretkey'
+  os.environ['STRIPE_WH_SECRET'] = 'examplestripeWHsecret'
+  ```
+  - If not already present, create a .gitignore file and add env.py to it
+
+- In your project, in settings.py:
+  - Import os
+  - Import dj_database_url
+  - if os.path.isfile('env.py'):
+	import env
+  ```
+  import os
+  import dj_database_url
+  if os.path.isfile('env.py'):
+      import env
+  ```
+  - Replace the insecure secret key with "SECRET_KEY = os.environ.get('SECRET_KEY')"
+  ```
+  SECRET_KEY = os.environ.get('SECRET_KEY')
+  ```
+  - Link new database by commenting out old DATABASES section and adding:
+	DATABASES = {
+			'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+			}
+  ```
+  DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
+  ```
+  - Add Heroku to the allowed hosts: "ALLOWED_HOSTS = ['the_app_name_from_heroku.herokuapp.com']
+  ```
+  ALLOWED_HOSTS = ['example-heroku-app-name.herokuapp.com', 'localhost']
+  ```
+  - Add 'cloudinary_storage' (above 'django.contrib.staticfiles') and 'cloudinary' (below) to INSTALLED_APPS
+  ```
+  ...
+  'cloudinary_storage',
+  'django.contrib.staticfiles',
+  'cloudinary',
+  ...
+  ```
+  - Setup Cloudinary to store static and media files
+  ```
+    STATIC_URL = '/static/'
+	STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+	STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+	STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+	MEDIA_URL = '/media/'
+	DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+  ```
+  - Run 'python3 manage.py collectstatic' to collect static files
+- In your project:
+  - Create a Procfile in the top level directory and add 'web: gunicorn project_name.wsgi' to tell 
+  ```
+  web: gunicorn project_name.wsgi
+  ```
+  - Create a requirements file with 'pip3 freeze --local > requirements.txt' for Heroku to install required packages
+  ```
+  pip3 freeze --local > requirements.txt
+  ```
+  - Make migrations with 'python3 manage.py migrate'
+  ```
+  python3 manage.py migrate
+  ```
+  - Commit and push to GitHub
+- Prior to final deployment:
+  - Set DEBUG = False in project settings.py
+  - Remove DISABLE_COLLECTSTATIC config var from Heroku
+- Go to the Deploy tab:
+  - Select GitHub and confirm connection to GitHub account
+  - Search for the repository and click "Connect"
+  - Scroll down to the deploy options
+  - Select automatic deploys if you would like automatic deployment with each new push to the GitHub repository
+  - In manual deploy, select which branch to deploy and click "Deploy Branch"
+  - Heroku will start building the app
+- The link to the app can be found at the top of the page by clicking "Open app"
+
+The live site can be found here: [Flywheel Rent a car](https://fly-wheel-rent-c4406dadb89b.herokuapp.com/)
+
+## Steps to clone site:
+- In the GitHub repository, click the "Code" button.
+- Select "HTTPS" and copy the URL.
+- Open Git Bash and navigate to the repository where you would like to locate the cloned repository.
+- Type "git clone" followed by the copied URL.
+- Press enter to create the clone.
+- Install required packages with the command "pip3 install -r requirements.txt"
+
+
+# Credits
+## Code
+
+- The code for srtipe is based on Code Institute's [Boutique ado](https://github.com/Code-Institute-Solutions/boutique_ado_v1)
+- The privacy policy and HTML for it is from [Privacy Policy Generator](https://www.privacypolicygenerator.info/)
+- logo carousel tutorial from [youtube]( https://www.youtube.com/watch?v=nAjR0Oj0J8E)
+- widget Tweaks form styling tutorial from [youtube](https://youtu.be/ynToND_xOAM?si=PBZfE-EeFRJ077ec)
+
+## Media
+- Icons are from [Font Awesome](https://fontawesome.com)
+- The fonts are imported from [Google Fonts](https://fonts.google.com)
+
+- Images from [Freepik](https://www.freepik.com/):
+  - [Logo Image](https://www.freepik.com/free-vector/gradient-car-service-logo-template_32378266.htm#fromView=search&page=1&position=19&uuid=2aa67cec-052e-4c5f-b2ab-fc25ac6a0434)
+  - [Home page car image ](https://www.freepik.com/free-vector/lightened-luxury-sedan-car-darkness-with-headlamps-rear-lights-lit-realistic-image-reflection_6867608.htm#fromView=search&page=1&position=0&uuid=d45e76ff-074b-40b6-a3f9-52cbbc8a4ce8)
+  - [Car image](https://www.freepik.com/free-vector/lightened-luxury-sedan-car-against-night-city-with-headlamps-rear-tail-lights-lit_6867609.htm#query=black%20car&position=49&from_view=keyword&track=ais&uuid=f10faeb6-30a1-462f-9108-a194663c311e)
+  - [About page image 1]( https://www.freepik.com/free-ai-image/photorealistic-happiness-scene-with-happy-woman_171767280.htm#fromView=search&page=1&position=11&uuid=8f4e2c78-d00c-4b47-a0a9-b8c7fffe0fec)
+  - [About page image 2](https://www.freepik.com/free-ai-image/summertime-seasonal-scene-with-monochromatic-black-white-effect_138702855.htm#fromView=search&page=1&position=28&uuid=8f4e2c78-d00c-4b47-a0a9-b8c7fffe0fec)
+  - [About page image 3](https://www.freepik.com/free-photo/car-dealer-customer-vehicle-showroom-choosing-new-car_11136278.htm#fromView=search&page=1&position=50&uuid=71a30d3d-579b-4062-8b86-2644e49e9a36
+  )
+  - [Home page customer image](https://www.freepik.com/free-photo/young-woman-holding-car-keys_27091452.htm#fromView=search&page=1&position=38&uuid=88c1ec58-b50e-4832-8dfc-c327b7b71cbf?log-in=google)
+
+
+- Images from other sourses:
+  - [Search page car image ](https://wallpapers.com/images/hd/black-car-4k-w132c4fj1juguqjr.jpg)
+
+## Acknowledgement
+I'd like to thank my mentor, Graeme, for providing very good advice, tips and feedback, as well as excellent resources that aided greatly in organising and implementing this project.

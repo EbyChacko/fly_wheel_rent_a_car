@@ -64,7 +64,7 @@ body {
 
 
 .bg-transparent{
-  background-color: rgb(255, 3, 255);
+  background-color: #ff03ff;
 }
 
 
@@ -174,7 +174,7 @@ border-color: gray;
   display: flex;
   justify-content: center;
   height:30px;
-  width:10;
+  width:10px;
  
   padding: 19px 24px;
   text-decoration: none;

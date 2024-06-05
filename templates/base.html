@@ -1,16 +1,16 @@
-{% load static %}
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-
+    {% load static %}
+    
+    <title>Fly Wheels {% block extra_title %}{% endblock %}</title>
+    
     {% block meta %}
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% endblock %}
-
+    
     {% block extra_meta %}
     {% endblock %}
 
@@ -60,8 +60,7 @@
 
     {% block extra_js %}
     {% endblock %}
-
-    <title>Fly Wheels {% block extra_title %}{% endblock %}</title>
+    
     <meta name="description"
         content="Budget friendly-luxuary rent a car company with a huge range of premium cars for hire.">
     <meta name="keywords" content="fly wheels, car rental, car hire, rent a car, auto rental, car rental near me, premium car rental, 
@@ -126,204 +125,18 @@
                         id="sign_up">
                         Register</a>
                     <p class=" me-4 mb-3 nav-item nav-link d-none d-xl-block  mt-3 ">|</p>
-                    <a class=" mb-3 nav-item nav-link text-warning  mt-3 " href="{% url 'account_login' %}" role="button"
-                        id="login">Login</a>
+                    <a class=" mb-3 nav-item nav-link text-warning  mt-3 " href="{% url 'account_login' %}"
+                        role="button">
+                        Log in</a>
                     {% endif %}
                 </div>
             </div>
         </nav>
     </header>
 
-    {% if messages %}
-    <div class="alert bg-warning p-3 alert-dismissible fade show d-flex justify-content-center " role="alert" id="messageContainer">
-        <div class="col-10 col-md-8 col-lg-6">
-            {% for message in messages %}
-                <small class="text-black "> {{ message }} </small>
-            {% endfor %}
-        </div>
-        <button type="button" data-bs-dismiss="alert" class="btn-close float-end" aria-label="Close"></button>
-    </div>
-    {% endif %}
-    
-
-    {% block page_header %}
-    {% endblock %}
-
-    {% block content %}
-    {% endblock %}
-
-    <footer class="container-fluid w-100 p-3 dark-blue">
-        <div class="container">
-            <div class="row ">
-                <div class="col-12 col-xl-4 d-none d-xl-block">
-                    <div class="col-12 col-xl-10  p-3">
-                        <img src="https://res.cloudinary.com/dgd5gtn1w/image/upload/v1712694080/Royal%20Drive/Uploads/Fly_wheel_logo_heading_wz2noi.png"
-                            alt="Fly wheel logo" style="width:250px;">
-                    </div>
-
-                    <div class="col-12 col-xl-10 p-3">
-                        <small>
-                            Fly wheel is an ultimate destination for top-tier <strong>luxury car rentals</strong>. At
-                            Royal
-                            Drive, we take immense pride in delivering unparalleled service, ensuring each journey with
-                            us
-                            is truly
-                            extraordinary. From streamlined booking processes to bespoke customer care, we are committed
-                            to
-                            surpassing expectations at every opportunity. At Fly wheel, you're not just
-                            renting a car - you're embarking on a voyage
-                            defined by sophistication, comfort, and unparalleled prestige. We offer a <strong>budget car
-                                rental</strong>
-                            service in the whole Ireland.
-                        </small>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-8">
-                    <div class="row p-3">
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-12 col-lg-6 p-3">
-                                    <h5 class="text-info">Explore Us</h5>
-                                    <small>
-                                        <a href="{% url 'home' %}">
-                                            <span><i class="fa-solid fa-circle-arrow-right"></i></span>
-                                            Home
-                                        </a>
-                                    </small>
-                                    <br>
-                                    <small>
-                                        <a href="{% url 'about' %}">
-                                            <span><i class="fa-solid fa-circle-arrow-right"></i></span>
-                                            About Us
-                                        </a>
-                                    </small><br>
-                                    <small>
-                                        <a href="{% url 'contact' %}"><span>
-                                                <i class="fa-solid fa-circle-arrow-right"></i></span>
-                                            Contact
-                                        </a>
-                                    </small>
-                                    <br>
-                                    <small>
-                                        <a href="{% if user.is_authenticated %}{% url 'search_cars' %}{% else %}{% url 'login_or_signup' %}{% endif %}">
-                                            <span><i class="fa-solid fa-circle-arrow-right"></i></span>
-                                            Rent a car
-                                        </a>
-                                    </small>
-                                    <br>
-                                </div>
-                                <div class="col-12  col-lg-6 p-3">
-                                    <h5 class="text-info">Meet Us</h5>
-                                    <address>
-                                        <small>Main Street</small><br>
-                                        <small>Ballinasloe</small><br>
-                                        <small>Co-Galway</small><br>
-                                    </address>
-                                </div>
-                                <div class="col-12  col-lg-6 p-3">
-                                    <h5 class="text-info">Reach Us</h5>
-                                    <small>
-                                        <a href="tel:+353892336291">
-                                            <span><i class="fa fa-phone-volume"> </i></span> +353 89 233 6291
-                                        </a>
-                                    </small>
-                                    <br>
-                                    <small>
-                                        <a href="mailto:flywheelrent@gmail.com">
-                                            <span><i class="fa-regular fa-envelope"> </i></span>
-                                            flywheelrent@gmail.com
-                                        </a>
-                                    </small>
-                                </div>
-                                <div class="col-12 col-lg-6 social-links">
-                                    <h5 class="text-info">Connect With Us</h5>
-                                    <h5><a href="https://www.facebook.com/profile.php?id=61560300099581" target="_blank" aria-label="Facebook" rel="noopener nofollow">
-                                            <i class="fab fa-facebook-f social"></i>
-                                        </a>
-                                        <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" rel="noopener nofollow">
-                                            <i class="fab fa-instagram social"></i>
-                                        </a>
-                                        <a href="https://www.youtube.com/" target="_blank" aria-label="Youtube" rel="noopener nofollow">
-                                            <i class="fab fa-youtube social"></i>
-                                        </a>
-                                    </h5>
-                                </div>
-                                <div class="col-12 p-3">
-                                    <h5 class="text-info">Subscribe</h5>
-                                    <div class="row d-flex justify-content-center ">
-                                        <div class="col-12">
-                                            <div id="mc_embed_shell">
-                                                <div id="mc_embed_signup">
-                                                    <form action="https://herokuapp.us17.list-manage.com/subscribe/post?u=8b7109a8271fd2920e49bf7ed&amp;id=17df13b949&amp;f_id=00fac2e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-                                                        <div id="mc_embed_signup_scroll">
-                                                            <div class="mc-field-group">
-                                                                <label for="mce-EMAIL">Email Address 
-                                                                    <span class="asterisk">*</span>
-                                                                </label>
-                                                                <input type="email" name="EMAIL" class="required email form-control" id="mce-EMAIL" required="" value="">
-                                                            </div>
-                                                            <div id="mce-responses" class="clear foot">
-                                                                <div class="response" id="mce-error-response" style="display: none;"></div>
-                                                                <div class="response" id="mce-success-response" style="display: none;"></div>
-                                                            </div>
-                                                            <div aria-hidden="true" style="position: absolute; left: -5000px;">
-                                                                /* real people should not fill this in and expect good things - do not remove this or risk form bot signups */
-                                                                <input type="text" name="b_8b7109a8271fd2920e49bf7ed_17df13b949" tabindex="-1" value="">
-                                                            </div>
-                                                            <div class="optionalParent">
-                                                                <div class="clear foot py-2 d-flex justify-content-end">
-                                                                    <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button button-4" value="Subscribe">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-12 text-center">
-                    <a href="{% url 'privacy' %}" target="_blank"><small>Privacy Policy</small></a><small class="p-4">  | </small><small>Copyright &copy; <span id="year"></span>Fly wheel.</small>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    {% block postloadjs %}
-        <script type="text/javascript">
-            $('.toast').toast('show');
-        </script>
-        <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
-    {% endblock %}
-
-    <script>
-        // Dynamically update the year in the copyright notice
-        document.getElementById("year").textContent = new Date().getFullYear();
-
-        // remove message container after 5 sec
-        document.addEventListener('DOMContentLoaded', function () {
-        setTimeout(function () {
-            var messageContainer = document.getElementById('messageContainer');
-            if (messageContainer) {
-                messageContainer.style.transition = 'opacity 0.5s ease';
-                messageContainer.style.opacity = '0';
-                setTimeout(function() {
-                    messageContainer.remove();
-                }, 500); // Match the transition duration
-            }
-        }, 5000); // 5000 milliseconds = 5 seconds
-    });
-    </script>
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
 </body>
-
 </html>
