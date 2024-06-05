@@ -4,9 +4,11 @@ from django.contrib import messages
 
 # Create your views here.
 
+
 def index(request):
     """To load home page"""
     return render(request, 'home/index.html')
+
 
 def contact(request):
     """To perform the messaging by the user to the fly wheel"""
@@ -16,7 +18,10 @@ def contact(request):
         form = CustomerMessageForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Your Message has been send successfully. We will contact you soon!')
+            messages.success(
+                request,
+                'Your Message has been send successfully. '
+                ' We will contact you soon!')
             return redirect('/')
     return render(request, 'home/contact.html', {
         'form': form,
@@ -26,6 +31,7 @@ def contact(request):
 def about(request):
     """To load about page"""
     return render(request, 'home/about.html')
+
 
 def login_or_signup(request):
     """To load login_or_signup page"""

@@ -3,14 +3,15 @@ from django.contrib.auth.models import User
 from django_countries.fields import CountryField
 import uuid
 
+
 class Cities(models.Model):
     city = models.CharField(max_length=250)
     county = models.CharField(max_length=250)
 
     class Meta:
         verbose_name_plural = "cities"
-        ordering = ['city','county']
-    
+        ordering = ['city', 'county']
+
     def __str__(self):
         return f"{self.city}, {self.county}"
 
@@ -21,6 +22,7 @@ class County(models.Model):
     class Meta:
         verbose_name_plural = "counties"
         ordering = ['county']
+
     def __str__(self):
         return f"{self.county}"
 
@@ -31,7 +33,7 @@ class Categories(models.Model):
     class Meta:
         verbose_name_plural = "categories"
         ordering = ['category']
-    
+
     def __str__(self):
         return f"{self.category}"
 
@@ -41,7 +43,7 @@ class Fuel(models.Model):
 
     class Meta:
         ordering = ['fuel']
-    
+
     def __str__(self):
         return f"{self.fuel}"
 
@@ -51,7 +53,7 @@ class GearBox(models.Model):
 
     class Meta:
         ordering = ['gear_box']
-    
+
     def __str__(self):
         return f"{self.gear_box}"
 
@@ -62,7 +64,7 @@ class Seats(models.Model):
     class Meta:
         verbose_name_plural = "Seats"
         ordering = ['seats']
-    
+
     def __str__(self):
         return f"{self.seats}"
 
@@ -72,7 +74,7 @@ class Title(models.Model):
 
     class Meta:
         ordering = ['title']
-    
+
     def __str__(self):
         return f"{self.title}"
 
@@ -83,9 +85,10 @@ class PersonalId(models.Model):
     class Meta:
         verbose_name_plural = "Personal IDs"
         ordering = ['personal_id']
-    
+
     def __str__(self):
         return f" {self.personal_id}"
+
 
 class Car(models.Model):
     image = models.ImageField(upload_to='images/')
@@ -118,13 +121,15 @@ class PersonalDetails(models.Model):
     address_1 = models.CharField(max_length=250)
     address_2 = models.CharField(max_length=250, blank=True, null=True)
     town = models.CharField(max_length=100)
-    county = models.ForeignKey(County, on_delete=models.CASCADE, blank=True, null=True)
+    county = models.ForeignKey(
+        County, on_delete=models.CASCADE,
+        blank=True, null=True)
     eir_code = models.CharField(max_length=10)
     country = CountryField()
 
     def __str__(self):
         return f"{self.user.username}"
+
     class Meta:
         verbose_name_plural = "Personal Details"
         ordering = ['name']
-

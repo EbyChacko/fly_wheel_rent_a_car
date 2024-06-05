@@ -14,7 +14,9 @@ def profile(request):
         customer_details = None
 
     try:
-       bookings = Booking.objects.filter(customer=customer_details).exclude(status="Deleted").order_by('-booking_time') if customer_details else []
+        bookings = Booking.objects.filter(customer=customer_details)\
+            .exclude(status="Deleted")\
+            .order_by('-booking_time') if customer_details else []
     except Exception as e:
         messages.error(request, f'Sorry, an error occurred: {e}')
 
@@ -26,24 +28,27 @@ def profile(request):
     }
     return render(request, 'profiles/profile.html', context)
 
+
 def booking_details(request, id):
 
     booking = get_object_or_404(Booking, id=id)
 
     if booking.customer.user != request.user:
-        messages.error(request, "You do not have permission to view this booking.")
+        messages.error(
+            request, "You do not have permission to view this booking.")
         return redirect('profile')
-    
+
     now = datetime.now()
-    pick_up_datetime = datetime.combine(booking.pick_up_date, booking.pick_up_time)
+    pick_up_datetime = datetime.combine(
+        booking.pick_up_date, booking.pick_up_time)
     time_difference = pick_up_datetime - now
     disable_delete = time_difference < timedelta(hours=48)
     context = {
         'booking': booking,
         'disable_delete': disable_delete,
-        'time_difference':time_difference,
-        'now':now,
-        'pick_up_datetime':pick_up_datetime,
+        'time_difference': time_difference,
+        'now': now,
+        'pick_up_datetime': pick_up_datetime,
     }
     return render(request, 'profiles/booking_details.html', context)
 
@@ -59,7 +64,8 @@ def delete_booking(request, id):
     booking = get_object_or_404(Booking, id=id)
 
     if booking.customer.user != request.user:
-        messages.error(request, 'You do not have permission to delete this booking.')
+        messages.error(
+            request, 'You do not have permission to delete this booking.')
         return redirect('profile')
 
     booking.status = 'Deleted'
@@ -67,7 +73,6 @@ def delete_booking(request, id):
 
     messages.success(request, 'Booking has been deleted successfully.')
     return redirect('profile')
-
 
 
 def confirm_cancel_booking(request, id):
@@ -81,7 +86,8 @@ def cancel_booking(request, id):
     booking = get_object_or_404(Booking, id=id)
 
     if booking.customer.user != request.user:
-        messages.error(request, 'You do not have permission to cancel this booking.')
+        messages.error(
+            request, 'You do not have permission to cancel this booking.')
         return redirect('profile')
 
     booking.status = 'Canceled'
@@ -104,7 +110,7 @@ def add_car(request):
     else:
         form = CarForm()
     cars = Car.objects.all()
-    context={
+    context = {
         'form': form,
         'cars': cars,
     }
@@ -135,7 +141,7 @@ def add_city(request):
     else:
         form = CityForm()
     cities = Cities.objects.all()
-    context={
+    context = {
         'form': form,
         'cities': cities,
     }
@@ -155,6 +161,7 @@ def delete_city(request, id):
     city.delete()
     messages.success(request, 'City details has been removed successfully.')
     return redirect('add_city')
+
 
 @login_required
 def update_profile(request):

@@ -10,16 +10,26 @@ class CustomerMessageForm(forms.ModelForm):
         model = CustomerMessage
         fields = ['name', 'mobile', 'email', 'message']
         widgets = {
-            'name': widgets.TextInput(attrs={'class': 'form-control text-start', 'placeholder': 'Your Name'}),
-            'mobile': widgets.TextInput(attrs={'class': 'form-control text-start', 'placeholder': 'Your Mobile Number'}),
-            'email': widgets.TextInput(attrs={'class': 'form-control text-start', 'placeholder': 'Your e-mail address'}),
-            'message': widgets.Textarea(attrs={'class': 'form-control text-start', 'placeholder': 'Your Message', 'rows': 15, 'cols': 36}),
+            'name': widgets.TextInput(attrs={
+                'class': 'form-control text-start',
+                'placeholder': 'Your Name'}),
+            'mobile': widgets.TextInput(attrs={
+                'class': 'form-control text-start',
+                'placeholder': 'Your Mobile Number'}),
+            'email': widgets.TextInput(attrs={
+                'class': 'form-control text-start',
+                'placeholder': 'Your e-mail address'}),
+            'message': widgets.Textarea(attrs={
+                'class': 'form-control text-start',
+                'placeholder': 'Your Message',
+                'rows': 15, 'cols': 36}),
         }
 
     def clean_mobile(self):
         mobile = self.cleaned_data.get('mobile')
         if not mobile.isdigit() or len(mobile) != 10:
-            raise forms.ValidationError("Please enter a valid 10-digit mobile number.")
+            raise forms.ValidationError(
+                "Please enter a valid 10-digit mobile number.")
         return mobile
 
     def clean_email(self):
@@ -34,7 +44,9 @@ class MailChimpMailForm(forms.ModelForm):
         model = MailChimpMails
         fields = ['email']
         widgets = {
-            'email': widgets.TextInput(attrs={'class': 'form-control text-start', 'placeholder': 'Your e-mail address'}),
+            'email': widgets.TextInput(attrs={
+                'class': 'form-control text-start',
+                'placeholder': 'Your e-mail address'}),
         }
 
     def clean_email(self):

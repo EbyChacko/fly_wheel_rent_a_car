@@ -5,9 +5,12 @@ from cars.models import PersonalId
 from django_countries.fields import CountryField
 import uuid
 
+
 class Booking(models.Model):
-    booking_number = models.CharField(max_length=32, null=False, editable=False)
-    customer = models.ForeignKey(PersonalDetails, on_delete=models.SET_NULL, null=True, blank=True)
+    booking_number = models.CharField(
+        max_length=32, null=False, editable=False)
+    customer = models.ForeignKey(
+        PersonalDetails, on_delete=models.SET_NULL, null=True, blank=True)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     pick_up_city = models.CharField(max_length=250)
     pick_up_county = models.CharField(max_length=250)
@@ -26,12 +29,14 @@ class Booking(models.Model):
     address_1 = models.CharField(max_length=250)
     address_2 = models.CharField(max_length=250, blank=True, null=True)
     town = models.CharField(max_length=100)
-    county = models.ForeignKey(County, on_delete=models.CASCADE, blank=True, null=True)
+    county = models.ForeignKey(
+        County, on_delete=models.CASCADE, blank=True, null=True)
     eir_code = models.CharField(max_length=10)
     country = CountryField()
     licence_number = models.CharField(max_length=20)
     licence_expiry = models.DateField()
-    personal_id = models.ForeignKey(PersonalId, on_delete=models.CASCADE, blank=True, null=True)
+    personal_id = models.ForeignKey(
+        PersonalId, on_delete=models.CASCADE, blank=True, null=True)
     id_number = models.CharField(max_length=20)
     country_issued = CountryField()
     id_expiry = models.DateField()
@@ -57,5 +62,7 @@ class Booking(models.Model):
         super(Booking, self).save(*args, **kwargs)
 
     def __str__(self):
-        customer_username = self.customer.user.username if self.customer and self.customer.user else "Unknown Customer"
+        customer_username = (
+            self.customer.user.username if self.customer and
+            self.customer.user else "Unknown Customer")
         return f"{customer_username} - {self.car}, {self.booking_number}"

@@ -10,14 +10,17 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 @receiver(post_save, sender=Booking)
 def send_booking_cancelation_email(sender, instance, created, **kwargs):
     if instance.status == 'Canceled':
-        logger.info(f'Booking cancellation email triggered for booking: {instance.booking_number}')
+        logger.info(
+            f'Booking cancellation email triggered for booking: '
+            '{instance.booking_number}')
         subject = _('Booking Cancellation - FlyWheel Rent a Car')
         from_email = settings.EMAIL_HOST_USER
         to_email = instance.email
-        
+
         context = {
             'booking': instance,
             'name': instance.name,
@@ -25,10 +28,13 @@ def send_booking_cancelation_email(sender, instance, created, **kwargs):
             'company_email': from_email,
             'company_contact_number': '0892336291',
         }
-        
-        text_content = render_to_string('emails/booking_cancellation.txt', context)
-        html_content = render_to_string('emails/booking_cancellation.html', context)
-        
-        msg = EmailMultiAlternatives(subject, text_content, from_email, [to_email])
+
+        text_content = render_to_string(
+            'emails/booking_cancellation.txt', context)
+        html_content = render_to_string(
+            'emails/booking_cancellation.html', context)
+
+        msg = EmailMultiAlternatives(
+            subject, text_content, from_email, [to_email])
         msg.attach_alternative(html_content, "text/html")
         msg.send()

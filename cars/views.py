@@ -10,6 +10,7 @@ from django.http import QueryDict
 from django.contrib import messages
 from django.conf import settings
 
+
 def search_cars(request):
     """To load search page"""
     form = CarRentalForm()
@@ -45,7 +46,10 @@ def search_result(request):
                 'drop_off_time': drop_off_time,
             })
 
-            return render(request, 'cars/search_result.html', {'form': form, 'cars': available_cars})
+            return render(
+                request,
+                'cars/search_result.html',
+                {'form': form, 'cars': available_cars})
         else:
             form = CarRentalForm(request.POST)
             return render(request, 'cars/search_cars.html', {'form': form})
@@ -85,7 +89,10 @@ def search_result_update(request):
 
             available_cars = available_cars.exclude(id__in=booked_cars)
 
-            return render(request, 'cars/search_result.html', {'form': form, 'cars': available_cars})
+            return render(
+                request,
+                'cars/search_result.html',
+                {'form': form, 'cars': available_cars})
         else:
             form = CarFilterForm(request.POST)
             return render(request, 'cars/search_result.html', {'form': form})
@@ -136,11 +143,13 @@ def car_details(request, id):
 
     try:
         if pick_up_date and pick_up_time:
-            pick_up_datetime = datetime.strptime(f"{pick_up_date} {pick_up_time}", '%Y-%m-%d %H:%M:%S')
+            pick_up_datetime = datetime.strptime
+            (f"{pick_up_date} {pick_up_time}", '%Y-%m-%d %H:%M:%S')
             pick_up_time_formatted = pick_up_datetime.strftime('%I:%M %p')
 
         if drop_off_date and drop_off_time:
-            drop_off_datetime = datetime.strptime(f"{drop_off_date} {drop_off_time}", '%Y-%m-%d %H:%M:%S')
+            drop_off_datetime = datetime.strptime
+            (f"{drop_off_date} {drop_off_time}", '%Y-%m-%d %H:%M:%S')
             drop_off_time_formatted = drop_off_datetime.strftime('%I:%M %p')
 
     except ValueError:
@@ -150,7 +159,9 @@ def car_details(request, id):
     total_rent = request.session.get('total_rent', 0)
 
     if pick_up_datetime and drop_off_datetime:
-        total_hours = (drop_off_datetime - pick_up_datetime).total_seconds() / 3600
+        total_hours = total_hours = (
+            (drop_off_datetime - pick_up_datetime).total_seconds() / 3600
+        )
         days = int(total_hours // 24)
         hours = int(total_hours % 24)
 
@@ -204,10 +215,12 @@ def add_extras(request, id):
     if id == 1:
         extra_name = 'Booster Seat'
         booster_quantity = request.session.get('booster_quantity', 0)
-        if booster_quantity == 4 :
+        if booster_quantity == 4:
             messages.error(request, "Booster Seat reached maximum quantity 4")
         else:
-            booster_quantity = min(request.session.get('booster_quantity', 0) + 1, 4)
+            booster_quantity = (
+                min(request.session.get('booster_quantity', 0) + 1, 4)
+            )
             if hours > 5:
                 days += 1
             booster_total = booster_quantity * 5 * days
@@ -217,10 +230,12 @@ def add_extras(request, id):
     elif id == 2:
         extra_name = 'Child Seat'
         childseat_quantity = request.session.get('childseat_quantity', 0)
-        if childseat_quantity == 4 :
+        if childseat_quantity == 4:
             messages.error(request, "Child Seat reached maximum quantity 4")
         else:
-            childseat_quantity = min(request.session.get('childseat_quantity', 0) + 1, 4)
+            childseat_quantity = (
+                min(request.session.get('childseat_quantity', 0) + 1, 4)
+            )
             if hours > 5:
                 days += 1
             childseat_total = childseat_quantity * 5 * days
@@ -231,16 +246,18 @@ def add_extras(request, id):
         extra_name = 'Infant Car Capsule'
         infant_quantity = request.session.get('infant_quantity', 0)
         if infant_quantity == 4:
-            messages.error(request, "Infan car capsule reached maximum quantity 4")
+            messages.error(
+                request, "Infan car capsule reached maximum quantity 4")
         else:
-            infant_quantity = min(request.session.get('infant_quantity', 0) + 1, 4)
+            infant_quantity = (
+                min(request.session.get('infant_quantity', 0) + 1, 4))
             if hours > 5:
                 days += 1
             infant_total = 5 * infant_quantity * days
             request.session['infant_quantity'] = infant_quantity
             request.session['infant_total'] = infant_total
             messages.success(request, "Infant Car Capsule added to extra")
-        
+
     booster_total = request.session.get('booster_total', 0)
     childseat_total = request.session.get('childseat_total', 0)
     infant_total = request.session.get('infant_total', 0)
@@ -258,7 +275,7 @@ def add_extras(request, id):
     return render(request, 'cars/car_details.html', context)
 
 
-def remove_extras(request,id):
+def remove_extras(request, id):
     extra_price = 5.00
     redirect_url = request.POST.get('redirect_url')
     request.session['grand_total'] = 0
@@ -269,7 +286,8 @@ def remove_extras(request,id):
     hours = request.session.get('hours', 0)
     if id == 1:
         extra_name = 'Booster Seat'
-        booster_quantity = max(request.session.get('booster_quantity', 0) - 1, 0)
+        booster_quantity = (
+            max(request.session.get('booster_quantity', 0) - 1, 0))
         if hours > 5:
             days += 1
         booster_total = booster_quantity * 5 * days
@@ -277,7 +295,8 @@ def remove_extras(request,id):
         request.session['booster_total'] = booster_total
     elif id == 2:
         extra_name = 'Child Seat'
-        childseat_quantity = max(request.session.get('childseat_quantity', 0) - 1, 0)
+        childseat_quantity = (
+            max(request.session.get('childseat_quantity', 0) - 1, 0))
         if hours > 5:
             days += 1
         childseat_total = childseat_quantity * 5 * days
@@ -291,7 +310,7 @@ def remove_extras(request,id):
         infant_total = 5 * infant_quantity * days
         request.session['infant_quantity'] = infant_quantity
         request.session['infant_total'] = infant_total
-    
+
     booster_total = request.session.get('booster_total', 0)
     childseat_total = request.session.get('childseat_total', 0)
     infant_total = request.session.get('infant_total', 0)
@@ -311,5 +330,3 @@ def remove_extras(request,id):
 
 def terms(request):
     return render(request, 'cars/terms.html')
-
-

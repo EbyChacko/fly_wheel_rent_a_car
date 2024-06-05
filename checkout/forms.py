@@ -9,6 +9,7 @@ from datetime import date, datetime
 import time
 import re
 
+
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
@@ -21,19 +22,23 @@ class BookingForm(forms.ModelForm):
             'name': widgets.TextInput(attrs={'class': 'form-control'}),
             'email': widgets.EmailInput(attrs={'class': 'form-control'}),
             'mobile': widgets.TextInput(attrs={'class': 'form-control'}),
-            'date_of_birth': widgets.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'date_of_birth': widgets.DateInput(attrs={
+                'class': 'form-control', 'type': 'date'}),
             'address_1': widgets.TextInput(attrs={'class': 'form-control'}),
             'address_2': widgets.TextInput(attrs={'class': 'form-control'}),
             'town': widgets.TextInput(attrs={'class': 'form-control'}),
             'county': widgets.Select(attrs={'class': 'form-control'}),
             'eir_code': widgets.TextInput(attrs={'class': 'form-control'}),
             'country': widgets.Select(attrs={'class': 'form-control'}),
-            'licence_number': widgets.TextInput(attrs={'class': 'form-control'}),
-            'licence_expiry': widgets.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'licence_number': widgets.TextInput(attrs={
+                'class': 'form-control'}),
+            'licence_expiry': widgets.DateInput(attrs={
+                'class': 'form-control', 'type': 'date'}),
             'personal_id': widgets.Select(attrs={'class': 'form-control'}),
             'id_number': widgets.TextInput(attrs={'class': 'form-control'}),
-            'country_issued':widgets.Select(attrs={'class': 'form-control'}),
-            'id_expiry': widgets.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'country_issued': widgets.Select(attrs={'class': 'form-control'}),
+            'id_expiry': widgets.DateInput(attrs={
+                'class': 'form-control', 'type': 'date'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -53,7 +58,7 @@ class BookingForm(forms.ModelForm):
             'licence_expiry': 'Expiry date of your Licence',
             'personal_id': 'Choose Personal ID',
             'id_number': 'ID NUmber',
-            'country_issued':'Country that issue your ID',
+            'country_issued': 'Country that issue your ID',
             'id_expiry': 'Expiry date of your ID',
         }
         empty_labels = {
@@ -61,7 +66,7 @@ class BookingForm(forms.ModelForm):
             'county': 'Select County',
             'country': 'Select Country',
             'personal_id': 'Choose Personal ID',
-            'country_issued':'Choose Country that issue your ID',
+            'country_issued': 'Choose Country that issue your ID',
         }
         self.request = kwargs.pop('request', None)
         super(BookingForm, self).__init__(*args, **kwargs)
@@ -77,7 +82,8 @@ class BookingForm(forms.ModelForm):
     def clean_mobile(self):
         mobile = self.cleaned_data.get('mobile')
         if not mobile.isdigit() or len(mobile) != 10:
-            raise forms.ValidationError("Please enter a valid 10-digit mobile number.")
+            raise forms.ValidationError(
+                "Please enter a valid 10-digit mobile number.")
         return mobile
 
     def clean_email(self):
@@ -90,11 +96,15 @@ class BookingForm(forms.ModelForm):
         today = date.today()
         date_of_birth = self.cleaned_data.get('date_of_birth')
         if date_of_birth and date_of_birth > today:
-            raise forms.ValidationError("Date of birth cannot be in the future.")
+            raise forms.ValidationError(
+                "Date of birth cannot be in the future.")
         if date_of_birth:
-            age = today.year - date_of_birth.year - ((today.month, today.day) < (date_of_birth.month, date_of_birth.day))
+            age = today.year - date_of_birth.year - (
+                (today.month, today.day) < (
+                    date_of_birth.month, date_of_birth.day))
             if age < 18:
-                raise forms.ValidationError("The driver must be at least 18 years old.")
+                raise forms.ValidationError(
+                    "The driver must be at least 18 years old.")
         return date_of_birth
 
     def clean_licence_expiry(self):
@@ -103,10 +113,12 @@ class BookingForm(forms.ModelForm):
         drop_off_date = datetime.strptime(drop_off_date_str, '%Y-%m-%d').date()
 
         if not licence_expiry:
-            raise forms.ValidationError("Please enter your licence expiry date.")
+            raise forms.ValidationError(
+                "Please enter your licence expiry date.")
 
         if licence_expiry <= drop_off_date:
-            raise forms.ValidationError("Licence expiry must be after the drop-off date.")
+            raise forms.ValidationError(
+                "Licence expiry must be after the drop-off date.")
 
         return licence_expiry
 
@@ -119,15 +131,19 @@ class BookingForm(forms.ModelForm):
             raise forms.ValidationError("Please enter your ID expiry date.")
 
         if id_expiry <= drop_off_date:
-            raise forms.ValidationError("ID expiry must be after the drop-off date.")
+            raise forms.ValidationError(
+                "ID expiry must be after the drop-off date.")
 
         return id_expiry
-    
+
     def clean_country_issued(self):
         country_issued = self.cleaned_data.get('country_issued')
         personal_id = self.cleaned_data.get('personal_id')
-        
-        if personal_id == 'Irish Government Travel Document' and country_issued != 'IE':
-            raise forms.ValidationError("For Irish Government Travel Document, please select Ireland (IE) as the country.")
-        
+
+        if personal_id == ('Irish Government Travel Document'
+        and country_issued != 'IE'):
+            raise forms.ValidationError(
+                '"For Irish Government Travel Document, '
+                'please select Ireland (IE) as the country."')
+
         return country_issued

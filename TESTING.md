@@ -209,14 +209,13 @@ JavaScript validation was performed using [JSHint](https://jshint.com/) to check
 
 ## Python Testing
 
-Python validation for PEP8 compliance was performed using [pycodestyle](https://pycodestyle.pycqa.org/en/latest/index.html) to check linting errors. Where appropriate, in a small number of cases "# noqa" was used, especially for "errors" in Django generated files. 
 
-[CI Python Linter](https://pep8ci.herokuapp.com/) was used to double check some pages by copy and pasting code, as a back up to confirm there were no linting issues.
+[CI Python Linter](https://pep8ci.herokuapp.com/) was used to check all the pages to confirm there were no linting issues. the following was the results for all the '.py' files
 
 <details>
-<summary>Python Problems</summary>
+<summary>Python PEP8 test result</summary>
 
-![Problems](readme-docs/testing/python_validation.webp)
+![Python PEP8 test result](https://res.cloudinary.com/dgd5gtn1w/image/upload/v1717557363/Royal%20Drive/readme/PEP8_Home_signals_t3wmzz.png)
 </details>
 
 

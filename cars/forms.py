@@ -10,6 +10,7 @@ import re
 
 SEATS_CHOICES = [(i, str(i)) for i in range(2, 11)]
 
+
 class CarRentalForm(forms.Form):
     pick_up_location = forms.ModelChoiceField(
         queryset=Cities.objects.all(),
@@ -51,7 +52,6 @@ class CarRentalForm(forms.Form):
 
         if pick_up_date == drop_off_date and pick_up_time >= drop_off_time:
             raise ValidationError("Pick-up time must be before drop-off time")
-
 
 
 class CarFilterForm(forms.Form):
@@ -109,6 +109,10 @@ class CarFilterForm(forms.Form):
         if pick_up_date and drop_off_date and pick_up_date > drop_off_date:
             raise ValidationError("Pick-up date cannot be after drop-off date")
 
-        if pick_up_date == drop_off_date and (pick_up_time is None or drop_off_time is None or pick_up_time >= drop_off_time):
+        if pick_up_date == drop_off_date and (
+                pick_up_time is None or
+                drop_off_time is None or
+                pick_up_time >= drop_off_time):
+
             raise ValidationError(
                 "Pick-up time must be before drop-off time if on the same day")
