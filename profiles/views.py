@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 
 def profile(request):
+    """to load the profile page"""
     try:
         customer_details = PersonalDetails.objects.get(user=request.user)
     except PersonalDetails.DoesNotExist:
@@ -30,7 +31,7 @@ def profile(request):
 
 
 def booking_details(request, id):
-
+    """to load the booking details page"""
     booking = get_object_or_404(Booking, id=id)
 
     if booking.customer.user != request.user:
@@ -54,6 +55,7 @@ def booking_details(request, id):
 
 
 def confirm_delete_booking(request, id):
+    """to load the confirm delete page"""
     context = {
         'id': id,
     }
@@ -61,6 +63,7 @@ def confirm_delete_booking(request, id):
 
 
 def delete_booking(request, id):
+    """to perform booking delete"""
     booking = get_object_or_404(Booking, id=id)
 
     if booking.customer.user != request.user:
@@ -76,6 +79,7 @@ def delete_booking(request, id):
 
 
 def confirm_cancel_booking(request, id):
+    """to load the confirm cancel page"""
     context = {
         'id': id,
     }
@@ -83,6 +87,7 @@ def confirm_cancel_booking(request, id):
 
 
 def cancel_booking(request, id):
+    """to perform booking cancel"""
     booking = get_object_or_404(Booking, id=id)
 
     if booking.customer.user != request.user:
@@ -98,10 +103,12 @@ def cancel_booking(request, id):
 
 
 def car_and_city(request):
+    """to load the data management page"""
     return render(request, 'profiles/car_and_city.html')
 
 
 def add_car(request):
+    """to load the car list and add car form"""
     if request.method == 'POST':
         form = CarForm(request.POST, request.FILES)
         if form.is_valid():
@@ -118,6 +125,7 @@ def add_car(request):
 
 
 def confirm_delete_car(request, id):
+    """to load the confirm delete car page"""
     car = get_object_or_404(Car, id=id)
     context = {
         'car': car,
@@ -126,6 +134,7 @@ def confirm_delete_car(request, id):
 
 
 def delete_car(request, id):
+    """to perform car deletion"""
     car = get_object_or_404(Car, id=id)
     car.delete()
     messages.success(request, 'Car details has been removed successfully.')
@@ -133,6 +142,7 @@ def delete_car(request, id):
 
 
 def add_city(request):
+    """to load the car list and add car form"""
     if request.method == 'POST':
         form = CityForm(request.POST, request.FILES)
         if form.is_valid():
@@ -149,6 +159,7 @@ def add_city(request):
 
 
 def confirm_delete_city(request, id):
+    """to load the confirm delete city page"""
     city = get_object_or_404(Cities, id=id)
     context = {
         'city': city,
@@ -157,6 +168,7 @@ def confirm_delete_city(request, id):
 
 
 def delete_city(request, id):
+    """to perform deletion of the city"""
     city = get_object_or_404(Cities, id=id)
     city.delete()
     messages.success(request, 'City details has been removed successfully.')
@@ -165,6 +177,7 @@ def delete_city(request, id):
 
 @login_required
 def update_profile(request):
+    """to update profile"""
     try:
         personal_details = PersonalDetails.objects.get(user=request.user)
     except PersonalDetails.DoesNotExist:

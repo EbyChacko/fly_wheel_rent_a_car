@@ -12,6 +12,7 @@ SEATS_CHOICES = [(i, str(i)) for i in range(2, 11)]
 
 
 class CarRentalForm(forms.Form):
+    """ The form using to search the cars"""
     pick_up_location = forms.ModelChoiceField(
         queryset=Cities.objects.all(),
         label='Pick-up Location',
@@ -55,6 +56,7 @@ class CarRentalForm(forms.Form):
 
 
 class CarFilterForm(forms.Form):
+    """ Form to filter the cars"""
     pick_up_location = forms.ModelChoiceField(
         queryset=Cities.objects.all(),
         label='Pick-up Location',

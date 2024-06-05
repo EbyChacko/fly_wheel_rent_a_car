@@ -7,6 +7,7 @@ import uuid
 
 
 class Booking(models.Model):
+    """model to store the booking dtails"""
     booking_number = models.CharField(
         max_length=32, null=False, editable=False)
     customer = models.ForeignKey(

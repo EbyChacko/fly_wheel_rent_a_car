@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 @receiver(post_save, sender=Booking)
 def send_booking_cancelation_email(sender, instance, created, **kwargs):
+    """to send a confirmation mail to the user when the booking is canceled"""
     if instance.status == 'Canceled':
         logger.info(
             f'Booking cancellation email triggered for booking: '

@@ -1,7 +1,8 @@
 from django.db import models
 
-# model fo the customer message from the contact.html
+
 class CustomerMessage(models.Model):
+    """model for the customer message from the contact.html"""
     name = models.CharField(max_length=100)
     mobile = models.CharField(max_length=20)
     email = models.EmailField()
@@ -10,10 +11,3 @@ class CustomerMessage(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class MailChimpMails(models.Model):
-    email = models.EmailField()
-
-    def __str__(self):
-        return self.email

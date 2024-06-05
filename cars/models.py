@@ -5,6 +5,7 @@ import uuid
 
 
 class Cities(models.Model):
+    """model for the cities"""
     city = models.CharField(max_length=250)
     county = models.CharField(max_length=250)
 
@@ -17,6 +18,7 @@ class Cities(models.Model):
 
 
 class County(models.Model):
+    """model for the county"""
     county = models.CharField(max_length=250)
 
     class Meta:
@@ -28,6 +30,7 @@ class County(models.Model):
 
 
 class Categories(models.Model):
+    """model for the country"""
     category = models.CharField(max_length=250)
 
     class Meta:
@@ -39,6 +42,7 @@ class Categories(models.Model):
 
 
 class Fuel(models.Model):
+    """model for the fuel"""
     fuel = models.CharField(max_length=250)
 
     class Meta:
@@ -49,6 +53,7 @@ class Fuel(models.Model):
 
 
 class GearBox(models.Model):
+    """model for the gear box"""
     gear_box = models.CharField(max_length=250)
 
     class Meta:
@@ -59,6 +64,7 @@ class GearBox(models.Model):
 
 
 class Seats(models.Model):
+    """model for the seats"""
     seats = models.IntegerField()
 
     class Meta:
@@ -70,6 +76,7 @@ class Seats(models.Model):
 
 
 class Title(models.Model):
+    """model for the title"""
     title = models.CharField(max_length=10)
 
     class Meta:
@@ -80,6 +87,7 @@ class Title(models.Model):
 
 
 class PersonalId(models.Model):
+    """model for the personal id"""
     personal_id = models.CharField(max_length=250)
 
     class Meta:
@@ -91,6 +99,7 @@ class PersonalId(models.Model):
 
 
 class Car(models.Model):
+    """model for the car"""
     image = models.ImageField(upload_to='images/')
     make = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
@@ -113,6 +122,7 @@ class Car(models.Model):
 
 
 class PersonalDetails(models.Model):
+    """model for the personal details"""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     title = models.ForeignKey(Title, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)

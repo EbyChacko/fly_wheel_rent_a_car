@@ -109,6 +109,7 @@ class CityForm(forms.ModelForm):
 
 
 class PersonalDetailsForm(forms.ModelForm):
+    """to update the personal details in the profile"""
     class Meta:
         model = PersonalDetails
         fields = [

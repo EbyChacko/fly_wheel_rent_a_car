@@ -7,6 +7,7 @@ from .models import Booking
 
 @receiver(post_save, sender=Booking)
 def send_booking_confirmation(sender, instance, created, **kwargs):
+    """to send email to the customer for booking confirmation"""
     if created:
         subject = 'Booking Confirmation - FlyWheel Rent a Car'
         from_email = 'flywheelrent@gmail.com'

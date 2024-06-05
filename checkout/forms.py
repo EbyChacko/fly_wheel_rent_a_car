@@ -11,6 +11,7 @@ import re
 
 
 class BookingForm(forms.ModelForm):
+    """booking form using in the checkout"""
     class Meta:
         model = Booking
         fields = ['title', 'name', 'email', 'mobile', 'date_of_birth',

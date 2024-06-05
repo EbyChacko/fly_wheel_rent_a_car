@@ -15,6 +15,7 @@ import json
 # Create your views here.
 @require_POST
 def cache_checkout_data(request):
+    """To load metadata to the stripe app"""
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -41,6 +42,7 @@ def cache_checkout_data(request):
 
 
 def checkout(request):
+    """To perform the checkout and save booking instance"""
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
     grand_total = request.session.get('grand_total', 0)
@@ -168,6 +170,7 @@ def checkout(request):
 
 
 def checkout_success(request, booking_number):
+    """To load checkout success page"""
     booking = get_object_or_404(
                                 Booking, booking_number=booking_number,
                                 customer__user=request.user)

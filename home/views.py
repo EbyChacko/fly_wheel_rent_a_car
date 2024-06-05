@@ -39,5 +39,5 @@ def login_or_signup(request):
 
 
 def privacy(request):
-    """To load login_or_signup page"""
+    """To load privacy policy page"""
     return render(request, 'home/privacy.html')

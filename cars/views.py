@@ -18,6 +18,7 @@ def search_cars(request):
 
 
 def search_result(request):
+    """To load search result page and show all the available cars to the customer"""
     if request.method == 'POST':
         form = CarRentalForm(request.POST)
         if form.is_valid():
@@ -59,6 +60,7 @@ def search_result(request):
 
 
 def search_result_update(request):
+    """To update the search result using the filter form"""
     if request.method == 'POST':
         form = CarFilterForm(request.POST)
         if form.is_valid():
@@ -102,6 +104,7 @@ def search_result_update(request):
 
 
 def car_details(request, id):
+    """To load details of a specific car"""
     car = get_object_or_404(Car, pk=id)
     form = CarFilterForm(request.POST)
     request.session['booster_quantity'] = 0
@@ -204,6 +207,7 @@ def car_details(request, id):
 
 
 def add_extras(request, id):
+    """add extra to the checkout and calculates its amount"""
     extra_price = 5.00
     redirect_url = request.POST.get('redirect_url')
     request.session['grand_total'] = 0
@@ -276,6 +280,8 @@ def add_extras(request, id):
 
 
 def remove_extras(request, id):
+    """To remove the extra from the checkout and calculate 
+    the amount after removing the extra"""
     extra_price = 5.00
     redirect_url = request.POST.get('redirect_url')
     request.session['grand_total'] = 0
@@ -330,4 +336,5 @@ def remove_extras(request, id):
 
 
 def terms(request):
+    """To load terms and conditions page"""
     return render(request, 'cars/terms.html')
