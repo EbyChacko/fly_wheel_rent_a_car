@@ -264,4 +264,8 @@ Due to time constraints, I am leaving the following known errors unfixed.
 - country_issued validation :
     - **Issue**: Unable to validate the country_issued in the checkout form
     - **Description**: If the user choose the personal id as Irish government travel document, the country must be ireland, i tried to fix that using the javascript. it won't work, so itried to fix it using the form validation in the django(cleaned function). It also won't work.
-    - **Fix**: [Validation try](https://github.com/EbyChacko/fly_wheel_rent_a_car/commit/bcf2f255fb9b3201b26f3421e9c9a1b316539ecd#diff-075000420d0f27b9c7afccd0c34e817e2374c79f1290793dd2bad1ac0b7e1911).
+    - **Try to fix**: [Validation try](https://github.com/EbyChacko/fly_wheel_rent_a_car/commit/bcf2f255fb9b3201b26f3421e9c9a1b316539ecd#diff-075000420d0f27b9c7afccd0c34e817e2374c79f1290793dd2bad1ac0b7e1911).
+
+- Car images loading :
+    - **Issue**: The images added from the local host is not loading in the deployed site and The images added in the from the deployed site not loading in the local host.
+    - **Try to fix**: Not Tried to fix this issue.
