@@ -270,6 +270,9 @@ Below the steps for manual testing of the site have been arranged into tables. A
 |Car search success | Input valid data | load the search result page with available car and its details | works as expected |
 |car search without any car | search the car with valida data | if any of the car in the flywheel is not available on the input date, at the pickup location, an empty result page with a message to search for other location or date. | Works as expected |
 | Filter form | click on the filter button in the search result page | A filter form will appear in the same page with additional filters like gearbox, number of searts etc. | works as expected |
+| filter form fails | input invalid data | show error in the form | Works as expected |
+|filter form success | Input valid data | Add fiter to the search result and show filtered result of car | Works as expected |
+
 
 ## Browser Compatibility
 

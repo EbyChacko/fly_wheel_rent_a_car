@@ -143,13 +143,13 @@ def car_details(request, id):
 
     try:
         if pick_up_date and pick_up_time:
-            pick_up_datetime = datetime.strptime
-            (f"{pick_up_date} {pick_up_time}", '%Y-%m-%d %H:%M:%S')
+            pick_up_datetime = datetime.strptime(
+                f"{pick_up_date} {pick_up_time}", '%Y-%m-%d %H:%M:%S')
             pick_up_time_formatted = pick_up_datetime.strftime('%I:%M %p')
 
         if drop_off_date and drop_off_time:
-            drop_off_datetime = datetime.strptime
-            (f"{drop_off_date} {drop_off_time}", '%Y-%m-%d %H:%M:%S')
+            drop_off_datetime = datetime.strptime(
+                f"{drop_off_date} {drop_off_time}", '%Y-%m-%d %H:%M:%S')
             drop_off_time_formatted = drop_off_datetime.strftime('%I:%M %p')
 
     except ValueError:
@@ -159,7 +159,7 @@ def car_details(request, id):
     total_rent = request.session.get('total_rent', 0)
 
     if pick_up_datetime and drop_off_datetime:
-        total_hours = total_hours = (
+        total_hours = (
             (drop_off_datetime - pick_up_datetime).total_seconds() / 3600
         )
         days = int(total_hours // 24)
@@ -304,7 +304,8 @@ def remove_extras(request, id):
         request.session['childseat_total'] = childseat_total
     else:
         extra_name = 'Infant Car Capsule'
-        infant_quantity = max(request.session.get('infant_quantity', 0) - 1, 0)
+        infant_quantity = max(request.session.get(
+            'infant_quantity', 0) - 1, 0)
         if hours > 5:
             days += 1
         infant_total = 5 * infant_quantity * days
